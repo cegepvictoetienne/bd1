@@ -1,0 +1,1577 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bd1.kerzo.ca/notes_de_cours/section_4.2/">
+      
+      
+        <link rel="prev" href="../section_4.1/">
+      
+      
+        <link rel="next" href="../section_4.3/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>4.2 Confidentialité des données - Cours Bases de donn&eacute;es 1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#confidentialite-des-donnees" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Cours Bases de donn&amp;eacute;es 1" class="md-header__button md-logo" aria-label="Cours Bases de donn&eacute;es 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0s224 35.8 224 80zm-54.8 134.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432v-85.9z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours Bases de donn&eacute;es 1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.2 Confidentialité des données
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jaixan/db1" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_1.1/" class="md-tabs__link">
+          
+  
+  Section 1
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_2.1/" class="md-tabs__link">
+          
+  
+  Section 2
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_3.1/" class="md-tabs__link">
+          
+  
+  Section 3
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../section_4.1/" class="md-tabs__link">
+          
+  
+  Section 4
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_5.1/" class="md-tabs__link">
+          
+  
+  Section 5
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ressources/" class="md-tabs__link">
+        
+  
+    
+  
+  Ressources
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../calendrier/" class="md-tabs__link">
+        
+  
+    
+  
+  Calendrier
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Cours Bases de donn&amp;eacute;es 1" class="md-nav__button md-logo" aria-label="Cours Bases de donn&eacute;es 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0s224 35.8 224 80zm-54.8 134.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432v-85.9z"/></svg>
+
+    </a>
+    Cours Bases de donn&eacute;es 1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jaixan/db1" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Section 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.1 Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.2 Composantes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3 Types de données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4 Création de BD et Tables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.5 Clés étrangères et relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Section 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.1 Créer, mettre à jour, supprimer des données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.2 Sélection, filtrage et opérateurs logiques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.3 Opérateurs arithmétiques, chaînes et expressions régulières
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.4 Manipulation de dates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.5 Jointures et agrégats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.6 Fonctions statistiques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 3
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Section 3
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 Établir une stratégie de sauvegarde de la BD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.2 Sauvegarder et restaurer une BD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.3 Automatisation des sauvegardes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 4
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Section 4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_4.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.1 Intégrité des données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4.2 Confidentialité des données
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    4.2 Confidentialité des données
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cryptage-et-hashage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cryptage et hashage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hashage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hashage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hashage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      SHA2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avantages-et-desavantages-du-hashage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avantages et désavantages du hashage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quand-utiliser-le-hashage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quand utiliser le hashage?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonction-de-sha256" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonction de SHA256
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cryptage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cryptage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cryptage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#securite-du-cryptage-symetrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sécurité du cryptage symétrique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithme-aes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithme AES
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crypter-avec-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crypter avec MySQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crypter avec MySQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fonction-unhex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonction UNHEX
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decrypter-avec-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Décrypter avec MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phrase-secrete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phrase secrète
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_4.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Gestion des accès
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 5
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Section 5
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_5.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.1 Variables, conditions et boucles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_5.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 Fonctions et déclencheurs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_5.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.3 Procédures stockées et transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ressources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ressources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calendrier/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calendrier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="confidentialite-des-donnees">Confidentialité des données</h1>
+<p>Cryptage et hashage
+Cryptage à clé symétrique
+Cryptage de la BD</p>
+<h2 id="cryptage-et-hashage">Cryptage et hashage</h2>
+<p>Il est très souvent nécessaire d'assurer la confidentialité des données. Ainsi, un administrateur de BDD ne peut pas voir les informations de certains champs ou tables.</p>
+<p>Quelle est la distinction entre le cryptage et le hashage?</p>
+<p><strong>Cryptage</strong> : transformation des données à l’aide d’une donnée secrète appelée clé</p>
+<p><strong>Hashage</strong> : transformation <em>non inversible</em> à l’aide d’un algorithme</p>
+<p>Doc : https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html</p>
+<h2 id="hashage">Hashage</h2>
+<p>Une fonction de hashage accepte généralement une seule chaîne en entrée et retourne une valeur correspondant à l’entrée (appelé <em>hash</em>).</p>
+<p>La fonction peut produire un <em>hash</em> unique pour chaque entrée (fonction injective) ou permettre à plusieurs entrées de partager le même <em>hash</em>. Le deuxième cas est celui le plus rencontré.</p>
+<p>Il faut évidemment évaluer le risque de collision de <em>hash</em> (partage de valeur). Pour le <em>hash</em> de Git, ce risque est estimé à environ $1 \times 10^{-48}$, soit de tirer au hasard un atome sur la Terre. </p>
+<p>Les fonctions utilisables par MySQL (et d'autres langages) sont</p>
+<table>
+<thead>
+<tr>
+<th>Fonction</th>
+<th>Longueur du hash</th>
+<th>Type de colonne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MD5</td>
+<td>128 bits</td>
+<td>CHAR(32)</td>
+</tr>
+<tr>
+<td>SHA</td>
+<td>160 bits</td>
+<td>CHAR(40)</td>
+</tr>
+<tr>
+<td>SHA2</td>
+<td>variable</td>
+<td>CHAR(56) à CHAR(128)</td>
+</tr>
+</tbody>
+</table>
+<p>Elles retournent toutes un hash en hexadécimal. On peut le convertir en binaire en utilisant la fonction <strong>UNHEX</strong>().</p>
+<h3 id="sha2">SHA2</h3>
+<p>La fonction SHA2 permet d’utiliser divers algorithmes. Les algorithmes sont SHA-224, SHA-256, SHA-384 et SHA-512.</p>
+<p>L’algorithme retourne un nombre de bits égal au nombre après le SHA (par exemple SHA-256 retourne un nombre binaire de 256 bits).</p>
+<p>Le standard est d’utiliser au moins 256 bits. On voit souvent 256 et 512 être utilisés.</p>
+<p><strong>Exemple</strong></p>
+<p>L’utilisateur veut enregistrer un mot de passe 'tarte123'. Pour le hasher avec SHA-256 avant de l’intégrer à la BD on utilise :</p>
+<pre><code class="language-mysql">INSERT INTO Utilisateur (nom, mot_de_passe)
+    VALUES ('Patissier21', SHA2('tarte123', 256));
+</code></pre>
+<p><strong>Résultat de SHA2</strong></p>
+<p>La requête </p>
+<pre><code class="language-mysql">SELECT * FROM Utilisateur;
+</code></pre>
+<p>retourne:</p>
+<pre><code>| nom           | mot_de_passe                                                     |
+
+| patissier21   | b2c4b81704855df00cff57312d46ec28254e2f69f526cc61da5f2df20c43d075 |
+| jardiner14    | b48cea174391677879618ace9ea78531f5a0d18551de187ee76eb3190624ef35 |
+...
+</code></pre>
+<h3 id="avantages-et-desavantages-du-hashage">Avantages et désavantages du hashage</h3>
+<p>Avantages :</p>
+<ul>
+<li>Plus rapide qu’un cryptage</li>
+<li>Espace mémoire constant</li>
+<li>Impossible à inverser</li>
+</ul>
+<p>Désavantage :</p>
+<ul>
+<li>Impossible d’avoir accès à la donnée originale</li>
+</ul>
+<h3 id="quand-utiliser-le-hashage">Quand utiliser le hashage?</h3>
+<ul>
+<li>Pour les données que nous n’avons pas besoin de consulter</li>
+<li>Vérification d’intégrité de fichier ou de transport (checksum) </li>
+</ul>
+<h3 id="fonction-de-sha256">Fonction de SHA256</h3>
+<p>https://qvault.io/cryptography/how-sha-2-works-step-by-step-sha-256/#:~:text=SHA%2D2%20is%20an%20algorithm,is%20the%20output%20size%2C%20256.</p>
+<ol>
+<li>Convertir en binaire</li>
+<li>Ajouter un 1</li>
+<li>Allonger avec des 0 à la fin pour obtenir un multiple de 512 moins 64 bits</li>
+<li>Ajouter la longueur de l'entrée originale en binaire sur 64 bits.</li>
+</ol>
+<p><strong>Exemple</strong></p>
+<ol>
+<li>Allo -&gt; <strong>01100001 01101100 01101100 01101111</strong></li>
+<li>01100001 01101100 01101100 01101111 <strong>1</strong></li>
+<li>01100001 01101100 01101100 01101111 1<strong>000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000</strong></li>
+<li>01100001 01101100 01101100 01101111 1000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+   <strong>00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000100</strong></li>
+<li>Initialisation des 8 constantes de hash qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines des 8 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19)</li>
+</ol>
+<p><strong>Exemple</strong></p>
+<p>Racine de 2 = 1.41421356237
+Partie fractionnaire = 41421356237
+En binaire = 1101010000010011110011001100111</p>
+<ol>
+<li>Initialisation des 64 constantes d'arrondissement qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines cubiques des 64 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19 - 311)</li>
+<li>Création de <em>chunk</em> (segment) de 512 bits de long</li>
+<li>Création du message pour chaque <em>chunk</em> </li>
+<li>Compression du message en utilisant les constantes établies et concaténation du résultat.</li>
+</ol>
+<h2 id="cryptage">Cryptage</h2>
+<p>Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».</p>
+<p>Texte clair + clé 🡺 texte crypté
+Texte crypté + clé 🡺 texte clair </p>
+<p>On appelle cryptage à clé symétrique lorsque la clé servant à crypter et à décrypter est la même.</p>
+<p>Voir Illustration - Hashage et cryptage </p>
+<h3 id="securite-du-cryptage-symetrique">Sécurité du cryptage symétrique</h3>
+<p>La sécurité d’un cryptage à clé symétrique repose sur 2 facteurs :</p>
+<ul>
+<li>Le secret de la clé</li>
+<li>La longueur de la clé</li>
+</ul>
+<h3 id="algorithme-aes">Algorithme AES</h3>
+<p>Le Advance Encryption Standard (AES) est la méthode de cryptage symétrique la plus utilisée aujourd’hui.</p>
+<p>Les données sont cryptées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.</p>
+<p>Il effectue plusieurs étapes de permutation / substitution</p>
+<h3 id="crypter-avec-mysql">Crypter avec MySQL</h3>
+<p>Pour crypter, on utilise la fonction <strong>AES_ENCRYPT</strong>. Son premier argument est le texte à crypter et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.</p>
+<pre><code class="language-mysql">INSERT INTO Utilisateur (nom, carte_credit)
+  VALUES ('Patissier21', AES_ENCRYPT('1234123412341234',  
+  UNHEX('F3229A0B371ED2D9441B830D21A390C3')));
+</code></pre>
+<p>On place le résultat dans un BLOB.</p>
+<h4 id="fonction-unhex">Fonction UNHEX</h4>
+<p>La fonction <strong>UNHEX</strong> convertit une chaîne de valeurs hexadécimale en sa représentation sous forme de chaîne de caractères.</p>
+<table>
+<thead>
+<tr>
+<th>Mot</th>
+<th>HEX(<em>mot</em>)</th>
+<th>CAST(UNHEX(<em>hex</em>) AS CHAR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>41</td>
+<td>A</td>
+</tr>
+<tr>
+<td>Allo</td>
+<td>416C6C6F</td>
+<td>Allo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="decrypter-avec-mysql">Décrypter avec MySQL</h3>
+<p>Pour décrypter, on utilise la fonction <strong>AES_DECRYPT</strong>. Le premier argument est la valeur à décrypter, le second la clé secrète.</p>
+<pre><code class="language-mysql">SELECT nom, CAST(AES_DECRYPT(carte_credit,   
+  UNHEX('F3229A0B371ED2D9441B830D21A390C3’)) AS CHAR)
+  AS carte_credit FROM Utilisateur;
+</code></pre>
+<p>Le résultat du décryptage.</p>
+<pre><code class="language-console">| nom           | carte_credit     |
+
+| patissier21   | 1234123412341234 |
+| jardiner14    | 9876987698769876 |
+</code></pre>
+<p>Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du décryptage avec la mauvaise clé !)</p>
+<h3 id="phrase-secrete">Phrase secrète</h3>
+<p>Plutôt que d’utiliser une clé binaire, on peut utiliser une phrase secrète comme mot de passe. La clé est cependant limitée à 256 caractères. Comment fait-on ?</p>
+<ul>
+<li>On peut hasher la phrase secrète pour obtenir une chaîne de la bonne longueur !</li>
+</ul>
+<h1 id="phrase-secrete_1">Phrase secrète</h1>
+<pre><code class="language-mysql"># Insertion
+INSERT INTO Utilisateur (nom, carte_credit) 
+  VALUES ('Patissier21', AES_ENCRYPT('1234123412341234',
+                           UNHEX(SHA2('secret', 256))));
+
+# Lecture
+SELECT nom, 
+  CAST(AES_DECRYPT(carte_credit, UNHEX(SHA2('secret', 256))) AS CHAR) AS 'Carte credit'
+  FROM Utilisateur;
+</code></pre>
+<h1 id="cryptage-de-la-bd">Cryptage de la BD</h1>
+<p>L’engin de stockage de données InnoDB permet de crypter l’ensemble d’une table ou de la BD. Via un plug-in.</p>
+<p>Ces manipulations ne sont pas vues en classe.</p>
+<p>https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html</p>
+<h3 id="-exercice-421-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.2.1 ---</h3>
+<p>On crée la table de renseignements personnels suivant :</p>
+<ol>
+<li>Nom</li>
+<li>Mot de passe</li>
+<li>Le contenu du certificat de naissance</li>
+<li>Une chaîne authentifiant le contenu du certificat de naissance</li>
+<li>Numéro de compte en banque</li>
+<li>Date de naissance</li>
+</ol>
+<p>Ajoutez les informations d’une personne fictive en cryptant ou hashant les données selon la situation.</p>
+<p>Affichez ensuite ces informations</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>

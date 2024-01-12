@@ -1,0 +1,1769 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bd1.kerzo.ca/notes_de_cours/section_5.3/">
+      
+      
+        <link rel="prev" href="../section_5.2/">
+      
+      
+        <link rel="next" href="../../ressources/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>5.3 Procédures stockées et transactions - Cours Bases de donn&eacute;es 1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#procedures-stockees-et-transactions" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Cours Bases de donn&amp;eacute;es 1" class="md-header__button md-logo" aria-label="Cours Bases de donn&eacute;es 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0s224 35.8 224 80zm-54.8 134.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432v-85.9z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours Bases de donn&eacute;es 1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5.3 Procédures stockées et transactions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jaixan/db1" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_1.1/" class="md-tabs__link">
+          
+  
+  Section 1
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_2.1/" class="md-tabs__link">
+          
+  
+  Section 2
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_3.1/" class="md-tabs__link">
+          
+  
+  Section 3
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../section_4.1/" class="md-tabs__link">
+          
+  
+  Section 4
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../section_5.1/" class="md-tabs__link">
+          
+  
+  Section 5
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ressources/" class="md-tabs__link">
+        
+  
+    
+  
+  Ressources
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../calendrier/" class="md-tabs__link">
+        
+  
+    
+  
+  Calendrier
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Cours Bases de donn&amp;eacute;es 1" class="md-nav__button md-logo" aria-label="Cours Bases de donn&eacute;es 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0s224 35.8 224 80zm-54.8 134.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432v-85.9z"/></svg>
+
+    </a>
+    Cours Bases de donn&eacute;es 1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jaixan/db1" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Section 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.1 Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.2 Composantes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3 Types de données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4 Création de BD et Tables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_1.5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.5 Clés étrangères et relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Section 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.1 Créer, mettre à jour, supprimer des données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.2 Sélection, filtrage et opérateurs logiques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.3 Opérateurs arithmétiques, chaînes et expressions régulières
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.4 Manipulation de dates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.5 Jointures et agrégats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_2.6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.6 Fonctions statistiques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 3
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Section 3
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.1 Établir une stratégie de sauvegarde de la BD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.2 Sauvegarder et restaurer une BD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_3.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.3 Automatisation des sauvegardes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 4
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Section 4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_4.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.1 Intégrité des données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_4.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.2 Confidentialité des données
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_4.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Gestion des accès
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Section 5
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Section 5
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_5.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.1 Variables, conditions et boucles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../section_5.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 Fonctions et déclencheurs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5.3 Procédures stockées et transactions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    5.3 Procédures stockées et transactions
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#procedures-stockees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procédures stockées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Procédures stockées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utilisation-des-procedures-et-des-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilisation des procédures et des fonctions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declarer-et-invoquer-une-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Déclarer et invoquer une procédure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametres-de-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paramètres de procédure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invocation-de-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invocation de procédure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documenter-une-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documenter une procédure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-exercice-531-" class="md-nav__link">
+    <span class="md-ellipsis">
+       --- Exercice 5.3.1 ---
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transactions-et-gestion-derreur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transactions et gestion d'erreur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transactions et gestion d'erreur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exceptions-en-programmation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions en programmation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quand-gerer-les-exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quand gérer les exceptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions-possibles-en-bd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions possibles en BD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codes-derreur-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codes d'erreur MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lancer-un-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lancer un signal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-des-signaux-et-des-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestion des signaux et des transactions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition-du-gestionnaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition du gestionnaire
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#afficher-lerreur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Afficher l'erreur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-complet-de-gestion-dexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple complet de gestion d'exception
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactions-mise-en-situation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transactions - Mise en situation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principe-dune-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principe d’une transaction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonctionnement-dune-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctionnement d'une transaction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-de-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple de ROLLBACK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-de-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple de commit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demonstration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Démonstration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-exercice-532-" class="md-nav__link">
+    <span class="md-ellipsis">
+       --- Exercice 5.3.2 ---
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ressources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ressources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calendrier/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calendrier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="procedures-stockees-et-transactions">Procédures stockées et transactions</h1>
+<h2 id="procedures-stockees">Procédures stockées</h2>
+<p>Les procédures stockées sont semblables aux fonctions. Elles permettent de préparer des traitements (comme des fonctions) et de les exécuter. À la différence des fonctions les procédures stockées :</p>
+<ul>
+<li>Peuvent ne pas retourner de valeur</li>
+<li>Peuvent s'appeller elle-même</li>
+<li>Les fonctions ne peuvent pas appeler de procédures, mais les procédures peuvent appeler des fonctions</li>
+</ul>
+<h3 id="utilisation-des-procedures-et-des-fonctions">Utilisation des procédures et des fonctions</h3>
+<p>Les procédures gèrent généralement la logique applicative (couche métier). Par exemple, les ajouts ou modifications aux données.</p>
+<p>Les fonctions définissent généralement un traitement d’appoint, un calcul ou l'obtention d'un renseignement.</p>
+<h3 id="declarer-et-invoquer-une-procedure">Déclarer et invoquer une procédure</h3>
+<pre><code class="language-sql">DELIMITER $$
+
+CREATE PROCEDURE nom_procedure()
+BEGIN
+  traitement
+END $$
+
+DELIMITER ;
+
+</code></pre>
+<p>Pour invoquer une procédure, on utilise l'instruction <strong>CALL</strong>.</p>
+<pre><code class="language-sql">CALL nom_procedure();
+</code></pre>
+<h3 id="parametres-de-procedure">Paramètres de procédure</h3>
+<p>Les paramètres d'une procédure peuvent prendre 3 formes :</p>
+<ul>
+<li>IN : paramètre d'entrée, donc en lecture seule</li>
+<li>OUT : paramètre de sortie, donc en écriture puis en lecture au besoin</li>
+<li>INOUT : paramètre d'entrée et de sortie (ref). En lecture et en écriture.</li>
+</ul>
+<p>On inscrit des variables dans les paramètres OUT pour récupérer les valeurs. Si la variable contient déjà une valeur, il n'est pas possible de la récupérer dans la procédure.</p>
+<h3 id="exemple">Exemple</h3>
+<pre><code class="language-sql">DELIMITER $$
+CREATE PROCEDURE somme (IN _operande1 INT, IN _operande2 INT, OUT _resultat INT)
+BEGIN   
+  SET _resultat = _operande1 + _operande2;
+END $$
+DELIMITER ; 
+</code></pre>
+<p>On remarque ici :
+- L'absence d'instruction RETURN (interdit dans une procédure)
+- L'utilisation du OUT pour résultat</p>
+<h3 id="invocation-de-procedure">Invocation de procédure</h3>
+<pre><code class="language-sql">SET @resultat = 0;            -- Déclaration d'une variable
+CALL somme(2, 4, @resultat);  -- Invocation
+SELECT @resultat;             -- Affichage
+</code></pre>
+<h3 id="documenter-une-procedure">Documenter une procédure</h3>
+<p>Chaque procédure s'accompagne d'une documentation d'en-tête</p>
+<pre><code class="language-sql">/**
+ * Description de la procédure
+ * 
+ * @param   IN | OUT | INOUT  Nom du paramètre  Description   
+ * @param   IN | OUT | INOUT  Nom du paramètre  Description  
+ * ...
+ */
+</code></pre>
+<p><strong>Comme les procédures peuvent devenir très longues, il est important d'utiliser des commentaires pour les variables locales déclarées et certaines instructions (IF, WHILE, REPEAT ...)</strong></p>
+<h3 id="-exercice-531-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 5.3.1 ---</h3>
+<p>A. Créez une procédure pour ajouter un nouveau groupe. Initialement l'enseignant est null. Vous connaissez seulement le semestre, l'année et le sigle du cours. Vous devez ajouter le numéro de groupe suivant (si le groupe 1 et 2 existent, alors le groupe aura le numéro 3). Le premier groupe porte le numéro 1. La procédure retourne le numéro du groupe qui a été créé. En cas d'erreur, le numéro -1 est retourné.</p>
+<p><strong>Paramètres</strong> : semestre, annee et sigle du cours
+<strong>Valeur de retour</strong> : le numéro du groupe qui a été créé</p>
+<p>B. Créez une procédure pour inscrire un étudiant à un cours. La procédure reçoit le code de l'étudiant, le sigle du cours, le semestre et l'année pour l'inscription. </p>
+<p>L'étudiant est toujours ajouté au groupe avec le plus petit numéro qui a une place de libre. Si le groupe est plein (4 étudiants et plus), alors un nouveau groupe est créé.</p>
+<p>Le numéro du groupe dans lequel l'élève a été inscrit est retourné. En cas d'erreur, la valeur -1 est retournée.</p>
+<p><strong>Paramètres</strong> : code étudiant, sigle du cours, semestre, année
+<strong>Valeur de retour</strong> : numéro du groupe dans lequel l'inscription s'est faite</p>
+<h2 id="transactions-et-gestion-derreur">Transactions et gestion d'erreur</h2>
+<p>Concept d'exception en programmation
+Principe d’une transaction</p>
+<h3 id="exceptions-en-programmation">Exceptions en programmation</h3>
+<p><img alt="" src="../images/5_exception.png" /></p>
+<h3 id="quand-gerer-les-exceptions">Quand gérer les exceptions</h3>
+<ul>
+<li>Quand une erreur de fonctionnement imprévisible est à risque de survenir :</li>
+<li>Donnée utilisateur</li>
+<li>Référence à un programme externe</li>
+<li>Référence à des données non contrôlées</li>
+<li>Gérer certaines scénarios d'exécution problématiques</li>
+</ul>
+<h3 id="exceptions-possibles-en-bd">Exceptions possibles en BD</h3>
+<p>Les exceptions possibles dans le domaine de la BD sont :</p>
+<ul>
+<li>Violation de contrainte</li>
+<li>Duplicat de clé primaire</li>
+<li>Duplicat de valeur unique</li>
+<li>Insérer NULL dans une colonne qui n'est pas nullifiable</li>
+<li>Ne pas respecter un contrainte CHECK</li>
+<li>Ne pas respecter une clé étrangère </li>
+<li>Exception personnalisées</li>
+</ul>
+<h3 id="codes-derreur-mysql">Codes d'erreur MySQL</h3>
+<p>Les codes d'erreur de MySQL sont gérés par les <strong>SQLSTATE</strong>. Les états SQL sont des codes à 5 chiffres. Les 2 premiers indiquent un état global (erreur, avertissement, succès, information...) et les 3 derniers sont spécifiques à la situation</p>
+<ul>
+<li>00### : indique un succès</li>
+<li>01### : avertissement</li>
+<li>02### : non trouvé</li>
+<li>&gt;02### : exception</li>
+</ul>
+<h3 id="lancer-un-signal">Lancer un signal</h3>
+<p>Le SGBD lance des sigaux lorsqu'une erreur interne se produit. Il est possible de lancer un signal avec un code d'erreur personnalisé.</p>
+<pre><code class="language-sql">SIGNAL SQLSTATE 'code 5 chiffres' SET MESSAGE_TEXT = 'Message erreur';
+</code></pre>
+<h3 id="gestion-des-signaux-et-des-transactions">Gestion des signaux et des transactions</h3>
+<p>Pour attraper un signal, on déclare un gestionnaire (<em>handler</em>).</p>
+<pre><code class="language-mysql">DECLARE action HANDLER FOR condition | code
+</code></pre>
+<p>L'action est de deux types :
+- CONTINUE : le bloc BEGIN - END continue son exécution après la gestion du signal
+- EXIT : le bloc BEGIN - END arrête son exécution après la gestion du signal.</p>
+<p>Les gestionnaires peuvent seulement être déclarés dans les procédures.</p>
+<h3 id="condition-du-gestionnaire">Condition du gestionnaire</h3>
+<p>La condition peut être de différents types.
+- Une classe de signaux :
+  - SQLWARNING
+  - NOT FOUND 
+  - SQLEXCEPTION
+- Un code particulier :
+  - Code d'erreur MySQL (4 chiffres) : https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html
+  - Un code de signal SQLSIGNAL code5
+- Le nom d'une condition (<strong>DECLARE ... CONDITION</strong>)</p>
+<h3 id="exemple_1">Exemple</h3>
+<p>Attraper les erreurs de clé primaire nulle</p>
+<pre><code class="language-mysql">DECLARE EXIT HANDLER FOR 1171 
+
+-- Alternative
+
+DECLARE EXIT HANDLER FOR 42000
+</code></pre>
+<p>Attraper toutes les exceptions</p>
+<pre><code class="language-mysql">DECLARE EXIT HANDLER FOR SQLEXCEPTION
+</code></pre>
+<h3 id="afficher-lerreur">Afficher l'erreur</h3>
+<p>On récupère l'erreur avec une requête </p>
+<pre><code class="language-sql">GET DIAGNOSTICS 
+</code></pre>
+<p>Par exemple pour récupérer le code et le message d'erreur actuel</p>
+<pre><code class="language-sql">GET DIAGNOSTICS CONDITION 1            
+  _code = RETURNED_SQLSTATE, 
+  _message = MESSAGE_TEXT;
+SELECT _code, _message;
+</code></pre>
+<p>où _code et _message sont des variables locales</p>
+<h3 id="exemple-complet-de-gestion-dexception">Exemple complet de gestion d'exception</h3>
+<pre><code class="language-sql">CREATE PROCEDURE gestion_erreur()
+BEGIN
+  DECLARE _code CHAR(5);
+  DECLARE _message TEXT;
+  ...
+
+  -- On répère ce bloc pour chaque type d'erreur à traiter
+  DECLARE EXIT HANDLER FOR 00000
+  BEGIN
+    GET DIAGNOSTICS CONDITION 1
+      _code = RETURNED_SQLSTATE,
+      _message = MESSAGE_TEXT;
+    SELECT _code, _message;
+  END;
+
+  ...
+</code></pre>
+<h3 id="transactions-mise-en-situation">Transactions - Mise en situation</h3>
+<p>Timmy, dévoué programmeur, crée un script qui importe, dans notre système École, les notes de tous les étudiants à une évaluation . Afin d'éviter d'insérer de mauvaises données, Timmy applique la règle suivante : si une des notes ne peut pas être ajoutée (par exemple pour une violation de contrainte), alors aucune note n'est ajoutée.</p>
+<p>Si notre script s’exécute automatiquement, comment appliquer cette mesure ?</p>
+<h3 id="principe-dune-transaction">Principe d’une transaction</h3>
+<p>Une transaction contient une série d’instructions. Une fois que toutes les instructions ont été effectuées, on peut les enregistrer ou les annuler.</p>
+<p>L’utilisation de transaction facilite l’exécution d’instructions multiples et aide à maintenir une intégrité dans nos données.</p>
+<h3 id="fonctionnement-dune-transaction">Fonctionnement d'une transaction</h3>
+<ol>
+<li>On commence pas indiquer notre intention de faire un bloc d'instructions (transaction) par START TRANSACTION</li>
+<li>On effectue les requêtes</li>
+<li>On COMMIT la transaction si tout s'est bien déroulé OU on ROLLBACK si on veut tout annuler.</li>
+</ol>
+<h3 id="exemple_2">Exemple</h3>
+<p>Ajoutez la contrainte suivante à la table Evaluation_etudiant </p>
+<pre><code class="language-mysql">CONSTRAINT interval_note CHECK (note BETWEEN 0 AND 100)
+</code></pre>
+<p>Désactivons le autocommit de MySQL Workbench</p>
+<p><img alt="" src="../images/4_autocommit.png" /></p>
+<p>Ajoutons maintenant les données suivantes</p>
+<pre><code class="language-mysql">INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 1234567, 22, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 4567890, -5, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 8901234, 24, NULL);
+</code></pre>
+<p>Comment revenir supprimer le premier enregistrement qui s'est bien déroulé ?</p>
+<h3 id="exemple-de-rollback">Exemple de ROLLBACK</h3>
+<pre><code class="language-mysql">SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
+
+START TRANSACTION;
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 1234567, 22, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 4567890, -5, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 8901234, 24, NULL);
+
+SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 77 (+2)
+
+ROLLBACK; -- Il y a eu erreur
+
+SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
+</code></pre>
+<h3 id="exemple-de-commit">Exemple de commit</h3>
+<p>Les INSERT sont valides cette fois-ci.</p>
+<pre><code class="language-mysql">SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
+
+START TRANSACTION;
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 1234567, 22, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 4567890, 17, NULL);
+
+INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
+  (1, 8901234, 24, NULL);
+
+SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 78 (+3)
+
+COMMIT; -- Tout s'est bien déroulé
+
+SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 78
+</code></pre>
+<h3 id="demonstration">Démonstration</h3>
+<p>Créez une procédure pour inscire un nouveau vol. La procédure reçoit une immatriculation de vaisseau, le numéro de vol et le nom du capitaine du vol.</p>
+<p>La procédure crée le vol et ajoute un membre d'équipage, le capitaine. En cas d'erreur, aucune donnée ne doit être créée.</p>
+<h3 id="-exercice-532-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 5.3.2 ---</h3>
+<p>A. Créez une procédure pour noter un étudiant. Cette procédure doit accepter un code étudiant, l'id de groupe (que l'on suppose avoir obtenu par un autre moyen) et le nom de l'évaluation. </p>
+<p>Supposez que l'id du groupe et le nom de l'évaluation forme une clé unique.</p>
+<p>Gérez l'erreur qui pourrait survenir si l'évaluation n'existe pas. </p>
+<p>Votre procédure doit permettre d'assigner une note que Evaluation_etudiant existe ou non au préalable.</p>
+<p><strong>Paramètres</strong> : code_etudiant, id_groupe, nom_evaluation et note.</p>
+<p>B. Créez une procédure pour permettre à un étudiant de déposer un travail. La procédure doit accepter un code etudiant, un id_evaluation (que l'on suppose avoir obtenu par un autre moyen) et les informations relative au document. On suppose que Evaluation_etudiant a déjà été créé pour l'évaluation et l'étudiant donné. </p>
+<p>Si un document a déjà été déposé, alors :</p>
+<ul>
+<li>Mettez à jour l'information du document</li>
+<li>Déclencher un avertissement de code 01001 qui ne bloque pas l'exécution de la procédure</li>
+</ul>
+<p><strong>Paramètres</strong> : code_etudiant, id_evaluation et le titre du document</p>
+<p>C. Vous devez ajouter 3 nouveaux enseignants dans le système École. Voici les données de ceux-ci.</p>
+<p>Effectuez l'opération en utilisant les transactions. Si l'un d'entre eux ne peut pas être ajouté, alors aucune ne doit l'être.</p>
+<table>
+<thead>
+<tr>
+<th>Code employé</th>
+<th>Nom</th>
+<th>No assurance sociale</th>
+<th>Ancienneté</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7645</td>
+<td>Diana de Themyscira</td>
+<td>111 222 333</td>
+<td>15</td>
+</tr>
+<tr>
+<td>7654</td>
+<td>Jason Todd</td>
+<td>987 654 321</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6574</td>
+<td>Barry Allen</td>
+<td>555 777 333</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
