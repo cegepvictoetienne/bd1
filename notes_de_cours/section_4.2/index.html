@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1261,6 +1278,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1325,7 +1362,7 @@ Cryptage de la BD</p>
 <h2 id="hashage">Hashage</h2>
 <p>Une fonction de hashage accepte généralement une seule chaîne en entrée et retourne une valeur correspondant à l’entrée (appelé <em>hash</em>).</p>
 <p>La fonction peut produire un <em>hash</em> unique pour chaque entrée (fonction injective) ou permettre à plusieurs entrées de partager le même <em>hash</em>. Le deuxième cas est celui le plus rencontré.</p>
-<p>Il faut évidemment évaluer le risque de collision de <em>hash</em> (partage de valeur). Pour le <em>hash</em> de Git, ce risque est estimé à environ $1 \times 10^{-48}$, soit de tirer au hasard un atome sur la Terre. </p>
+<p>Il faut évidemment évaluer le risque de collision de <em>hash</em> (partage de valeur). Pour le <em>hash</em> de Git, ce risque est estimé à environ $1 times 10^{-48}$, soit de tirer au hasard un atome sur la Terre. </p>
 <p>Les fonctions utilisables par MySQL (et d'autres langages) sont</p>
 <table>
 <thead>
@@ -1360,20 +1397,20 @@ Cryptage de la BD</p>
 <p>Le standard est d’utiliser au moins 256 bits. On voit souvent 256 et 512 être utilisés.</p>
 <p><strong>Exemple</strong></p>
 <p>L’utilisateur veut enregistrer un mot de passe 'tarte123'. Pour le hasher avec SHA-256 avant de l’intégrer à la BD on utilise :</p>
-<pre><code class="language-mysql">INSERT INTO Utilisateur (nom, mot_de_passe)
-    VALUES ('Patissier21', SHA2('tarte123', 256));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">mot_de_passe</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">SHA2</span><span class="p">(</span><span class="s1">&#39;tarte123&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">));</span>
+</code></pre></div>
 <p><strong>Résultat de SHA2</strong></p>
-<p>La requête </p>
-<pre><code class="language-mysql">SELECT * FROM Utilisateur;
-</code></pre>
+<p>La requête 
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Utilisateur</span><span class="p">;</span>
+</code></pre></div></p>
 <p>retourne:</p>
-<pre><code>| nom           | mot_de_passe                                                     |
+<div class="highlight"><pre><span></span><code>| nom           | mot_de_passe                                                     |
 
 | patissier21   | b2c4b81704855df00cff57312d46ec28254e2f69f526cc61da5f2df20c43d075 |
 | jardiner14    | b48cea174391677879618ace9ea78531f5a0d18551de187ee76eb3190624ef35 |
 ...
-</code></pre>
+</code></pre></div>
 <h3 id="avantages-et-desavantages-du-hashage">Avantages et désavantages du hashage</h3>
 <p>Avantages :</p>
 <ul>
@@ -1448,10 +1485,10 @@ Texte crypté + clé 🡺 texte clair </p>
 <p>Il effectue plusieurs étapes de permutation / substitution</p>
 <h3 id="crypter-avec-mysql">Crypter avec MySQL</h3>
 <p>Pour crypter, on utilise la fonction <strong>AES_ENCRYPT</strong>. Son premier argument est le texte à crypter et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.</p>
-<pre><code class="language-mysql">INSERT INTO Utilisateur (nom, carte_credit)
-  VALUES ('Patissier21', AES_ENCRYPT('1234123412341234',  
-  UNHEX('F3229A0B371ED2D9441B830D21A390C3')));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">carte_credit</span><span class="p">)</span>
+<span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">AES_ENCRYPT</span><span class="p">(</span><span class="s1">&#39;1234123412341234&#39;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">  </span><span class="nf">UNHEX</span><span class="p">(</span><span class="s1">&#39;F3229A0B371ED2D9441B830D21A390C3&#39;</span><span class="p">)));</span>
+</code></pre></div>
 <p>On place le résultat dans un BLOB.</p>
 <h4 id="fonction-unhex">Fonction UNHEX</h4>
 <p>La fonction <strong>UNHEX</strong> convertit une chaîne de valeurs hexadécimale en sa représentation sous forme de chaîne de caractères.</p>
@@ -1478,16 +1515,16 @@ Texte crypté + clé 🡺 texte clair </p>
 </table>
 <h3 id="decrypter-avec-mysql">Décrypter avec MySQL</h3>
 <p>Pour décrypter, on utilise la fonction <strong>AES_DECRYPT</strong>. Le premier argument est la valeur à décrypter, le second la clé secrète.</p>
-<pre><code class="language-mysql">SELECT nom, CAST(AES_DECRYPT(carte_credit,   
-  UNHEX('F3229A0B371ED2D9441B830D21A390C3’)) AS CHAR)
-  AS carte_credit FROM Utilisateur;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="nf">CAST</span><span class="p">(</span><span class="nf">AES_DECRYPT</span><span class="p">(</span><span class="n">carte_credit</span><span class="p">,</span><span class="w">   </span>
+<span class="w">  </span><span class="nf">UNHEX</span><span class="p">(</span><span class="s1">&#39;F3229A0B371ED2D9441B830D21A390C3’)) AS CHAR)</span>
+<span class="s1">  AS carte_credit FROM Utilisateur;</span>
+</code></pre></div>
 <p>Le résultat du décryptage.</p>
-<pre><code class="language-console">| nom           | carte_credit     |
+<div class="highlight"><pre><span></span><code><span class="go">| nom           | carte_credit     |</span>
 
-| patissier21   | 1234123412341234 |
-| jardiner14    | 9876987698769876 |
-</code></pre>
+<span class="go">| patissier21   | 1234123412341234 |</span>
+<span class="go">| jardiner14    | 9876987698769876 |</span>
+</code></pre></div>
 <p>Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du décryptage avec la mauvaise clé !)</p>
 <h3 id="phrase-secrete">Phrase secrète</h3>
 <p>Plutôt que d’utiliser une clé binaire, on peut utiliser une phrase secrète comme mot de passe. La clé est cependant limitée à 256 caractères. Comment fait-on ?</p>
@@ -1495,16 +1532,16 @@ Texte crypté + clé 🡺 texte clair </p>
 <li>On peut hasher la phrase secrète pour obtenir une chaîne de la bonne longueur !</li>
 </ul>
 <h1 id="phrase-secrete_1">Phrase secrète</h1>
-<pre><code class="language-mysql"># Insertion
-INSERT INTO Utilisateur (nom, carte_credit) 
-  VALUES ('Patissier21', AES_ENCRYPT('1234123412341234',
-                           UNHEX(SHA2('secret', 256))));
+<div class="highlight"><pre><span></span><code><span class="c1"># Insertion</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">carte_credit</span><span class="p">)</span><span class="w"> </span>
+<span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">AES_ENCRYPT</span><span class="p">(</span><span class="s1">&#39;1234123412341234&#39;</span><span class="p">,</span>
+<span class="w">                           </span><span class="nf">UNHEX</span><span class="p">(</span><span class="nf">SHA2</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">))));</span>
 
-# Lecture
-SELECT nom, 
-  CAST(AES_DECRYPT(carte_credit, UNHEX(SHA2('secret', 256))) AS CHAR) AS 'Carte credit'
-  FROM Utilisateur;
-</code></pre>
+<span class="c1"># Lecture</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">CAST</span><span class="p">(</span><span class="nf">AES_DECRYPT</span><span class="p">(</span><span class="n">carte_credit</span><span class="p">,</span><span class="w"> </span><span class="nf">UNHEX</span><span class="p">(</span><span class="nf">SHA2</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">)))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s1">&#39;Carte credit&#39;</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">Utilisateur</span><span class="p">;</span>
+</code></pre></div>
 <h1 id="cryptage-de-la-bd">Cryptage de la BD</h1>
 <p>L’engin de stockage de données InnoDB permet de crypter l’ensemble d’une table ou de la BD. Via un plug-in.</p>
 <p>Ces manipulations ne sont pas vues en classe.</p>

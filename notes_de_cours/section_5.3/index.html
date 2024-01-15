@@ -14,7 +14,7 @@
         <link rel="prev" href="../section_5.2/">
       
       
-        <link rel="next" href="../../ressources/">
+        <link rel="next" href="../../convention/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -312,6 +312,23 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
   
 
       
@@ -1381,6 +1398,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1444,19 +1481,18 @@
 <p>Les procédures gèrent généralement la logique applicative (couche métier). Par exemple, les ajouts ou modifications aux données.</p>
 <p>Les fonctions définissent généralement un traitement d’appoint, un calcul ou l'obtention d'un renseignement.</p>
 <h3 id="declarer-et-invoquer-une-procedure">Déclarer et invoquer une procédure</h3>
-<pre><code class="language-sql">DELIMITER $$
+<div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
 
-CREATE PROCEDURE nom_procedure()
-BEGIN
-  traitement
-END $$
+<span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">nom_procedure</span><span class="p">()</span>
+<span class="k">BEGIN</span>
+<span class="w">  </span><span class="n">traitement</span>
+<span class="k">END</span><span class="w"> </span><span class="err">$$</span>
 
-DELIMITER ;
-
-</code></pre>
+<span class="k">DELIMITER</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
 <p>Pour invoquer une procédure, on utilise l'instruction <strong>CALL</strong>.</p>
-<pre><code class="language-sql">CALL nom_procedure();
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CALL</span><span class="w"> </span><span class="n">nom_procedure</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="parametres-de-procedure">Paramètres de procédure</h3>
 <p>Les paramètres d'une procédure peuvent prendre 3 formes :</p>
 <ul>
@@ -1466,31 +1502,31 @@ DELIMITER ;
 </ul>
 <p>On inscrit des variables dans les paramètres OUT pour récupérer les valeurs. Si la variable contient déjà une valeur, il n'est pas possible de la récupérer dans la procédure.</p>
 <h3 id="exemple">Exemple</h3>
-<pre><code class="language-sql">DELIMITER $$
-CREATE PROCEDURE somme (IN _operande1 INT, IN _operande2 INT, OUT _resultat INT)
-BEGIN   
-  SET _resultat = _operande1 + _operande2;
-END $$
-DELIMITER ; 
-</code></pre>
-<p>On remarque ici :
+<p><div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">somme</span><span class="w"> </span><span class="p">(</span><span class="k">IN</span><span class="w"> </span><span class="n">_operande1</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">_operande2</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="k">OUT</span><span class="w"> </span><span class="n">_resultat</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span>
+<span class="k">BEGIN</span><span class="w">   </span>
+<span class="w">  </span><span class="k">SET</span><span class="w"> </span><span class="n">_resultat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_operande1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_operande2</span><span class="p">;</span>
+<span class="k">END</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">DELIMITER</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
+On remarque ici :
 - L'absence d'instruction RETURN (interdit dans une procédure)
 - L'utilisation du OUT pour résultat</p>
 <h3 id="invocation-de-procedure">Invocation de procédure</h3>
-<pre><code class="language-sql">SET @resultat = 0;            -- Déclaration d'une variable
-CALL somme(2, 4, @resultat);  -- Invocation
-SELECT @resultat;             -- Affichage
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">resultat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">            </span><span class="c1">-- Déclaration d&#39;une variable</span>
+<span class="k">CALL</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">resultat</span><span class="p">);</span><span class="w">  </span><span class="c1">-- Invocation</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">resultat</span><span class="p">;</span><span class="w">             </span><span class="c1">-- Affichage</span>
+</code></pre></div>
 <h3 id="documenter-une-procedure">Documenter une procédure</h3>
 <p>Chaque procédure s'accompagne d'une documentation d'en-tête</p>
-<pre><code class="language-sql">/**
- * Description de la procédure
- * 
- * @param   IN | OUT | INOUT  Nom du paramètre  Description   
- * @param   IN | OUT | INOUT  Nom du paramètre  Description  
- * ...
- */
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Description de la procédure</span>
+<span class="cm"> * </span>
+<span class="cm"> * @param   IN | OUT | INOUT  Nom du paramètre  Description   </span>
+<span class="cm"> * @param   IN | OUT | INOUT  Nom du paramètre  Description  </span>
+<span class="cm"> * ...</span>
+<span class="cm"> */</span>
+</code></pre></div>
 <p><strong>Comme les procédures peuvent devenir très longues, il est important d'utiliser des commentaires pour les variables locales déclarées et certaines instructions (IF, WHILE, REPEAT ...)</strong></p>
 <h3 id="-exercice-531-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 5.3.1 ---</h3>
 <p>A. Créez une procédure pour ajouter un nouveau groupe. Initialement l'enseignant est null. Vous connaissez seulement le semestre, l'année et le sigle du cours. Vous devez ajouter le numéro de groupe suivant (si le groupe 1 et 2 existent, alors le groupe aura le numéro 3). Le premier groupe porte le numéro 1. La procédure retourne le numéro du groupe qui a été créé. En cas d'erreur, le numéro -1 est retourné.</p>
@@ -1535,12 +1571,12 @@ Principe d’une transaction</p>
 </ul>
 <h3 id="lancer-un-signal">Lancer un signal</h3>
 <p>Le SGBD lance des sigaux lorsqu'une erreur interne se produit. Il est possible de lancer un signal avec un code d'erreur personnalisé.</p>
-<pre><code class="language-sql">SIGNAL SQLSTATE 'code 5 chiffres' SET MESSAGE_TEXT = 'Message erreur';
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">SIGNAL</span><span class="w"> </span><span class="k">SQLSTATE</span><span class="w"> </span><span class="s1">&#39;code 5 chiffres&#39;</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">MESSAGE_TEXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Message erreur&#39;</span><span class="p">;</span>
+</code></pre></div>
 <h3 id="gestion-des-signaux-et-des-transactions">Gestion des signaux et des transactions</h3>
 <p>Pour attraper un signal, on déclare un gestionnaire (<em>handler</em>).</p>
-<pre><code class="language-mysql">DECLARE action HANDLER FOR condition | code
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="k">action</span><span class="w"> </span><span class="k">HANDLER</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">condition</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">code</span>
+</code></pre></div>
 <p>L'action est de deux types :
 - CONTINUE : le bloc BEGIN - END continue son exécution après la gestion du signal
 - EXIT : le bloc BEGIN - END arrête son exécution après la gestion du signal.</p>
@@ -1556,45 +1592,45 @@ Principe d’une transaction</p>
   - Un code de signal SQLSIGNAL code5
 - Le nom d'une condition (<strong>DECLARE ... CONDITION</strong>)</p>
 <h3 id="exemple_1">Exemple</h3>
-<p>Attraper les erreurs de clé primaire nulle</p>
-<pre><code class="language-mysql">DECLARE EXIT HANDLER FOR 1171 
+<p>Attraper les erreurs de clé primaire nulle
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="k">EXIT</span><span class="w"> </span><span class="k">HANDLER</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="mi">1171</span><span class="w"> </span>
 
--- Alternative
+<span class="c1">-- Alternative</span>
 
-DECLARE EXIT HANDLER FOR 42000
-</code></pre>
-<p>Attraper toutes les exceptions</p>
-<pre><code class="language-mysql">DECLARE EXIT HANDLER FOR SQLEXCEPTION
-</code></pre>
+<span class="k">DECLARE</span><span class="w"> </span><span class="k">EXIT</span><span class="w"> </span><span class="k">HANDLER</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="mi">42000</span>
+</code></pre></div></p>
+<p>Attraper toutes les exceptions
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="k">EXIT</span><span class="w"> </span><span class="k">HANDLER</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">SQLEXCEPTION</span>
+</code></pre></div></p>
 <h3 id="afficher-lerreur">Afficher l'erreur</h3>
 <p>On récupère l'erreur avec une requête </p>
-<pre><code class="language-sql">GET DIAGNOSTICS 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">GET</span><span class="w"> </span><span class="k">DIAGNOSTICS</span><span class="w"> </span>
+</code></pre></div>
 <p>Par exemple pour récupérer le code et le message d'erreur actuel</p>
-<pre><code class="language-sql">GET DIAGNOSTICS CONDITION 1            
-  _code = RETURNED_SQLSTATE, 
-  _message = MESSAGE_TEXT;
-SELECT _code, _message;
-</code></pre>
-<p>où _code et _message sont des variables locales</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">GET</span><span class="w"> </span><span class="k">DIAGNOSTICS</span><span class="w"> </span><span class="n">CONDITION</span><span class="w"> </span><span class="mi">1</span><span class="w">            </span>
+<span class="w">  </span><span class="n">_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">RETURNED_SQLSTATE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">MESSAGE_TEXT</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">_code</span><span class="p">,</span><span class="w"> </span><span class="n">_message</span><span class="p">;</span>
+</code></pre></div>
+où _code et _message sont des variables locales</p>
 <h3 id="exemple-complet-de-gestion-dexception">Exemple complet de gestion d'exception</h3>
-<pre><code class="language-sql">CREATE PROCEDURE gestion_erreur()
-BEGIN
-  DECLARE _code CHAR(5);
-  DECLARE _message TEXT;
-  ...
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">gestion_erreur</span><span class="p">()</span>
+<span class="k">BEGIN</span>
+<span class="w">  </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">_code</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">  </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">_message</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">;</span>
+<span class="w">  </span><span class="p">...</span>
 
-  -- On répère ce bloc pour chaque type d'erreur à traiter
-  DECLARE EXIT HANDLER FOR 00000
-  BEGIN
-    GET DIAGNOSTICS CONDITION 1
-      _code = RETURNED_SQLSTATE,
-      _message = MESSAGE_TEXT;
-    SELECT _code, _message;
-  END;
+<span class="w">  </span><span class="c1">-- On répère ce bloc pour chaque type d&#39;erreur à traiter</span>
+<span class="w">  </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">EXIT</span><span class="w"> </span><span class="k">HANDLER</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="mi">00000</span>
+<span class="w">  </span><span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">GET</span><span class="w"> </span><span class="k">DIAGNOSTICS</span><span class="w"> </span><span class="n">CONDITION</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="n">_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">RETURNED_SQLSTATE</span><span class="p">,</span>
+<span class="w">      </span><span class="n">_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">MESSAGE_TEXT</span><span class="p">;</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">_code</span><span class="p">,</span><span class="w"> </span><span class="n">_message</span><span class="p">;</span>
+<span class="w">  </span><span class="k">END</span><span class="p">;</span>
 
-  ...
-</code></pre>
+<span class="w">  </span><span class="p">...</span>
+</code></pre></div>
 <h3 id="transactions-mise-en-situation">Transactions - Mise en situation</h3>
 <p>Timmy, dévoué programmeur, crée un script qui importe, dans notre système École, les notes de tous les étudiants à une évaluation . Afin d'éviter d'insérer de mauvaises données, Timmy applique la règle suivante : si une des notes ne peut pas être ajoutée (par exemple pour une violation de contrainte), alors aucune note n'est ajoutée.</p>
 <p>Si notre script s’exécute automatiquement, comment appliquer cette mesure ?</p>
@@ -1609,62 +1645,62 @@ BEGIN
 </ol>
 <h3 id="exemple_2">Exemple</h3>
 <p>Ajoutez la contrainte suivante à la table Evaluation_etudiant </p>
-<pre><code class="language-mysql">CONSTRAINT interval_note CHECK (note BETWEEN 0 AND 100)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">interval_note</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">note</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
 <p>Désactivons le autocommit de MySQL Workbench</p>
 <p><img alt="" src="../images/4_autocommit.png" /></p>
 <p>Ajoutons maintenant les données suivantes</p>
-<pre><code class="language-mysql">INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 1234567, 22, NULL);
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 4567890, -5, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4567890</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 8901234, 24, NULL);
-</code></pre>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8901234</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
+</code></pre></div>
 <p>Comment revenir supprimer le premier enregistrement qui s'est bien déroulé ?</p>
 <h3 id="exemple-de-rollback">Exemple de ROLLBACK</h3>
-<pre><code class="language-mysql">SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 75</span>
 
-START TRANSACTION;
+<span class="k">START</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 1234567, 22, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 4567890, -5, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4567890</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 8901234, 24, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8901234</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 77 (+2)
+<span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 77 (+2)</span>
 
-ROLLBACK; -- Il y a eu erreur
+<span class="k">ROLLBACK</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Il y a eu erreur</span>
 
-SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
-</code></pre>
+<span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 75</span>
+</code></pre></div>
 <h3 id="exemple-de-commit">Exemple de commit</h3>
 <p>Les INSERT sont valides cette fois-ci.</p>
-<pre><code class="language-mysql">SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 75
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 75</span>
 
-START TRANSACTION;
+<span class="k">START</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 1234567, 22, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 4567890, 17, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4567890</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-INSERT INTO Evaluation_etudiant (id_evaluation, etudiant, note, document) VALUES
-  (1, 8901234, 24, NULL);
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">,</span><span class="w"> </span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">note</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8901234</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">);</span>
 
-SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 78 (+3)
+<span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 78 (+3)</span>
 
-COMMIT; -- Tout s'est bien déroulé
+<span class="k">COMMIT</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Tout s&#39;est bien déroulé</span>
 
-SELECT count(id_evaluation) FROM Evaluation_etudiant; -- Affiche 78
-</code></pre>
+<span class="k">SELECT</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Affiche 78</span>
+</code></pre></div>
 <h3 id="demonstration">Démonstration</h3>
 <p>Créez une procédure pour inscire un nouveau vol. La procédure reçoit une immatriculation de vaisseau, le numéro de vol et le nom du capitaine du vol.</p>
 <p>La procédure crée le vol et ajoute un membre d'équipage, le capitaine. En cas d'erreur, aucune donnée ne doit être créée.</p>

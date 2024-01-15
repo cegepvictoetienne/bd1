@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1225,6 +1242,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1338,26 +1375,57 @@
 <p>On remarque la direction de la flèche, de la table appelée « enfant » vers la table 
 « parent ».</p>
 <p>On ajoute dans la table enfant un champ enseignant et une annotation de clé étrangère. Donc ici chaque Cours possède un enseignant.</p>
-<p><img alt="" src="../images/1_cle_etrangere.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+    enseignants ||--o{ cours : "enseigne" 
+enseignants {
+        NUMERIC(8) code_employe
+        VARCHAR(255) nom
+        VARCHAR(255) prenom
+        NUMERIC(9) num_assurance_sociale
+        TINYINT anciennete
+    }
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }    </code></pre>
 <h2 id="importances-des-relations">Importances des relations</h2>
 <p>On trouve rarement une table isolée dans un modèle de base de données (table en relation avec aucune autre table).</p>
 <p>Pour faire une analogie, on pourrait comporarer une table isolée à du code qui n'est pas référencé (fonction qui n'est jamais appelée) dans le domaine de la programmation.</p>
 <h2 id="cle-etrangere-sql">Clé étrangère SQL</h2>
 <p>Pour indiquer une clé étrangère, on ajoute la contrainte suivante dans la requête de création de la table.</p>
-<pre><code class="language-mysql">FOREIGN KEY (nom_colonne) REFERENCES Table_parent(cle_primaire)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">nom_colonne</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Table_parent</span><span class="p">(</span><span class="n">cle_primaire</span><span class="p">)</span>
+</code></pre></div>
 <p>Exemple avec la table Cours</p>
-<pre><code class="language-mysql">CREATE TABLE Cours (  
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,  
-    sigle CHAR (11),  
-    duree SMALLINT, 
-    nom VARCHAR(255),
-    enseignant NUMERIC(8),
-    FOREIGN KEY (enseignant) REFERENCES Enseignant (code_employe));
-</code></pre>
-<p>Ici rien ne change dans la création de la table Enseignant (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="w"> </span><span class="p">(</span><span class="mi">11</span><span class="p">),</span><span class="w">  </span>
+<span class="w">    </span><span class="n">duree</span><span class="w"> </span><span class="kt">TINYINT</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">    </span><span class="n">enseignant</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">enseignant</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">enseignants</span><span class="w"> </span><span class="p">(</span><span class="n">code_employe</span><span class="p">));</span>
+</code></pre></div>
+<p>Ici rien ne change dans la création de la table enseignants (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).</p>
 <h2 id="suppression-de-tables-qui-contiennent-des-relations">Suppression de tables qui contiennent des relations</h2>
-<p><img alt="" src="../images/1_cle_etrangere.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+    enseignants ||--o{ cours : "enseigne" 
+enseignants {
+        NUMERIC(8) code_employe
+        VARCHAR(255) nom
+        VARCHAR(255) prenom
+        NUMERIC(9) num_assurance_sociale
+        TINYINT anciennete
+    }
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    } 
+</code></pre>
 <p>Peut-on supprimer la table Enseignant sans supprimer la table Cours? Pourquoi?</p>
 <p><img alt="❗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2757.svg" title=":exclamation:" />Pour pouvoir supprimer une table, celle-ci ne doit pas être référencée par une autre table. Autrement dit, il faut que sa clé primaire ne soit pas une clé étrangère pour une ou plusieurs autres tables.</p>
 <p>Si l'on pouvait faire la suppression, la table <em>Cours</em> aurait une colonne qui contiendrait des clés d'une table inexistante.</p>
@@ -1374,31 +1442,74 @@
 <p>Par exemple, on ajouterait une table « Inscription » pour représenter notre association. Comme Inscription est créée spécialement pour représenter une association, elle est appelée table d'association.</p>
 <p>On voit ici que la table Inscription assure l'association entre Cours et Etudiant.</p>
 <p>On peut voir que deux tables sont associées si l'on peut suivre avec notre doigt d'une table à l'autre en empruntant les flèches comme des chemins (ici le sens des flèches n'a pas d'importance).</p>
-<p><img alt="" src="../images/1_table_association.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+    etudiants ||--o{ inscriptions : " " 
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
+    inscriptions }o--|| cours : " "
+inscriptions {
+        INTEGER cours PK
+        INTEGER etudiant PK
+        CHAR(3) session
+    }
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }    </code></pre>
 <h2 id="mais-un-instant">Mais... un instant!</h2>
 <p>Dans la table Inscription la clé primaire est-elle vraiment composée de <em>deux</em> colonnes?</p>
 <p>Oui, c'est possible: c'est appelé une <em>clé composée</em>. </p>
-<p><img alt="" src="../images/1_table_association.png" /></p>
+<pre class="mermaid"><code>erDiagram   
+    etudiants ||--o{ inscriptions : " " 
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
+    inscriptions }o--|| cours : " "
+inscriptions {
+        INTEGER cours PK
+        INTEGER etudiant PK
+        CHAR(3) session
+    }
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }   
+</code></pre>
 <h2 id="cle-composee">Clé composée</h2>
 <p>Pour indiquer une clé composée dans une base de données, nous devrons utiliser la notation de contrainte.</p>
 <p>Après avoir déclaré les colonnes, on indique</p>
-<pre><code class="language-mysql">PRIMARY KEY (nom_colonne1, nom_colonne2, … )
-</code></pre>
-<p>Ne fonctionne pas :</p>
-<pre><code class="language-mysql">CREATE TABLE Inscription(
-    etudiant NUMERIC(7) PRIMARY KEY, 
-    cours INTEGER PRIMARY KEY,
-    FOREIGN KEY (etudiant) REFERENCES Etudiant (code),
-    FOREIGN KEY (cours) REFERENCES Cours (id_cours));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">nom_colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">nom_colonne2</span><span class="p">,</span><span class="w"> </span><span class="n">…</span><span class="w"> </span><span class="p">)</span>
+</code></pre></div>
+<p>Ne fonctionne pas :
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">inscription</span><span class="p">(</span>
+<span class="w">    </span><span class="n">etudiant</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">cours</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">etudiant</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">etudiant</span><span class="w"> </span><span class="p">(</span><span class="k">code</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cours</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="n">cours_id</span><span class="p">));</span>
+</code></pre></div></p>
 <p>Bonne écriture :</p>
-<pre><code class="language-mysql">CREATE TABLE Inscription(
-    etudiant NUMERIC(7), 
-    cours INTEGER,
-    PRIMARY KEY (etudiant, cours),
-    FOREIGN KEY (etudiant) REFERENCES Etudiant (code),
-    FOREIGN KEY (cours) REFERENCES Cours (id_cours));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">inscription</span><span class="p">(</span>
+<span class="w">    </span><span class="n">etudiant</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">cours</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">etudiant</span><span class="p">,</span><span class="w"> </span><span class="n">cours</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">etudiant</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">etudiant</span><span class="w"> </span><span class="p">(</span><span class="k">code</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cours</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="n">id_cours</span><span class="p">));</span>
+</code></pre></div>
 <h2 id="notation-de-contraintes">Notation de contraintes</h2>
 <p>La notation contrainte de <strong>PRIMARY KEY</strong> s'utilise aussi en présence d'une clé simple (clé comportant une seule colonne).</p>
 <p>La notation vue précédemment constitue un raccourci intéressant lorsqu'on travaille.</p>

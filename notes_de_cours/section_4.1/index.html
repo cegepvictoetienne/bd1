@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1315,6 +1332,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1380,95 +1417,135 @@ Référence un enregistrement d’une autre table. Garanti que l’enregistremen
 Spécifie la valeur utilisée lorsqu’un enregistrement est créé et qu’aucune valeur n’est spécifiée. Si aucune valeur par défaut n’est indiquée, <strong>NULL</strong> est utilisée par le système.</p>
 <h3 id="cascade">Cascade</h3>
 <p>Jusqu’à présent le code suivant provoque une erreur.</p>
-<pre><code class="language-mysql">DELETE FROM Enseignant
-    WHERE id_enseignant = 1;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">enseignants</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">code_employe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
 <p>Parce que la table Programme contient une clé étrangère vers Enseignant et qu'elle ne pointerait sur rien si l'enseignant est supprimé.</p>
-<p><img alt="" src="../images/4_programme_enseignant.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+    enseignants ||--o{ programmes : " " 
+    enseignants {
+        NUMERIC(8) code_employe
+        VARCHAR(255) nom
+        VARCHAR(255) prenom
+        NUMERIC(9) num_assurance_sociale
+        TINYINT anciennete
+    }
+    programmes {
+        INTEGER code PK
+        VARCHAR(255) nom
+        NUMERIC(8) responsable FK
+    }</code></pre>
 <p>La stratégie cascade permet de supprimer tous les enregistrements sont référencés, donc qui posent problème.</p>
 <p>Par exemple, ici tous les cours associés aux professeurs seraient également supprimés.</p>
-<pre><code class="language-mysql">FOREIGN KEY (colonne) REFERENCES Nom_table(colonne) ON DELETE CASCADE
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">colonne</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Nom_table</span><span class="p">(</span><span class="n">colonne</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
+</code></pre></div>
 <h2 id="-exercice-411-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.1 ---</h2>
 <p>À partir du diagramme Ecole.pdf, identifiez les enregistrements de quelles tables seraient supprimés si toutes les clés étrangères utilisent la stratégie Cascade et que l'on supprime une session.</p>
 <h3 id="cascade-suite">Cascade (suite)</h3>
 <p>La mise à jour en cascade permet de modifier la valeur d’une clé primaire et de mettre à jour simultanément toutes les clés étrangères (conserver l’intégrité).</p>
 <p>Utile seulement si la clé primaire n’est pas un identifiant autoincrémenté.</p>
-<pre><code>FOREIGN KEY (colonne) REFERENCES Nom_table(colonne) ON UPDATE CASCADE
-</code></pre>
+<div class="highlight"><pre><span></span><code>FOREIGN KEY (colonne) REFERENCES Nom_table(colonne) ON UPDATE CASCADE
+</code></pre></div>
 <h3 id="cle-unique">Clé unique</h3>
 <p>Une clé unique est une façon de préciser qu’une valeur ou un groupe de valeur sont uniques dans la table.</p>
 <p>La clé primaire est un type particulier de clé unique.</p>
 <p><strong>ATTENTION</strong> : contrairement à une clé primaire, une clé unique peut être nulle et plusieurs enregistrements peuvent être nuls.</p>
 <p>Pour indiquer qu’une colonne est unique, on place le mot-clé UNIQUE après le nom de la colonne.</p>
-<pre><code class="language-mysql">CREATE TABLE Programme (  
-    code CHAR(6) PRIMARY KEY,
-    nom VARCHAR(255) UNIQUE,
-    responsable NUMERIC(4),
-    ...
-);
-</code></pre>
-<p><img alt="" src="../images/4_programme.png" /></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">programmes</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">responsable</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">);</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+    programmes {
+        INTEGER code PK
+        VARCHAR(255) nom
+        NUMERIC(8) responsable FK
+    }</code></pre></p>
 <p>Pour indiquer une clé unique portant sur plusieurs colonnes, on utilise la syntaxe suivante:</p>
-<pre><code class="language-mysql">CONSTRAINT nom UNIQUE (colonne1, colonne2...)
-</code></pre>
-<pre><code class="language-mysql">CREATE TABLE Session (
-    id_session INTEGER 
-      PRIMARY KEY AUTO_INCREMENT,
-    semestre ENUM('Automne', 'Hiver'),
-    annee YEAR,
-    debut_session DATE,
-    fin_session DATE,    
-    CONSTRAINT semestre_annee_unique 
-      UNIQUE (semestre, annee));
-</code></pre>
-<p><img alt="" src="../images/4_session.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">colonne2</span><span class="p">...)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sessions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id_session</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span>
+<span class="w">      </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">semestre</span><span class="w"> </span><span class="kt">ENUM</span><span class="p">(</span><span class="s1">&#39;Automne&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Hiver&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">annee</span><span class="w"> </span><span class="kt">YEAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">debut_session</span><span class="w"> </span><span class="kt">DATE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">fin_session</span><span class="w"> </span><span class="kt">DATE</span><span class="p">,</span><span class="w">    </span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">semestre_annee_unique</span><span class="w"> </span>
+<span class="w">      </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">semestre</span><span class="p">,</span><span class="w"> </span><span class="n">annee</span><span class="p">));</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+sessions {
+        INTEGER session_id PK  
+        ENUM semestre "not null"
+        YEAR annee "not null"
+        DATE debut_session "not null"
+        DATE fin_session "not null"   
+    }</code></pre>
 <h3 id="nullite">Nullité</h3>
 <p>À l’exception des clés primaires, toutes les colonnes peuvent prendre la valeur nulle.</p>
 <p>On peut empêcher la présence de valeur nulle dans une colonne en ajoutant <strong>NOT NULL</strong> après le type.</p>
-<p>Pour éviter des professeurs dont le nom est <strong>NULL</strong>, on ajoute
-<strong>| NN</strong> après le type sur le diagramme.</p>
-<pre><code class="language-mysql">CREATE TABLE Etudiant (
-    code NUMERIC(7) PRIMARY KEY,
-    nom VARCHAR(255) NOT NULL
-    ...
-);
-</code></pre>
+<p>Pour éviter des étudiants dont le nom est <strong>NULL</strong>, on ajoute
+<strong>| not null</strong> après le type sur le diagramme.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Etudiant</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">);</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+    etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom "not null"
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }</code></pre>
 <p><img alt="" src="../images/4_etudiant.png" /></p>
 <h3 id="-exercice-412-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.2 ---</h3>
 <p>Modifiez le script de création de la base de données ecole pour inclure les contraintes suivantes :</p>
-<p>A) Deux programmes ne peuvent pas porter le même nom
-B) Chaque programme doit toujours avoir un professeur responsable
-C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22)
-D) Si l'on supprime une Évaluation, on veut supprimer toutes les Evaluation_etudiant associées.</p>
+<p>A) Deux programmes ne peuvent pas porter le même nom<br />
+B) Chaque programme doit toujours avoir un professeur responsable<br />
+C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22)<br />
+D) Si l'on supprime une Évaluation, on veut supprimer toutes les evaluations_etudiants associées.  </p>
 <h3 id="check">Check</h3>
 <p>La contrainte <strong>CHECK</strong> permet de vérifier que les valeurs suivent une certaine condition. On insère cette contrainte directement dans la définition de la table.</p>
-<pre><code class="language-mysql">CREATE TABLE Nom_table (
-    colonne TYPE,
-    ...
-    CONSTRAINT nom_contrainte CHECK (condition));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">colonne</span><span class="w"> </span><span class="k">TYPE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">nom_contrainte</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="k">condition</span><span class="p">));</span>
+</code></pre></div>
 <p>Exemple : les pondérations des évaluations doivent être entre 0 et 100.</p>
-<pre><code class="language-mysql">CREATE TABLE Evaluation (
-  id_evaluation INTEGER 
-    PRIMARY KEY AUTO_INCREMENT
-  ...
-  ponderation NUMERIC(5,2),
-  ...
-  CONSTRAINT note_0_a_100 
-    CHECK (ponderation BETWEEN 0 AND 100));
-</code></pre>
-<p><img alt="" src="../images/4_evaluation.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">evaluation_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">ponderation</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">note_0_a_100</span><span class="w"> </span>
+<span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">ponderation</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+evaluations {
+        INTEGER evaluation_id PK 
+        INTEGER group FK 
+        VARCHAR(64) titre
+        NUMERIC(4_1) ponderation
+        DATETIME date_passage 
+    }</code></pre>
 <h3 id="-exercice-413-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.3 ---</h3>
 <p>Insérez une vérification pour vous assurer que :</p>
-<p>A) La note obtenue à une évaluation est positive
-B) L'ancienneté d'un enseignant est entre 0 et 50
-C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # est un entier) : ###-#A#-AA</p>
+<p>A) La note obtenue à une évaluation est positive<br />
+B) L'ancienneté d'un enseignant est entre 0 et 50<br />
+C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # est un entier) : ###-#A#-AA  </p>
 <h3 id="que-peut-contenir-un-check">Que peut contenir un CHECK</h3>
 <p>Certaines colonnes ne peuvent pas faire l’objet d’un CHECK dont:</p>
 <ul>
-<li>Colonne avec l’attribut AUTO_INCREMENT</li>
-<li>Colonne avec référence d’action (CASCADE).</li>
+<li>Colonne avec l’attribut AUTO_INCREMENT  </li>
+<li>Colonne avec référence d’action (CASCADE).  </li>
 </ul>
 <p>On ne peut pas non plus appeler les éléments suivants dans un CHECK :</p>
 <ul>
@@ -1487,42 +1564,42 @@ C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # e
 <h3 id="tricher-et-eviter-les-check">Tricher et éviter les CHECK</h3>
 <p>À l’occasion, on peut vouloir insérer une valeur qui ne respecte pas une condition en raison d’un élément spécial.</p>
 <p>On peut utiliser alors les requêtes spéciales avec la clause <strong>IGNORE</strong> :</p>
-<pre><code class="language-mysql">INSERT IGNORE INTO ...
-UPDATE IGNORE ...
-LOAD DATA INFILE 'nom' IGNORE INTO TABLE ...
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">IGNORE</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">...</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="k">IGNORE</span><span class="w"> </span><span class="p">...</span>
+<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">INFILE</span><span class="w"> </span><span class="s1">&#39;nom&#39;</span><span class="w"> </span><span class="k">IGNORE</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div>
 <p>Comme toute vérification, il faut une bonne raison pour l’éviter !</p>
 <h3 id="-exercice-414-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.4 ---</h3>
 <p>Implémentez, lorsque possible, les vérifications suivantes. Expliquez pourquoi lorsque vous ne pouvez pas les implémenter.</p>
-<p>A) Le nom des documents remis n'excède pas 64 caractères (fonction CHAR_LENGTH ?)
-B) La note d’un étudiant n’excède jamais la pondération de l'évaluation
-C) La durée d'une session n'excède pas 17 semaines
-D) Pour une évaluation, tous les étudiants reçoivent une note
-E) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)</p>
+<p>A) Le nom des documents remis n'excède pas 64 caractères (fonction CHAR_LENGTH ?)<br />
+B) La note d’un étudiant n’excède jamais la pondération de l'évaluation<br />
+C) La durée d'une session n'excède pas 17 semaines<br />
+D) Pour une évaluation, tous les étudiants reçoivent une note<br />
+E) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)  </p>
 <h2 id="ajouter-ou-retirer-des-contraintes">Ajouter ou retirer des contraintes</h2>
 <p>On peut modifier les tables pour ajouter ou supprimer des contraintes</p>
-<pre><code class="language-mysql">ALTER TABLE Nom_table
-  ADD CONSTRAINT nom TYPE_CONTRAINTE (contrainte)
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="n">TYPE_CONTRAINTE</span><span class="w"> </span><span class="p">(</span><span class="n">contrainte</span><span class="p">)</span>
 
-ALTER TABLE Nom_table
-  DROP [PRIMARY KEY | FOREIGN KEY | CHECK] nom
-</code></pre>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span>
+<span class="w">  </span><span class="k">DROP</span><span class="w"> </span><span class="err">[</span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">CHECK</span><span class="err">]</span><span class="w"> </span><span class="n">nom</span>
+</code></pre></div>
 <h3 id="ajouter-une-cle-primaire">Ajouter une clé primaire</h3>
-<pre><code class="language-mysql">ALTER TABLE Evaluation
-  ADD CONSTRAINT evaluation_pk PRIMARY KEY (id_evaluation);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations</span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">evaluation_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id_evaluation</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="ajouter-un-check">Ajouter un CHECK</h3>
-<pre><code class="language-mysql">ALTER TABLE Evaluation_etudiant 
-  ADD CONSTRAINT note_0_a_100 CHECK (note BETWEEN 0 AND 100);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations_etudiants</span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">note_0_a_100</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">note</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="supprimer-une-cle-primaire">Supprimer une clé primaire</h3>
-<pre><code class="language-mysql">ALTER TABLE Evaluation
-  DROP PRIMARY KEY;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations</span>
+<span class="w">  </span><span class="k">DROP</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">;</span>
+</code></pre></div>
 <h3 id="supprimer-un-check">Supprimer un CHECK</h3>
-<pre><code class="language-mysql">ALTER TABLE Evaluation_etudiant
-  DROP CHECK note_0_a_100;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations_etudiants</span>
+<span class="w">  </span><span class="k">DROP</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="n">note_0_a_100</span><span class="p">;</span>
+</code></pre></div>
 
 
 

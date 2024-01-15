@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1297,6 +1314,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1350,12 +1387,19 @@
 
 <h1 id="manipulation-de-dates">Manipulation de dates</h1>
 <p>Les fonctions SQL date, time et datetime permettent de convertir explicitement une chaîne de caractère en DATE, TIME ou DATETIME respectivement (ou convertir les formats de date entre eux). À l'insertion des données, des conversions implicitent s'opèrent.</p>
-<p><img alt="" src="../images/2_etudiant.png" /></p>
-<pre><code class="language-sql">INSERT INTO Etudiant (code, nom, annee_admission, 
-    date_naissance, programme) VALUES
-    (1234567, 'Tony Stark', 2019, date('1970-05-29'), '420.A0'),
-    (2345678, 'Steve Rogers' 2019, date('1918-07-04'), '420.A0');
-</code></pre>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     } </code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">annee_admission</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">date_naissance</span><span class="p">,</span><span class="w"> </span><span class="n">programme</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Tony Stark&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2019</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;1970-05-29&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">2345678</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Steve Rogers&#39;</span><span class="w"> </span><span class="mi">2019</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;1918-07-04&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="extraire-des-informations-de-la-datetemps">Extraire des informations de la date/temps</h2>
 <p>On peut avoir besoin d’extraire certains éléments des types DATE, TIME ou DATETIME.</p>
 <p>Une fonction existe pour chaque type. La fonction extract permet d’extraire plusieurs informations à la fois.</p>
@@ -1478,22 +1522,56 @@
 <p>Les deux arguments doivent être du même type.</p>
 <h3 id="exemple-de-timediff">Exemple de timediff</h3>
 <p>Par exemple, chaque periode du cours possède un temps de début et de fin et on souhaite connaître la longueur des périodes.</p>
-<pre><code class="language-sql">SELECT id_periode, heure_debut, heure_fin, 
-       timediff(heure_fin, heure_debut) 
-    FROM Periode; 
-</code></pre>
-<p><img alt="" src="../images/2_resultat_timediff.png" /></p>
-<p><img alt="" src="../images/2_periode.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">periode_id</span><span class="p">,</span><span class="w"> </span><span class="n">heure_debut</span><span class="p">,</span><span class="w"> </span><span class="n">heure_fin</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">timediff</span><span class="p">(</span><span class="n">heure_fin</span><span class="p">,</span><span class="w"> </span><span class="n">heure_debut</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">periodes</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">periode_id</th>
+<th style="text-align: center;">heure_debut</th>
+<th style="text-align: center;">heure_fin</th>
+<th style="text-align: center;">timediff(heure_fin, heure_debut)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">09:15:00</td>
+<td style="text-align: center;">11:05:00</td>
+<td style="text-align: center;">01:50:00</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">08:15:00</td>
+<td style="text-align: center;">12:05:00</td>
+<td style="text-align: center;">03:50:00</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">15:15:00</td>
+<td style="text-align: center;">16:05:00</td>
+<td style="text-align: center;">00:50:00</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>erDiagram  
+    periodes {
+        int periode_id PK
+        time heure_debut
+        time heure_fin
+    }</code></pre>
 <h2 id="difference-de-dates">Différence de dates</h2>
 <p>De même façon la fonction datediff permet de calculer la différence entre deux dates.</p>
 <p>Le résultat de datediff est exprimé en termes de nombre de jours. Si un type <strong>DATETIME</strong> est utilisé, la partie du temps est ignorée.</p>
 <p>Les deux arguments doivent être du même type.</p>
 <h3 id="exemple-de-difference-de-dates">Exemple de différence de dates</h3>
 <p>Par exemple, on peut exprimer la longueur d'une session en terme de jours, mais cela n'est pas toujours parlant.</p>
-<pre><code class="language-sql">SELECT semestre, annee, 
-    datediff(fin_session, debut_session) AS nombre_jours 
-    FROM Session;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">semestre</span><span class="p">,</span><span class="w"> </span><span class="n">annee</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">datediff</span><span class="p">(</span><span class="n">fin_session</span><span class="p">,</span><span class="w"> </span><span class="n">debut_session</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre_jours</span><span class="w"> </span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">sessions</span><span class="p">;</span>
+</code></pre></div>
 <p><img alt="" src="../images/2_duree_session.png" /></p>
 <h2 id="construire-une-date-a-partir-dun-nombre-de-jour">Construire une date à partir d'un nombre de jour</h2>
 <p>La fonction <strong>from_days</strong> permet de construire la date à partir d'un nombre de jours.</p>
@@ -1503,28 +1581,28 @@
 <h2 id="addition-de-temps">Addition de temps</h2>
 <p>Pour ajouter du temps à un type <strong>TIME</strong> on utilise la fonction addtime.</p>
 <p>Cette fonction ajoute deux types time ensemble.</p>
-<pre><code class="language-mysql">addtime ('00:02:15', '00:03:18') 
--- retourne 0 h 5 m 33 s
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nf">addtime</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;00:02:15&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;00:03:18&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="c1">-- retourne 0 h 5 m 33 s</span>
+</code></pre></div>
 <h2 id="addition-de-date">Addition de date</h2>
 <p>La fonction adddate ajoute un intervalle à un type DATE ou à un type DATETIME. On inscrit un intervalle avec la syntaxe suivante.</p>
-<pre><code class="language-sql">INTERVAL nombre UNITE
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">INTERVAL</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="n">UNITE</span>
+</code></pre></div>
 <p>Les unités possibles sont YEAR, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND 
 https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals</p>
 <p>Pour ajouter une journée à la date du 15 janvier 2022.</p>
-<pre><code class="language-sql">adddate ('2022-01-15', INTERVAL 1 DAY) 
--- retourne 2022-01-16
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">adddate</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;2022-01-15&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">DAY</span><span class="p">)</span><span class="w"> </span>
+<span class="c1">-- retourne 2022-01-16</span>
+</code></pre></div>
 <h2 id="soustraction-de-date">Soustraction de date</h2>
 <p>Pour soustraire un intervalle à un type DATE ou DATETIME, on peut utiliser la fonction subdate.</p>
 <p>Cette fonction s’utilise exactement comme adddate.</p>
 <h3 id="-exercice-241-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 2.4.1 ---</h3>
-<p>On veut le titre des documents qui :
-A. ont été remis au mois de mai
-B. ont été remis dans les deux dernières années</p>
-<p>On veut le semestre et l'année des sessions qui :
-C. Durent plus de 17 semaines</p>
+<p>On veut le titre des documents qui :<br />
+A. ont été remis au mois de mai<br />
+B. ont été remis dans les deux dernières années  </p>
+<p>On veut le semestre et l'année des sessions qui :<br />
+C. Durent plus de 17 semaines  </p>
 <h2 id="manipulation-de-timestamp">Manipulation de timestamp</h2>
 <p>Deux fonctions permettent la manipulation des timestamps:</p>
 <ul>
@@ -1533,11 +1611,11 @@ C. Durent plus de 17 semaines</p>
 </ul>
 <p>Les fonctions addition ou soustraient 2 timestamp et retournent la valeur sous forme de l’unité indiquée.</p>
 <p>Obtenir l’addition de 3 minutes à l’heure actuelle :</p>
-<pre><code class="language-mysql">timestampadd (MINUTE, 3, current_timestamp())
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">timestampadd</span><span class="w"> </span><span class="p">(</span><span class="k">MINUTE</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="k">current_timestamp</span><span class="p">())</span>
+</code></pre></div>
 <p>Obtenir le nombre de jours avant Noël.</p>
-<pre><code class="language-mysql">timestampdiff (DAY, '2022-12-25', current_timestamp ())
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">timestampdiff</span><span class="w"> </span><span class="p">(</span><span class="k">DAY</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2022-12-25&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">current_timestamp</span><span class="w"> </span><span class="p">())</span>
+</code></pre></div>
 <h2 id="gestion-des-fuseaux-horaires">Gestion des fuseaux horaires</h2>
 <p>MySQL offre plusieurs fonctions pour gérer des informations de différents fuseaux horaires.</p>
 <p>Toutes les fonctions de manipulation du temps sont décrites ici:</p>

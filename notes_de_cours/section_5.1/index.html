@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1171,6 +1188,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1232,28 +1269,28 @@
 <p>Lorsqu'on peut utiliser une variable <strong>locale</strong>, <em>on le fait!</em></p>
 <h2 id="variables-globales">Variables globales</h2>
 <p>Pour déclarer ou modifier une variable globale on utilise l’instruction:</p>
-<pre><code class="language-sql">SET @variable = valeur
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="k">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valeur</span>
+</code></pre></div>
 <p>Les valeurs possibles dans une variables sont :</p>
 <p>Integer, decimal, float, blob, text</p>
 <p>Tout autre type est converti dans l'un de ces types.</p>
 <h2 id="afficher-une-variable">Afficher une variable</h2>
 <p>On utilise l’instruction SELECT pour afficher une variable.</p>
-<pre><code class="language-sql">SET @nombre = 12;
-SELECT @nombre;
-</code></pre>
-<p>Le résultat est :</p>
-<pre><code>| @nombre |
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">nombre</span><span class="p">;</span>
+</code></pre></div>
+<p>Le résultat est :
+<div class="highlight"><pre><span></span><code>| @nombre |
 --
 | 12      |
-</code></pre>
+</code></pre></div></p>
 <h2 id="variables-locales">Variables locales</h2>
 <p>Elles doivent être utilisées dans un bloc <strong>BEGIN ... END</strong></p>
-<pre><code class="language-sql">DECLARE nom TYPE DEFAULT valeur;
-</code></pre>
-<p>Par exemple</p>
-<pre><code class="language-sql">DECLARE _nombre INTEGER DEFAULT 12;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">valeur</span><span class="p">;</span>
+</code></pre></div>
+<p>Par exemple
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="n">_nombre</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+</code></pre></div></p>
 <p>Le <strong>DEFAULT</strong> valeur peut être omis pour ne pas affecter de valeurs lors de la déclaration. On les modifie également en utilisant l’instruction <strong>SET</strong> ou un <strong>SELECT</strong>.</p>
 <h2 id="variables-locales_1">Variables locales</h2>
 <p>Toutes les instructions <strong>DECLARE</strong> doivent être au début du bloc <strong>BEGIN</strong>.</p>
@@ -1261,62 +1298,61 @@ SELECT @nombre;
 <h2 id="operations">Opérations</h2>
 <p>Les opérations arithmétiques et de comparaison sont permises dans les membres de droite des assignations.</p>
 <p>On peut également utiliser les variables dans les requêtes.</p>
-<pre><code class="language-sql">SELECT nom FROM Etudiant 
-  WHERE code_etudiant = @code;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">code</span><span class="p">;</span>
+</code></pre></div>
 <h1 id="conditions-et-boucles">Conditions et boucles</h1>
 <p>L’instruction conditionnelle de base à la syntaxe suivante</p>
-<pre><code class="language-sql">IF condition THEN
-    traitements…
-END IF;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">IF</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">    </span><span class="n">traitements</span><span class="err">…</span>
+<span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+</code></pre></div>
 <p>Pas d’accolade { }, elles sont remplacées par THEN … END IF;</p>
 <p>Par exemple, on vérifie que l'âge est plus grande ou égale à 18 (le code ne fonctionne pas, on ne peut pas mettre d'instructions conditionnelles hors d'une fonction en SQL).</p>
-<pre><code class="language-sql">IF @age &gt;= 18 THEN
-  SELECT 'Vous etes majeur';
-END IF;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Vous etes majeur&#39;</span><span class="p">;</span>
+<span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="traitements-alternatifs">Traitements alternatifs</h2>
-<pre><code class="language-sql">IF condition THEN
-    traitement
-ELSEIF condition alternative THEN
-    traitement
-ELSE
-    traitement
-END IF;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">IF</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">    </span><span class="n">traitement</span>
+<span class="n">ELSEIF</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">alternative</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">    </span><span class="n">traitement</span>
+<span class="k">ELSE</span>
+<span class="w">    </span><span class="n">traitement</span>
+<span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="instruction-par-cas">Instruction par cas</h2>
 <p>Semblable à l’instruction <em>switch</em></p>
-<pre><code class="language-sql">CASE 
-  WHEN condition THEN traitement
-  WHEN condition THEN traitement
-  ELSE traitement
-END
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CASE</span><span class="w"> </span>
+<span class="w">  </span><span class="k">WHEN</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">traitement</span>
+<span class="w">  </span><span class="k">WHEN</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">traitement</span>
+<span class="w">  </span><span class="k">ELSE</span><span class="w"> </span><span class="n">traitement</span>
+<span class="k">END</span>
+</code></pre></div>
 <p>La première condition validée est exécutée, puis le CASE est conclut (pas de <em>break</em> et pas de possibilité d'effectuer plusieurs traitements).</p>
 <h2 id="exemple-de-case">Exemple de CASE</h2>
 <p>L'exemple est un peu avancé, retenez l'élément suivant : on peut utiliser le CASE directement dans un SELECT</p>
-<pre><code class="language-sql">SELECT      
-  CASE 
-    WHEN nb_echecs = 0 THEN 'Pas d'echec'
-    WHEN nb_echecs &lt;= 2 THEN '2 echecs ou moins'
-    ELSE ' Plus de deux echecs' 
-  END
-  FROM ...          
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w">      </span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">nb_echecs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="ss">&quot;Pas d&#39;echec&quot;</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">nb_echecs</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;2 echecs ou moins&#39;</span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;Plus de deux echecs&#39;</span><span class="w"> </span>
+<span class="w">  </span><span class="k">END</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="p">...</span><span class="w">          </span>
+</code></pre></div>
 <h2 id="instructions-repetees">Instructions répétées</h2>
 <p>Boucle while qui exécute un traitement tant que la condition est vérifiée.</p>
-<pre><code class="language-sql">WHILE condition DO
-    traitements…
-END WHILE;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">WHILE</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">DO</span>
+<span class="w">    </span><span class="n">traitements</span><span class="err">…</span>
+<span class="k">END</span><span class="w"> </span><span class="n">WHILE</span><span class="p">;</span>
+</code></pre></div>
 <p>Boucle qui effectue au moins une fois le traitement (semblable à la boucle do-while).</p>
-<pre><code class="language-sql">REPEAT 
-    traitements…
-UNTIL condition
-END REPEAT;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">REPEAT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">traitements</span><span class="err">…</span>
+<span class="k">UNTIL</span><span class="w"> </span><span class="n">condition</span>
+<span class="k">END</span><span class="w"> </span><span class="n">REPEAT</span><span class="p">;</span>
+</code></pre></div>
 
 
 

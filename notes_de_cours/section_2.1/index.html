@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1282,6 +1299,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1345,74 +1382,151 @@
 </ul>
 <h2 id="inserer-un-enregistrement">Insérer un enregistrement</h2>
 <p>La requête d’insertion est la suivante :</p>
-<pre><code class="language-sql">INSERT INTO Nom_table (nom_colonne1, nom_colonne2,...) 
-VALUES (valeur_colonne1, valeur_colonne2,...);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="p">(</span><span class="n">nom_colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">nom_colonne2</span><span class="p">,...)</span><span class="w"> </span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">valeur_colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">valeur_colonne2</span><span class="p">,...);</span>
+</code></pre></div>
 <p>Par exemple, la requête suivante ajoute un étudiant dans la table Étudiant.</p>
-<pre><code class="language-mysql">INSERT INTO Etudiant (code, nom, 
-        annee_admission, programme)
-    VALUES (1324567, 'Tony Stark', 2018,
-        '420.A0');
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span><span class="k">code</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">annee_admission</span><span class="p">,</span><span class="w"> </span><span class="n">programme</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1324567</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Tony Stark&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2023</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;420.B0&#39;</span><span class="p">);</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
 </code></pre>
-<p><img alt="" src="../images/2_etudiant_simple.png" /></p>
 <p>Dans le cas d’un champ assigné automatiquement, comme une clé auto-incrémentée ou l’utilisation d’une valeur par défaut, on n'indique pas cette colonne dans la requête <strong>INSERT</strong>.</p>
-<pre><code class="language-mysql">INSERT INTO Cours (sigle, nom)
-    VALUES ('420-2B4-VI', 'Base de données 1');
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="n">sigle</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;420-2B4-VI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Base de données 1&#39;</span><span class="p">);</span>
+</code></pre></div>
 <p>Le cours BD1 aura alors un id automatique et une durée de 60 heures.</p>
-<p><img alt="" src="../images/2_cours.png" /></p>
-<p><img alt="" src="../images/2_omission_colonne.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>cours_id</th>
+<th>enseignant</th>
+<th>sigle</th>
+<th>duree</th>
+<th>nom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NULL</td>
+<td>420-2B4-VI</td>
+<td>60</td>
+<td>Base de données 1</td>
+</tr>
+</tbody>
+</table>
 <h3 id="inserer-plusieurs-enregistrements">Insérer plusieurs enregistrements</h3>
 <p>On peut insérer dans une requête plusieurs enregistrements en les séparant par une virgule.</p>
-<pre><code class="language-mysql">INSERT INTO Etudiant (code, nom, annee_admission, programme) 
-    VALUES (1234567, 'Anthony Stark', 2018, '420.A0'),    
-        (2345678, 'Steve Rogers', 2018, '420.A0'),      
-        (3456789, 'Natasha Romanov', 2019, '420.A1');
-
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span><span class="k">code</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">annee_admission</span><span class="p">,</span><span class="w"> </span><span class="n">programme</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Anthony Stark&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">),</span><span class="w">    </span>
+<span class="w">        </span><span class="p">(</span><span class="mi">2345678</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Steve Rogers&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">),</span><span class="w">      </span>
+<span class="w">        </span><span class="p">(</span><span class="mi">3456789</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Natasha Romanov&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2019</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;420.A1&#39;</span><span class="p">);</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
 </code></pre>
-<p><img alt="" src="../images/2_etudiant_simple.png" /></p>
 <h3 id="omettre-le-nom-des-colonnes">Omettre le nom des colonnes</h3>
 <p>On peut omettre le nom des colonnes à condition que les valeurs soient insérées dans l’ordre des colonnes.</p>
 <p>Par exemple, cette instruction est valide :</p>
-<pre><code class="language-mysql">INSERT INTO Etudiant VALUES      
-    (1234567, '420.A0', 'Anthony Stark', 2018) 
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">VALUES</span><span class="w">      </span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1234567</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Anthony Stark&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
 </code></pre>
-<p><img alt="" src="../images/2_etudiant_simple.png" /></p>
-<p>L'instruction suivante n'est pas valide car la table <em>Cours</em> comporte quatre colonnes et seulement deux valeurs sont indiquées:</p>
-<pre><code class="language-mysql">INSERT INTO Cours VALUES ('420-2B4-VI', 'Base de données 1');
-</code></pre>
+<p>L'instruction suivante n'est pas valide car la table <em>cours</em> comporte cinq colonnes et seulement deux valeurs sont indiquées:</p>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;420-2B4-VI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Base de données 1&#39;</span><span class="p">);</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }     </code></pre>
 <p>L'instruction suivante n'est pas valide car l'ordre des colonnes n’est pas respecté:</p>
-<pre><code class="language-mysql">INSERT INTO Etudiant VALUES ('Anthony Stark', 2018, '420.A0', 1234567);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Anthony Stark&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1234567</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="utiliser-la-valeur-par-defaut">Utiliser la valeur par défaut</h3>
 <p>On peut indiquer explicitement à SQL d’utiliser la valeur par défaut en utilisant l’instruction  </p>
-<pre><code class="language-sql">DEFAULT(nom_colonne).
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DEFAULT</span><span class="p">(</span><span class="n">nom_colonne</span><span class="p">).</span>
+</code></pre></div>
 <p>Ici le cours BD1 aura une durée de 60.</p>
-<pre><code class="language-mysql">    INSERT INTO Cours (sigle, duree, nom) VALUES      
-        ('420-2B4-VI', DEFAULT (duree), 'Base de données 1'),     
-        ('420-1D6-VI', 90, 'Programmation 1');
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="n">sigle</span><span class="p">,</span><span class="w"> </span><span class="n">duree</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w">      </span>
+<span class="w">        </span><span class="p">(</span><span class="s1">&#39;420-2B4-VI&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="p">(</span><span class="n">duree</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;Base de données 1&#39;</span><span class="p">),</span><span class="w">     </span>
+<span class="w">        </span><span class="p">(</span><span class="s1">&#39;420-1D6-VI&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Programmation 1&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="omettre-une-colonne">Omettre une colonne</h3>
 <p>Si lors de l’ajout d’un enregistrement une colonne ne possède pas de valeur par défaut et qu’aucune valeur n’est précisée, alors la valeur spéciale <strong>NULL</strong> est utilisée.</p>
-<pre><code class="language-mysql">INSERT INTO Cours (nom) VALUES ('Base de données 1');
-</code></pre>
-<p>Ici le sigle de l’enregistrement est <strong>NULL</strong> :</p>
-<p><img alt="" src="../images/2_omission_colonne.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Base de données 1&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Ici le sigle et l'enseignant de l’enregistrement sont <strong>NULL</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>cours_id</th>
+<th>enseignant</th>
+<th>sigle</th>
+<th>duree</th>
+<th>nom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>60</td>
+<td>Base de données 1</td>
+</tr>
+</tbody>
+</table>
 <h2 id="afficher-le-contenu-dune-table">Afficher le contenu d’une table</h2>
 <p>Pour afficher tous les enregistrements d’une table, on utilise l’instruction suivante :</p>
-<pre><code class="language-sql">SELECT * FROM Nom_table;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_table</span><span class="p">;</span>
+</code></pre></div>
 <p>Nous verrons dans les prochaines sections les requêtes <strong>SELECT</strong> en détail.</p>
 <h2 id="-exercice-211-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 2.1.1 ---</h2>
 <p>Ajoutez les enseignants et les programmes suivants:</p>
-<p><strong>Enseignants</strong></p>
+<p><strong>enseignants</strong></p>
 <table>
 <thead>
 <tr>
 <th>code_employe</th>
 <th>nom</th>
-<th>no_assurance_sociale</th>
+<th>num_assurance_sociale</th>
 <th>anciennete</th>
 </tr>
 </thead>
@@ -1443,7 +1557,7 @@ VALUES (valeur_colonne1, valeur_colonne2,...);
 </tr>
 </tbody>
 </table>
-<p><strong>Programmes</strong> </p>
+<p><strong>programmes</strong> </p>
 <table>
 <thead>
 <tr>
@@ -1467,22 +1581,27 @@ VALUES (valeur_colonne1, valeur_colonne2,...);
 </table>
 <h2 id="mettre-a-jour-un-enregistrement">Mettre à jour un enregistrement</h2>
 <p>On utilise la requête <strong>UPDATE</strong> pour mettre à jour un enregistrement.</p>
-<pre><code class="language-mysql">UPDATE Nom_table SET nom_colonne1 = valeur1, nom_colonne2 = valeur2; 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">nom_table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">nom_colonne1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valeur1</span><span class="p">,</span><span class="w"> </span><span class="n">nom_colonne2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valeur2</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
 <p>Cette syntaxe comporte un défaut car ici, on met à jour <strong>tous</strong> les enregistrements! Dans la plupart des cas, ce n’est pas ce qu’on cherche à faire.</p>
 <p>Pour indiquer quel enregistrement mettre à jour, on utilise la clause <strong>WHERE</strong> qui permet de spécifier une condition. </p>
 <h3 id="clause-where">Clause WHERE</h3>
 <p>La syntaxe d’une requête UPDATE avec la clause WHERE est :</p>
-<pre><code class="language-sql">UPDATE Nom_table 
-    SET nom_colonne1 = valeur1, nom_colonne2 = valeur 2, ...
-    WHERE condition;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">nom_table</span><span class="w"> </span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">nom_colonne1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valeur1</span><span class="p">,</span><span class="w"> </span><span class="n">nom_colonne2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valeur</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
+</code></pre></div>
 <p>Par exemple, on souhaite que le programme 420.A0 (Informatique appliquée) soit maintenant sous la responsabilité de Clark Kent (9876).</p>
-<pre><code class="language-sql">UPDATE Programme
-    SET responsable = 9876
-    WHERE code = '420.A0'; 
-</code></pre>
-<p><img alt="" src="../images/2_programme.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">programmes</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">responsable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9876</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;420.B0&#39;</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram  
+programmes {
+        INTEGER code PK
+        VARCHAR(255) nom
+        NUMERIC(8) responsable FK
+    }</code></pre>
 <h3 id="desactiver-le-safemode">Désactiver le SafeMode</h3>
 <p>Si vous n'indiquez pas de clause WHERE ou que celle-ci ne s'applique pas sur une clé, alors la requête sera bloquée par le <em>SafeMode</em>.</p>
 <p>Pour désactiver le SafeMode :</p>
@@ -1498,17 +1617,17 @@ Puis reconnectez-vous au serveur.</p>
 <p>2) Offrir la possibilité de mettre à jour l’enregistrement</p>
 <h2 id="mettre-a-jour-si-la-cle-existe-deja">Mettre à jour si la clé existe déjà</h2>
 <p>On modifie la requête <strong>INSERT</strong> de la façon suivante :</p>
-<pre><code class="language-mysql">INSERT INTO Nom_table (nom_colonne1, nom_colonne2,…)
-    VALUES (valeur1, valeur2,…)
-    ON DUPLICATE KEY UPDATE;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">nom_table</span><span class="w"> </span><span class="p">(</span><span class="n">nom_colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">nom_colonne2</span><span class="p">,</span><span class="n">…</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">valeur1</span><span class="p">,</span><span class="w"> </span><span class="n">valeur2</span><span class="p">,</span><span class="n">…</span><span class="p">)</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
+</code></pre></div>
 <p>Note: il n'est pas toujours une bonne idée d’utiliser <strong>ON DUPLICATE KEY UPDATE</strong>.</p>
 <p>Souvent, on veut signaler une erreur pour indiquer à l’utilisateur qu’il fait une opération non standard.</p>
 <p>On peut utiliser <strong>ON DUPLICATE KEY UPDATE</strong> lorsqu’on transfère des données ou que l’on est sûr que les enregistrements sont identiques.</p>
 <h2 id="supprimer-un-enregistrement">Supprimer un enregistrement</h2>
 <p>La requête de suppression est <strong>DELETE</strong> et a la syntaxe suivante :</p>
-<pre><code class="language-mysql">DELETE FROM Nom_table WHERE condition;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">condition</span><span class="p">;</span>
+</code></pre></div>
 <p>Comme pour les requêtes DROP, aucune confirmation n'est demandée.</p>
 <p><strong><em>Attention</em></strong> : s’il n’y a pas de clause WHERE et que le SafeMode est désactivé, vous allez supprimer toutes les données de la table.</p>
 <h2 id="-exercice-213-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 2.1.3 ---</h2>

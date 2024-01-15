@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1285,6 +1302,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1350,15 +1387,15 @@
 <p>Les guillemets " " fonctionnent seulement dans certains cas, les apostrophes simples ' ' fonctionnent dans tous les cas.</p>
 <h2 id="creer-une-bd">Créer une BD</h2>
 <p>Pour créer une base de données l'instruction est :</p>
-<pre><code class="language-mysql">CREATE DATABASE Nom_bd;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Nom_bd</span><span class="p">;</span>
+</code></pre></div>
 <p>Pour afficher la liste des bases de données sur un serveur, on utilise la commande:</p>
-<pre><code class="language-mysql">SHOW DATABASES;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">DATABASES</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="supprimer-une-bd">Supprimer une BD</h2>
 <p>Pour supprimer une base de données, l'instruction est : </p>
-<pre><code class="language-mysql">DROP DATABASE Nom_bd;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Nom_bd</span><span class="p">;</span>
+</code></pre></div>
 <p>Toutes les tables et les enregistrements sont automatiquement supprimés. </p>
 <p><strong>Attention! Aucune confirmation n'est demandée.</strong></p>
 <h2 id="-exercice-141-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 1.4.1 ---</h2>
@@ -1372,51 +1409,70 @@
 <p>Quel raccourcis clavier permet d'exécuter toutes les lignes ou la ligne courante?</p>
 <h2 id="creer-une-table">Créer une table</h2>
 <p>Pour créer une table, il faut d'abord sélectionner une BD. La sélection se fait à l'aide l'instruction suivante :</p>
-<pre><code class="language-mysql">USE Nom_bd;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">USE</span><span class="w"> </span><span class="n">Nom_bd</span><span class="p">;</span>
+</code></pre></div>
 <p><img alt="❗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2757.svg" title=":exclamation:" />La BD sera celle utilisée pour toutes les requêtes tant que l'instruction <strong>USE</strong> n'aura pas été rappelée.</p>
 <p>Pour créer une table, la syntaxe est la suivante:</p>
-<pre><code class="language-mysql">CREATE TABLE Nom_table (
-    nom_colonne1 TYPE, 
-    nom_colonne2 TYPE, 
-    ...);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">nom_colonne1</span><span class="w"> </span><span class="k">TYPE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">nom_colonne2</span><span class="w"> </span><span class="k">TYPE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="p">...);</span>
+</code></pre></div>
 <p><strong>Exemple – Créer une table</strong></p>
 <p>Pour créer la table Étudiant correspondant au modèle suivant.</p>
-<p><img alt="" src="../images/1_exemple_create_table.png" /></p>
-<pre><code class="language-mysql">CREATE TABLE Etudiant (
-    code INTEGER, 
-    nom VARCHAR(255), 
-    annee_admission YEAR);
-</code></pre>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Etudiants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">annee_admission</span><span class="w"> </span><span class="kt">YEAR</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="afficher-les-tables">Afficher les tables</h2>
 <p>Pour afficher toutes les tables de la BD active, on utilise l'instruction :</p>
-<pre><code class="language-mysql">SHOW TABLES;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">TABLES</span><span class="p">;</span>
+</code></pre></div>
 <p>Pour afficher la structure d'une table, on utilise l'instruction :</p>
-<pre><code class="language-mysql">DESCRIBE Nom_table;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">Nom_table</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="-exercice-142-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 1.4.2 ---</h2>
 <p>Créez la table représentant le modèle suivant.</p>
-<p><img alt="" src="../images/1_exercice1-5.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+programmes {
+        INTEGER code PK
+        VARCHAR(255) nom
+        NUMERIC(8) responsable FK
+    }</code></pre>
 <p>Afficher la structure de la table après la création pour vous valider votre opération.</p>
 <h2 id="notation-diagrammes-er">Notation diagrammes ER</h2>
 <p>On note sur le modèle de base de données le type de données associé au champ.</p>
 <p>Par exemple, pour la table Étudiant, le modèle correspond maintenant à </p>
-<p><img alt="" src="../images/1_exemple_UML_type.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }</code></pre>
 <h2 id="supprimer-une-table">Supprimer une table</h2>
 <p>Pour supprimer une table, l'instruction à utiliser est :</p>
-<pre><code class="language-mysql">DROP TABLE Nom_table;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nom_table</span><span class="p">;</span>
+</code></pre></div>
 <p>Tous les enregistrements sont automatiquement supprimés.</p>
 <p><strong>Attention! Aucune confirmation n'est demandée.</strong></p>
 <h2 id="cle-primaire">Clé primaire</h2>
 <p>Pour indiquer qu'un champ est une clé primaire, on indique <strong>PRIMARY KEY</strong> après le type du champ.</p>
-<pre><code class="language-mysql">CREATE TABLE Etudiant (
-    code INTEGER PRIMARY KEY, 
-    nom VARCHAR(255), 
-    adresse VARCHAR(255));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">adresse</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">));</span>
+</code></pre></div>
 <h2 id="auto-increment">Auto-incrément</h2>
 <p>Dans le cas où l'on ajoute un identifiant unique (id), on peut indiquer au SGBD d'incrémenter automatiquement sa valeur à chaque enregistrement. </p>
 <p>Cela nous évite de devoir manuellement gérer la mise à jour de l'identifiant.</p>
@@ -1428,57 +1484,85 @@
 <p>À la création d'une table, on peut indiquer une valeur par défaut.</p>
 <p>Tous les nouveaux enregistrements auront cette valeur pour la colonne sauf si une autre valeur est indiquée.</p>
 <p>On indique une valeur par défaut en utilisant la syntaxe suivante :</p>
-<pre><code class="language-mysql">nom_colonne TYPE DEFAULT valeur
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">nom_colonne</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">valeur</span>
+</code></pre></div>
 <p>Pour ajouter une valeur par défaut sur un diagramme ER on l'indique avec le symbole = après le type.</p>
 <p>Par exemple, dans la table Cours la durée par défaut est de 60 heures.</p>
-<p><img alt="" src="../images/1_uml_defaut.png" /></p>
-<p>La requête pour créer la table cours serait donc:</p>
-<pre><code class="language-mysql">CREATE TABLE Cours (  
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,  
-    sigle CHAR(11), 
-    duree TINYINT DEFAULT 60,  
-    nom VARCHAR(255));
-</code></pre>
+<p><pre class="mermaid"><code>erDiagram  
+    p[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }</code></pre>
+La requête pour créer la table cours serait donc:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<span class="w">    </span><span class="n">cours_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="n">duree</span><span class="w"> </span><span class="kt">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="modifier-une-table">Modifier une table</h2>
 <p>Pour modifier une table, trois opérations sont possibles : ajouter une colonne, modifier une colonne, supprimer une colonne.</p>
 <p>La requête est:</p>
-<pre><code class="language-mysql">ALTER TABLE Nom_de_la_table 
-    opération1, 
-    opération2 ... ;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_de_la_table</span><span class="w"> </span>
+<span class="w">    </span><span class="n">opération1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">opération2</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
 <h3 id="ajouter-une-colonne">Ajouter une colonne</h3>
 <p>L'instruction est ADD suivi de la définition de la colonne</p>
 <p>Par exemple, on a oublié une colonne dans la table Cours (on veut le résultat de droite)</p>
-<p><img alt="" src="../images/1_ajouter_colonne.png" /></p>
+<pre class="mermaid"><code>erDiagram 
+    p[Cours] {
+        INTEGER cours_id PK
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    } 
+    q[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }</code></pre>
 <p>La requête pour corriger la table est:</p>
-<pre><code class="language-mysql">ALTER TABLE Cours
-    ADD sigle CHAR(11);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span>
+<span class="w">    </span><span class="k">ADD</span><span class="w"> </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="modifier-une-colonne">Modifier une colonne</h3>
 <p>Pour modifier une colonne existante, on utilise l'instruction MODIFY COLUMN suivie de la nouvelle définition de la colonne.</p>
 <p>On a créé la table Cours avec la requête suivante:</p>
-<pre><code class="language-mysql">CREATE TABLE Cours (  
-    id INTEGER, 
-    sigle CHAR (11),  
-    duree SMALLINT, 
-    nom VARCHAR(255));
-</code></pre>
-<p><img alt="" src="../images/1_modifier_colonne_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<span class="w">    </span><span class="n">cours_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="w"> </span><span class="p">(</span><span class="mi">11</span><span class="p">),</span><span class="w">  </span>
+<span class="w">    </span><span class="n">duree</span><span class="w"> </span><span class="kt">SMALLINT</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">));</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram 
+    q[Cours] {
+        INTEGER cours_id
+        CHAR(11) sigle
+        TINYINT duree
+        VARCHAR(255) nom
+    }</code></pre>
 <p>La requête de modification devrait être:</p>
-<pre><code class="language-mysql">ALTER TABLE Cours   
-    MODIFY COLUMN id INTEGER PRIMARY KEY AUTO_INCREMENT,   
-    MODIFY COLUMN duree SMALLINT DEFAULT 60;
-</code></pre>
-<p><img alt="" src="../images/1_modifier_colonne_2.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w">   </span>
+<span class="w">    </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">   </span>
+<span class="w">    </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">duree</span><span class="w"> </span><span class="kt">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+</code></pre></div>
+<pre class="mermaid"><code>erDiagram 
+    q[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }</code></pre>
 <h3 id="supprimer-une-colonne">Supprimer une colonne</h3>
 <p>On utilise l'instruction:</p>
-<pre><code class="language-mysql">DROP COLUMN nom_colonne
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">nom_colonne</span>
+</code></pre></div>
 <p>Pour supprimer la colonne sigle de la table Cours, on utilise la requête suivante :</p>
-<pre><code class="language-mysql">ALTER TABLE Cours 
-    DROP COLUMN sigle;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span>
+<span class="w">    </span><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sigle</span><span class="p">;</span>
+</code></pre></div>
 
 
 

@@ -320,6 +320,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../convention/" class="md-tabs__link">
+        
+  
+    
+  
+  Convention
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../ressources/" class="md-tabs__link">
         
   
@@ -1273,6 +1290,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ressources/" class="md-nav__link">
         
   
@@ -1358,10 +1395,17 @@
 </tbody>
 </table>
 <p>On veut sélectionner le nombre d’heures par semaine de chaque cours, sachant qu'une session dure 15 semaines.</p>
-<pre><code class="language-mysql">SELECT duree / 15 FROM Cours;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">duree</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Cours</span><span class="p">;</span>
+</code></pre></div>
 <p>On peut utiliser des noms de colonne des deux côtés de l'opérateur.</p>
-<p><img alt="" src="../images/2_cours.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+cours {
+        INTEGER cours_id PK
+        NUMERIC(8) enseignant FK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    } </code></pre>
 <h2 id="recherche-sur-les-chaines-de-caracteres">Recherche sur les chaînes de caractères</h2>
 <p>Pour rechercher simplement sur des chaînes de caractères (CHAR, VARCHAR) on utilise l’opérateur LIKE et les <em>patterns de recherche</em>.</p>
 <p>Les patterns disposes de 3 caractères spéciaux :</p>
@@ -1385,17 +1429,24 @@
 </ul>
 <h3 id="exemple-like">Exemple LIKE</h3>
 <p>On veut sélectionner les pondérations et le titre de toutes les évaluation comportant le mot « final » ou « finale »</p>
-<pre><code class="language-mysql">SELECT ponderation, titre FROM Evaluation 
-  WHERE titre LIKE '%final%';
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">ponderation</span><span class="p">,</span><span class="w"> </span><span class="n">titre</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation</span><span class="w"> </span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">titre</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%final%&#39;</span><span class="p">;</span>
+</code></pre></div>
 <p>On peut utiliser des noms de colonne des deux côtés de l'opérateur.</p>
-<p><img alt="" src="../images/2_evaluation.png" /></p>
+<pre class="mermaid"><code>erDiagram  
+evaluations {
+        INTEGER evaluation_id PK 
+        INTEGER group FK 
+        VARCHAR(64) titre
+        NUMERIC(4_1) ponderation
+        DATETIME date_passage 
+    } </code></pre>
 <h2 id="expressions-regulieres-regex">Expressions régulières (Regex)</h2>
 <p>Les patterns sont simples à utiliser, mais aussi limités. Pour faire une recherche plus avancée, on utilise les REGEX (<em>Regular Expression</em>).</p>
 <p>Notez que l'utilisation des Regex peut devenir rapidement complexe. Pour vous aider à vous former, utilisez le site <a href="https://regexone.com/">https://regexone.com/</a>.</p>
 <p>Pour introduire une REGEX en MySQL, on utilise la syntaxe suivante :</p>
-<pre><code class="language-mysql">SELECT colonne FROM Table WHERE colonne RLIKE 'regex';
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">colonne</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">colonne</span><span class="w"> </span><span class="k">RLIKE</span><span class="w"> </span><span class="s1">&#39;regex&#39;</span><span class="p">;</span>
+</code></pre></div>
 <h3 id="rechercher-un-caractere">Rechercher un caractère</h3>
 <p>À moins qu'il s'agisse d'un caractère spécial, indiquez une lettre dans une REGEX permet de chercher celle-ci, n'importe où dans la chaîne.</p>
 <table>
@@ -1674,27 +1725,27 @@ C. Les mots qui contiennent au moins 3 voyelles. (2 mots)</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;">\w</td>
+<td style="text-align: center;">w</td>
 <td>Tout caractère de mot (lettre et nombres) [a-zA-Z0-9_]</td>
 </tr>
 <tr>
-<td style="text-align: center;">\d</td>
+<td style="text-align: center;">d</td>
 <td>Tout nombre [0-9]</td>
 </tr>
 <tr>
-<td style="text-align: center;">\s</td>
-<td>Espaces [\n\r\t ]</td>
+<td style="text-align: center;">s</td>
+<td>Espaces [nrt ]</td>
 </tr>
 <tr>
-<td style="text-align: center;">\W \D \S</td>
+<td style="text-align: center;">W D S</td>
 <td>La négation de la classe associé à la minuscule</td>
 </tr>
 </tbody>
 </table>
 <h3 id="classes-speciales-mysql">Classes spéciales MySQL</h3>
 <p>Les REGEX dans MySQL définissent des classes spéciales qui leur sont propres. Pour les utiliser on les écrits entre crochets en utilisant la syntaxe suivante :</p>
-<pre><code class="language-sql">[:classe de caractere:]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">[:</span><span class="n">classe</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">caractere</span><span class="p">:]</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1705,7 +1756,7 @@ C. Les mots qui contiennent au moins 3 voyelles. (2 mots)</p>
 <tbody>
 <tr>
 <td>alnum</td>
-<td>Caractères alphanumériques (comme \w sauf _)</td>
+<td>Caractères alphanumériques (comme w sauf _)</td>
 </tr>
 <tr>
 <td>alpha</td>
@@ -1713,7 +1764,7 @@ C. Les mots qui contiennent au moins 3 voyelles. (2 mots)</p>
 </tr>
 <tr>
 <td>space</td>
-<td>Caractères d'espacement (semblable à \s)</td>
+<td>Caractères d'espacement (semblable à s)</td>
 </tr>
 <tr>
 <td>cntrl</td>
@@ -1721,7 +1772,7 @@ C. Les mots qui contiennent au moins 3 voyelles. (2 mots)</p>
 </tr>
 <tr>
 <td>digit</td>
-<td>Caractères numériques (comme \d)</td>
+<td>Caractères numériques (comme d)</td>
 </tr>
 <tr>
 <td>lower, upper</td>
