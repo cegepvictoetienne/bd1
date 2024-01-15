@@ -67,8 +67,8 @@ Les opérations arithmétiques et de comparaison sont permises dans les membres 
 On peut également utiliser les variables dans les requêtes.
 
 ```sql
-SELECT nom FROM Etudiant 
-  WHERE code_etudiant = @code;
+SELECT nom FROM etudiants 
+  WHERE code = @code;
 ```
 
 # Conditions et boucles
@@ -124,9 +124,9 @@ L'exemple est un peu avancé, retenez l'élément suivant : on peut utiliser le 
 ```sql
 SELECT  	
   CASE 
-    WHEN nb_echecs = 0 THEN 'Pas d'echec'
+    WHEN nb_echecs = 0 THEN "Pas d'echec"
     WHEN nb_echecs <= 2 THEN '2 echecs ou moins'
-    ELSE ' Plus de deux echecs' 
+    ELSE 'Plus de deux echecs' 
   END
   FROM ...  		
     

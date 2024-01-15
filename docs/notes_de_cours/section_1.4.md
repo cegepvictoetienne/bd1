@@ -71,10 +71,13 @@ CREATE TABLE Nom_table (
 
 Pour créer la table Étudiant correspondant au modèle suivant.
 
-![](images/1_exemple_create_table.png)
+``` mermaid
+erDiagram  
+{!etudiants.mermaid!}
+```
 
 ```mysql
-CREATE TABLE Etudiant (
+CREATE TABLE Etudiants (
     code INTEGER, 
     nom VARCHAR(255), 
     annee_admission YEAR);
@@ -98,7 +101,10 @@ DESCRIBE Nom_table;
 
 Créez la table représentant le modèle suivant.
 
-![](images/1_exercice1-5.png)
+``` mermaid
+erDiagram  
+{!programmes.mermaid!}
+```
 
 Afficher la structure de la table après la création pour vous valider votre opération.
 
@@ -108,14 +114,17 @@ On note sur le modèle de base de données le type de données associé au champ
 
 Par exemple, pour la table Étudiant, le modèle correspond maintenant à 
 
-![](images/1_exemple_UML_type.png)
+``` mermaid
+erDiagram  
+{!etudiants.mermaid!}
+```
 
 ## Supprimer une table
 
 Pour supprimer une table, l'instruction à utiliser est :
 
 ```mysql
-DROP TABLE Nom_table;
+DROP TABLE nom_table;
 ```
 
 Tous les enregistrements sont automatiquement supprimés.
@@ -127,7 +136,7 @@ __Attention! Aucune confirmation n'est demandée.__
 Pour indiquer qu'un champ est une clé primaire, on indique __PRIMARY KEY__ après le type du champ.
 
 ```mysql
-CREATE TABLE Etudiant (
+CREATE TABLE etudiants (
     code INTEGER PRIMARY KEY, 
     nom VARCHAR(255), 
     adresse VARCHAR(255));
@@ -163,16 +172,22 @@ Pour ajouter une valeur par défaut sur un diagramme ER on l'indique avec le sym
 
 Par exemple, dans la table Cours la durée par défaut est de 60 heures.
 
-![](images/1_uml_defaut.png)
-
+``` mermaid
+erDiagram  
+    p[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }
+```
 La requête pour créer la table cours serait donc:
 
 ```mysql
 CREATE TABLE Cours (  
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,  
-    sigle CHAR(11), 
+    cours_id INTEGER PRIMARY KEY AUTO_INCREMENT,  
     duree TINYINT DEFAULT 60,  
-    nom VARCHAR(255));
+    nom VARCHAR(255);
 ```
 
 ## Modifier une table
@@ -194,7 +209,20 @@ L'instruction est ADD suivi de la définition de la colonne
 
 Par exemple, on a oublié une colonne dans la table Cours (on veut le résultat de droite)
 
-![](images/1_ajouter_colonne.png)
+``` mermaid
+erDiagram 
+    p[Cours] {
+        INTEGER cours_id PK
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    } 
+    q[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }
+```
 
 La requête pour corriger la table est:
 
@@ -211,24 +239,39 @@ On a créé la table Cours avec la requête suivante:
 
 ```mysql
 CREATE TABLE Cours (  
-    id INTEGER, 
+    cours_id INTEGER, 
     sigle CHAR (11),  
     duree SMALLINT, 
     nom VARCHAR(255));
 ```
 
-
-![](images/1_modifier_colonne_1.png)
+``` mermaid
+erDiagram 
+    q[Cours] {
+        INTEGER cours_id
+        CHAR(11) sigle
+        TINYINT duree
+        VARCHAR(255) nom
+    }
+```
 
 La requête de modification devrait être:
 
 ```mysql
 ALTER TABLE Cours   
     MODIFY COLUMN id INTEGER PRIMARY KEY AUTO_INCREMENT,   
-    MODIFY COLUMN duree SMALLINT DEFAULT 60;
+    MODIFY COLUMN duree TINYINT DEFAULT 60;
 ```
   
-![](images/1_modifier_colonne_2.png)
+``` mermaid
+erDiagram 
+    q[Cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree "=60"
+        VARCHAR(255) nom
+    }
+```
 
 ### Supprimer une colonne
 

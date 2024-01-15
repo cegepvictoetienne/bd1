@@ -20,7 +20,10 @@ SELECT duree / 15 FROM Cours;
 
 On peut utiliser des noms de colonne des deux côtés de l'opérateur.
 
-![](images/2_cours.png)
+``` mermaid
+erDiagram  
+{!cours.mermaid!} 
+```
 
 ## Recherche sur les chaînes de caractères
 
@@ -57,7 +60,10 @@ SELECT ponderation, titre FROM Evaluation
 
 On peut utiliser des noms de colonne des deux côtés de l'opérateur.
 
-![](images/2_evaluation.png)
+``` mermaid
+erDiagram  
+{!evaluations.mermaid!} 
+```
 
 ## Expressions régulières (Regex)
 

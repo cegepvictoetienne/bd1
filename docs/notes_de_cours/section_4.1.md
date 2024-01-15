@@ -24,13 +24,18 @@ Spécifie la valeur utilisée lorsqu’un enregistrement est créé et qu’aucu
 Jusqu’à présent le code suivant provoque une erreur.
 
 ```mysql
-DELETE FROM Enseignant
-    WHERE id_enseignant = 1;
+DELETE FROM enseignants
+    WHERE code_employe = 1;
 ```
 
 Parce que la table Programme contient une clé étrangère vers Enseignant et qu'elle ne pointerait sur rien si l'enseignant est supprimé.
 
-![](images/4_programme_enseignant.png)
+```mermaid  
+erDiagram  
+    enseignants ||--o{ programmes : " " 
+    {!enseignants.mermaid!}
+    {!programmes.mermaid!}
+```
 
 La stratégie cascade permet de supprimer tous les enregistrements sont référencés, donc qui posent problème.
 
@@ -65,15 +70,18 @@ La clé primaire est un type particulier de clé unique.
 Pour indiquer qu’une colonne est unique, on place le mot-clé UNIQUE après le nom de la colonne.
 
 ```mysql
-CREATE TABLE Programme (  
+CREATE TABLE programmes (  
     code CHAR(6) PRIMARY KEY,
     nom VARCHAR(255) UNIQUE,
-    responsable NUMERIC(4),
+    responsable NUMERIC(8),
     ...
 );
 ```
+```mermaid  
+erDiagram  
+    {!programmes.mermaid!}
+```
 
-![](images/4_programme.png)
 
 Pour indiquer une clé unique portant sur plusieurs colonnes, on utilise la syntaxe suivante:
 
@@ -82,7 +90,7 @@ CONSTRAINT nom UNIQUE (colonne1, colonne2...)
 ```
 
 ```mysql
-CREATE TABLE Session (
+CREATE TABLE sessions (
     id_session INTEGER 
       PRIMARY KEY AUTO_INCREMENT,
     semestre ENUM('Automne', 'Hiver'),
@@ -93,7 +101,10 @@ CREATE TABLE Session (
       UNIQUE (semestre, annee));
 ```
 
-![](images/4_session.png)
+```mermaid
+erDiagram  
+{!sessions.mermaid!}
+```
 
 ### Nullité
 
@@ -101,8 +112,8 @@ CREATE TABLE Session (
 
 On peut empêcher la présence de valeur nulle dans une colonne en ajoutant **NOT NULL** après le type.
 
-Pour éviter des professeurs dont le nom est **NULL**, on ajoute
-**| NN** après le type sur le diagramme.
+Pour éviter des étudiants dont le nom est **NULL**, on ajoute
+**| not null** après le type sur le diagramme.
 
 ```mysql
 CREATE TABLE Etudiant (
@@ -112,16 +123,27 @@ CREATE TABLE Etudiant (
 );
 ```
 
+```mermaid
+erDiagram  
+    etudiants {
+        NUMERIC(8) code PK
+        VARCHAR(255) nom "not null"
+        YEAR annee_admission
+        DATETIME date_naissance
+        VARCHAR(10) programme
+     }
+```
+
 ![](images/4_etudiant.png)
 
 ### :material-cog: --- Exercice 4.1.2 ---
 
 Modifiez le script de création de la base de données ecole pour inclure les contraintes suivantes :
 
-A) Deux programmes ne peuvent pas porter le même nom
-B) Chaque programme doit toujours avoir un professeur responsable
-C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22)
-D) Si l'on supprime une Évaluation, on veut supprimer toutes les Evaluation_etudiant associées.
+A) Deux programmes ne peuvent pas porter le même nom  
+B) Chaque programme doit toujours avoir un professeur responsable  
+C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22)  
+D) Si l'on supprime une Évaluation, on veut supprimer toutes les evaluations_etudiants associées.  
 
 ### Check
 
@@ -137,8 +159,8 @@ CREATE TABLE Nom_table (
 Exemple : les pondérations des évaluations doivent être entre 0 et 100.
 
 ```mysql
-CREATE TABLE Evaluation (
-  id_evaluation INTEGER 
+CREATE TABLE evaluations (
+  evaluation_id INTEGER 
     PRIMARY KEY AUTO_INCREMENT
   ...
   ponderation NUMERIC(5,2),
@@ -147,22 +169,25 @@ CREATE TABLE Evaluation (
     CHECK (ponderation BETWEEN 0 AND 100));
 ```
 
-![](images/4_evaluation.png)
+```mermaid
+erDiagram  
+{!evaluations.mermaid!}
+```
 
 ### :material-cog: --- Exercice 4.1.3 ---
 
 Insérez une vérification pour vous assurer que :
 
-A) La note obtenue à une évaluation est positive
-B) L'ancienneté d'un enseignant est entre 0 et 50
-C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # est un entier) : ###-#A#-AA
+A) La note obtenue à une évaluation est positive  
+B) L'ancienneté d'un enseignant est entre 0 et 50  
+C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # est un entier) : ###-#A#-AA  
 
 ### Que peut contenir un CHECK
 
 Certaines colonnes ne peuvent pas faire l’objet d’un CHECK dont:
 
-* Colonne avec l’attribut AUTO_INCREMENT
-* Colonne avec référence d’action (CASCADE).
+* Colonne avec l’attribut AUTO_INCREMENT  
+* Colonne avec référence d’action (CASCADE).  
 
 On ne peut pas non plus appeler les éléments suivants dans un CHECK :
 
@@ -196,11 +221,11 @@ Comme toute vérification, il faut une bonne raison pour l’éviter !
 
 Implémentez, lorsque possible, les vérifications suivantes. Expliquez pourquoi lorsque vous ne pouvez pas les implémenter.
 
-A) Le nom des documents remis n'excède pas 64 caractères (fonction CHAR_LENGTH ?)
-B) La note d’un étudiant n’excède jamais la pondération de l'évaluation
-C) La durée d'une session n'excède pas 17 semaines
-D) Pour une évaluation, tous les étudiants reçoivent une note
-E) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)
+A) Le nom des documents remis n'excède pas 64 caractères (fonction CHAR_LENGTH ?)  
+B) La note d’un étudiant n’excède jamais la pondération de l'évaluation  
+C) La durée d'une session n'excède pas 17 semaines  
+D) Pour une évaluation, tous les étudiants reçoivent une note  
+E) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)  
 
 ## Ajouter ou retirer des contraintes
 
@@ -217,26 +242,26 @@ ALTER TABLE Nom_table
 ### Ajouter une clé primaire
 
 ```mysql
-ALTER TABLE Evaluation
+ALTER TABLE evaluations
   ADD CONSTRAINT evaluation_pk PRIMARY KEY (id_evaluation);
 ```
 
 ### Ajouter un CHECK
 
 ```mysql
-ALTER TABLE Evaluation_etudiant 
+ALTER TABLE evaluations_etudiants
   ADD CONSTRAINT note_0_a_100 CHECK (note BETWEEN 0 AND 100);
 ```
 
 ### Supprimer une clé primaire
 
 ```mysql
-ALTER TABLE Evaluation
+ALTER TABLE evaluations
   DROP PRIMARY KEY;
 ```
 ### Supprimer un CHECK
 
 ```mysql
-ALTER TABLE Evaluation_etudiant
+ALTER TABLE evaluations_etudiants
   DROP CHECK note_0_a_100;
 ```

@@ -2,10 +2,13 @@
 
 Les fonctions SQL date, time et datetime permettent de convertir explicitement une chaîne de caractère en DATE, TIME ou DATETIME respectivement (ou convertir les formats de date entre eux). À l'insertion des données, des conversions implicitent s'opèrent.
 
-![](images/2_etudiant.png)
+``` mermaid
+erDiagram  
+{!etudiants.mermaid!} 
+```
 
 ```sql
-INSERT INTO Etudiant (code, nom, annee_admission, 
+INSERT INTO etudiants (code, nom, annee_admission, 
     date_naissance, programme) VALUES
     (1234567, 'Tony Stark', 2019, date('1970-05-29'), '420.A0'),
     (2345678, 'Steve Rogers' 2019, date('1918-07-04'), '420.A0');
@@ -65,15 +68,25 @@ Les deux arguments doivent être du même type.
 Par exemple, chaque periode du cours possède un temps de début et de fin et on souhaite connaître la longueur des périodes.
 
 ```sql
-SELECT id_periode, heure_debut, heure_fin, 
+SELECT periode_id, heure_debut, heure_fin, 
        timediff(heure_fin, heure_debut) 
-    FROM Periode; 
+    FROM periodes; 
 ```
 
-![](images/2_resultat_timediff.png)
+|periode_id|heure_debut|heure_fin|timediff(heure_fin, heure_debut)|
+|:-:|:-:|:-:|:-:|
+|1|09:15:00|11:05:00|01:50:00|
+|2|08:15:00|12:05:00|03:50:00|
+|3|15:15:00|16:05:00|00:50:00|
 
-![](images/2_periode.png)
-
+``` mermaid
+erDiagram  
+    periodes {
+        int periode_id PK
+        time heure_debut
+        time heure_fin
+    }
+```
 ## Différence de dates
 
 De même façon la fonction datediff permet de calculer la différence entre deux dates.
@@ -89,7 +102,7 @@ Par exemple, on peut exprimer la longueur d'une session en terme de jours, mais 
 ```sql
 SELECT semestre, annee, 
     datediff(fin_session, debut_session) AS nombre_jours 
-    FROM Session;
+    FROM sessions;
 ```
 
 ![](images/2_duree_session.png)
@@ -141,12 +154,12 @@ Cette fonction s’utilise exactement comme adddate.
 
 ### :material-cog: --- Exercice 2.4.1 ---
 
-On veut le titre des documents qui :
-A. ont été remis au mois de mai
-B. ont été remis dans les deux dernières années
+On veut le titre des documents qui :  
+A. ont été remis au mois de mai  
+B. ont été remis dans les deux dernières années  
 
-On veut le semestre et l'année des sessions qui :
-C. Durent plus de 17 semaines
+On veut le semestre et l'année des sessions qui :  
+C. Durent plus de 17 semaines  
 
 ## Manipulation de timestamp
 

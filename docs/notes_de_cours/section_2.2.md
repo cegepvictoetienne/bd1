@@ -10,7 +10,7 @@ Ordonner et limiter
 Pour sélectionner des données, la requête est **SELECT** et à la syntaxe de base suivante :
 
 ```mysql
-SELECT nom_colonne1, nom_colonne2,… FROM Nom_table;
+SELECT nom_colonne1, nom_colonne2,… FROM nom_table;
 ```
 
 On indique après le **SELECT** que le nom des colonnes que l’on souhaite récupérer.
@@ -18,16 +18,20 @@ On indique après le **SELECT** que le nom des colonnes que l’on souhaite réc
 Pour récupérer les colonnes sigle et nom de la table Cours, on utilise la requête suivante :
 
 ```mysql
-SELECT sigle, nom FROM Cours;
+SELECT sigle, nom FROM cours;
 ```
 
 On utilise le symbole __*__ pour indiquer la sélection de toutes les colonnes.
 
 ```mysql
-SELECT * FROM Nom_table;
+SELECT * FROM nom_table;
 ```
 
-![](images/2_cours.png)
+``` mermaid
+erDiagram  
+{!cours.mermaid!}
+    
+```
 
 ### Alias
 
@@ -36,7 +40,7 @@ Il est possible de renommer des colonnes lors de la sélection (on verra plus ta
 Le mot-clé à utiliser est **AS**
 
 ```mysql
-SELECT sigle, nom AS nom_cours FROM Cours 
+SELECT sigle, nom AS nom_cours FROM cours 
 ```
 
 ## Filtrer les enregistrements
@@ -44,7 +48,7 @@ SELECT sigle, nom AS nom_cours FROM Cours
 Tout comme dans un **UPDATE** ou **DELETE**, il est possible d'utiliser la clause **WHERE** dans un **SELECT** afin de restreindre le nombre d'enregistrements affectés.
 
 ```mysql
-SELECT nom_colonne1, nom_colonne2,… FROM Nom_table 
+SELECT nom_colonne1, nom_colonne2,… FROM nom_table 
     WHERE condition;
 ```
 
@@ -66,30 +70,33 @@ On peut utiliser les opérateurs suivants pour construire des conditions.
 Pour récupérer les colonnes dont la valeur est **NULL**, la structure de la condition est différente. Il faut utiliser le mot-clé **IS**.
 
 ```mysql
-SELECT nom_colonne1, nom_colonne2... FROM Nom_table WHERE nom_colonne IS NULL;
+SELECT nom_colonne1, nom_colonne2... FROM nom_table WHERE nom_colonne IS NULL;
 ```
 
 On ajoute le mot-clé **NOT** pour avoir les colonnes qui ne sont pas **NULL**
 
 ```mysql
-SELECT nom_colonne1, nom_colonne2... FROM Nom_table WHERE nom_colonne IS NOT NULL;
+SELECT nom_colonne1, nom_colonne2... FROM nom_table WHERE nom_colonne IS NOT NULL;
 ```
 
 Pour sélectionner le nom des cours dont la durée est supérieure ou égale à 60 heures on utilise la requête suivante.
 
 ```mysql
-SELECT nom FROM Cours 
+SELECT nom FROM cours 
     WHERE duree >= 60;
 ```
 
 Pour sélectionner les sigles des cours dont le nom est **NULL**, on utilise la requête suivante.
 
 ```mysql
-SELECT sigle FROM Cours 
+SELECT sigle FROM cours 
     WHERE nom IS NULL;
 ```
 
-![](images/2_cours.png)
+``` mermaid
+erDiagram  
+{!cours.mermaid!} 
+```
 
 On peut combiner les opérations de filtrage en utilisant les opérateurs logiques.
 
@@ -105,15 +112,18 @@ SELECT nom FROM Cours
     WHERE duree >= 60 AND duree <= 75;
 ```
 
-![](images/2_cours.png)
+``` mermaid
+erDiagram  
+{!cours.mermaid!} 
+```
 
 ### :material-cog: --- Exercice 2.2.1 ---
 
 À partir du script Ecole.sql
 
-A. Sélectionnez les codes d'employé des enseignants qui ont au moins 5 ans d'ancienneté.
-B. Sélectionnez le nom des étudiants admis entre 2019 et 2020.
-C. Sélectionnez la date de début de session de toutes les sessions d'automne.
+A. Sélectionnez les codes d'employé des enseignants qui ont au moins 5 ans d'ancienneté.  
+B. Sélectionnez le nom des étudiants admis entre 2019 et 2020.  
+C. Sélectionnez la date de début de session de toutes les sessions d'automne.  
 
 ## Ordonner les résultats
 
@@ -130,15 +140,18 @@ Il faut porter attention à la taille de la sélection, car un tri devient vite 
 Pour sélectionner le nom et la durée des cours et les classer en ordre alphabétique on utilise la requete suivante.
 
 ```mysql
-SELECT nom, duree FROM Cours
+SELECT nom, duree FROM cours
     ORDER by nom;
 ```
 
-![](images/2_cours.png)
+``` mermaid
+erDiagram  
+{!cours.mermaid!} 
+```
 
 Maintenant, on veut la même requête, mais en ordonnant d'abord par durée, puis par ordre alphabétique. Voici le résultat attendu :
 
-|Nom|Duree|
+|nom|duree|
 ||:-:|
 |Mathématique de l'ordinateur|45|
 |Base de donnees 1|60|
@@ -150,7 +163,7 @@ Maintenant, on veut la même requête, mais en ordonnant d'abord par durée, pui
 On peut trier sur plusieurs colonnes en les séparant par des virgules. Le tri se fait en ordre inverse que les colonnes sont indiquées.
 
 ```mysql
-SELECT nom, duree FROM Cours
+SELECT nom, duree FROM cours
     ORDER BY duree, nom;
 ```
 

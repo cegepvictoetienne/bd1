@@ -25,7 +25,12 @@ On remarque la direction de la flèche, de la table appelée « enfant » vers l
 
 On ajoute dans la table enfant un champ enseignant et une annotation de clé étrangère. Donc ici chaque Cours possède un enseignant.
 
-![](images/1_cle_etrangere.png)
+``` mermaid
+erDiagram  
+    enseignants ||--o{ cours : "enseigne" 
+{!enseignants.mermaid!}
+{!cours.mermaid!}    
+```
 
 ## Importances des relations
 
@@ -44,20 +49,27 @@ FOREIGN KEY (nom_colonne) REFERENCES Table_parent(cle_primaire)
 Exemple avec la table Cours
 
 ```mysql
-CREATE TABLE Cours (  
+CREATE TABLE cours (  
     id INTEGER PRIMARY KEY AUTO_INCREMENT,  
     sigle CHAR (11),  
-    duree SMALLINT, 
+    duree TINYINT, 
     nom VARCHAR(255),
     enseignant NUMERIC(8),
-    FOREIGN KEY (enseignant) REFERENCES Enseignant (code_employe));
+    FOREIGN KEY (enseignant) REFERENCES enseignants (code_employe));
 ```
 
-Ici rien ne change dans la création de la table Enseignant (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).
+Ici rien ne change dans la création de la table enseignants (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).
 
 ## Suppression de tables qui contiennent des relations
 
-![](images/1_cle_etrangere.png)
+
+``` mermaid
+erDiagram  
+    enseignants ||--o{ cours : "enseigne" 
+{!enseignants.mermaid!}
+{!cours.mermaid!} 
+    
+```
 
 Peut-on supprimer la table Enseignant sans supprimer la table Cours? Pourquoi?
 
@@ -91,7 +103,15 @@ On voit ici que la table Inscription assure l'association entre Cours et Etudian
 
 On peut voir que deux tables sont associées si l'on peut suivre avec notre doigt d'une table à l'autre en empruntant les flèches comme des chemins (ici le sens des flèches n'a pas d'importance).
 
-![](images/1_table_association.png)
+
+``` mermaid
+erDiagram  
+    etudiants ||--o{ inscriptions : " " 
+{!etudiants.mermaid!}
+    inscriptions }o--|| cours : " "
+{!inscriptions.mermaid!}
+{!cours.mermaid!}    
+```
 
 ## Mais... un instant!
 
@@ -99,7 +119,16 @@ Dans la table Inscription la clé primaire est-elle vraiment composée de *deux*
 
 Oui, c'est possible: c'est appelé une *clé composée*. 
 
-![](images/1_table_association.png)
+
+``` mermaid
+erDiagram   
+    etudiants ||--o{ inscriptions : " " 
+{!etudiants.mermaid!}
+    inscriptions }o--|| cours : " "
+{!inscriptions.mermaid!}
+{!cours.mermaid!}   
+    
+```
 
 ## Clé composée
 
@@ -113,22 +142,22 @@ PRIMARY KEY (nom_colonne1, nom_colonne2, … )
 
 Ne fonctionne pas :
 ```mysql
-CREATE TABLE Inscription(
+CREATE TABLE inscription(
     etudiant NUMERIC(7) PRIMARY KEY, 
     cours INTEGER PRIMARY KEY,
-    FOREIGN KEY (etudiant) REFERENCES Etudiant (code),
-    FOREIGN KEY (cours) REFERENCES Cours (id_cours));
+    FOREIGN KEY (etudiant) REFERENCES etudiant (code),
+    FOREIGN KEY (cours) REFERENCES cours (cours_id));
 ```
 
 Bonne écriture :
 
 ```mysql
-CREATE TABLE Inscription(
+CREATE TABLE inscription(
     etudiant NUMERIC(7), 
     cours INTEGER,
     PRIMARY KEY (etudiant, cours),
-    FOREIGN KEY (etudiant) REFERENCES Etudiant (code),
-    FOREIGN KEY (cours) REFERENCES Cours (id_cours));
+    FOREIGN KEY (etudiant) REFERENCES etudiant (code),
+    FOREIGN KEY (cours) REFERENCES cours (id_cours));
 ```
 
 ## Notation de contraintes

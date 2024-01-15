@@ -29,6 +29,7 @@ nav:
       - 5.1 Variables, conditions et boucles: notes_de_cours/section_5.1.md
       - 5.2 Fonctions et déclencheurs: notes_de_cours/section_5.2.md
       - 5.3 Procédures stockées et transactions: notes_de_cours/section_5.3.md
+  - 'Convention': convention.md
   - 'Ressources': ressources.md
   - 'Calendrier': calendrier.md
 theme:
@@ -59,7 +60,22 @@ plugins:
   - search: {}
 
 markdown_extensions:
+  - admonition
   - attr_list
+  - markdown_include.include:
+      base_path: docs/tables
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.escapeall:
+      hardbreak: true # use \ to create new line
+      nbsp: true # use \<space> to create &nbsp;
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

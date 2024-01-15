@@ -6,19 +6,19 @@ Les tables comportent des colonnes (aussi appelés attributs). Chaque colonne d�
 
 **Exemple de base de données : Cégep Victo**
 
-Table «Étudiant» : nom, code, année d'adminission, adresse, etc.
+Table «etudiants» : nom, code, année d'admission, adresse, etc.
 
-Table «Enseignant» : nom, code employé, adresse, etc.
+Table «enseignants» : nom, code employé, adresse, etc.
 
-Table «Cours» : sigle, nom, etc.
+Table «cours» : sigle, nom, etc.
 
-Table «Programme» : nom, code, etc.
+Table «programmes» : nom, code, etc.
 
 ## Contenu d'une table
 
 Les tables contiennent des enregistrements qui correspondent à une entrée avec des valeurs indiquées pour chaque colonne.
 
-__Table « Étudiant »__
+**Table « etudiant »**
 
 | Code | Nom | Annee admission|
 ||||
@@ -29,7 +29,7 @@ Les enregistrements peuvent aussi être appelés lignes ou tuples.
 
 ## Notation Entité-relation
 
-ERD (*Entity relation diagram*) est un langage permettant d'exprimer graphiquement la structure d'un programme ou d'une BD.
+ERD (_Entity relation diagram_) est un langage permettant d'exprimer graphiquement la structure d'un programme ou d'une BD.
 
 On représente les entités (tables pour une BD) par un rectangle dans lequel on inscrit en haut le nom de la table.
 
@@ -37,7 +37,26 @@ On représente les entités (tables pour une BD) par un rectangle dans lequel on
 
 On remarque que les colonnes (en minuscules) sont écrites dans la boîte sous le nom.
 
-![](images/1_exemple_UML.png)
+``` mermaid
+erDiagram  
+    p[Etudiants] {
+        _ code PK
+        _ nom
+        _ annee_admission
+    }
+
+    q[Cours] {
+        _ cours_id PK
+        _ nom
+        _ duree
+    }
+
+    r[Programmes] {
+        _ cours_id PK
+        _ nom
+        _ duree
+    }
+```
 
 ## Trouver un enregistrement
 
@@ -51,11 +70,15 @@ Il est important que chaque table ait au moins une colonne unique afin de permet
 
 On indique qu'une colonne est la clé primaire avec la notation
 
-code <pk>
+code `<pk>`
 
 À noter: on rassemble en haut les colonnes de clé primaire
 
-![](images/1_exemple_cle_primaire.png) 
+``` mermaid
+erDiagram  
+{!etudiants.mermaid!} 
+{!cours.mermaid!}
+```
 
 ## Identifier les clés candidates
 
@@ -65,7 +88,7 @@ code <pk>
 
 On sélectionne parmi les clés candidates une colonne pour jouer le rôle de clé primaire.
 
-Si aucune colonne ne satisfait les conditions, alors on ajoute une colonne identifiant (ou simplement id_(nom de la table)) qui sert de clé primaire.
+Si aucune colonne ne satisfait les conditions, alors on ajoute une colonne identifiant (ou simplement (nom de la table)\_id) qui sert de clé primaire.
 
 La colonne id sera un nombre entier dont la valeur est auto-incrémentée entre chaque enregistrement.
 
@@ -73,7 +96,16 @@ La colonne id sera un nombre entier dont la valeur est auto-incrémentée entre 
 
 En créant une base de données pour le Cégep, vous devez identifier une clé primaire dans la table suivante. Justifiez votre choix.
 
-![](images/1_exercice1-1.png)
+``` mermaid
+erDiagram  
+    p[enseignants] {
+        _ code_employe
+        _ nom
+        _ prenom
+        _ num_assurance_sociale
+        _ anciennete
+    }
+```
 
 ## :material-cog: --- Exercice 1.2.2 ---
 
@@ -82,4 +114,3 @@ En créant une base de données pour le Cégep, vous devez identifier une clé p
 La compagnie de livraison intergalactique du PlanetExpress souhaite informatiser son service de livraison. Pour ce faire, elle a besoin d'une base de données contenant les informations sur ses vaisseaux de livraison (modèle, immatriculation, chargement, équipage requis) et sur les commandes (nom du destinataire, planète du destinataire, type de livraison , masse de la livraison et date de livraison).
 
 Proposez un digramme ER pour cette BD et identifiez pour chaque table une clé primaire.
-

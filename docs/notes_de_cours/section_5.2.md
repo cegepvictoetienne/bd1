@@ -85,7 +85,7 @@ DELIMITER $$
 CREATE FUNCTION nombre_etudiants() RETURNS INTEGER NOT DETERMINISTIC READS SQL DATA
 BEGIN		
   DECLARE _nombre INT;    
-  SET _nombre = (SELECT count(*) FROM Etudiant);	
+  SET _nombre = (SELECT count(*) FROM etudiants);	
   RETURN _nombre;
 END $$
 
@@ -222,7 +222,7 @@ CREATE TRIGGER respect_note_maximale BEFORE INSERT ON Evaluation_etudiant FOR EA
 BEGIN
   DECLARE _note_maximale INTEGER;
   SET _note_maximale = (
-    SELECT ponderation FROM Evaluation 
+    SELECT ponderation FROM evaluations 
       WHERE id_evaluation = NEW.id_evaluation
   );
 
@@ -254,7 +254,7 @@ Si la date de passation d'une nouvelle évaluation est hors de la durée de la s
 
 Ajoutez les déclencheurs permettant d'effectuer les traitements suivants
 
-A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable)
+A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable)  
 B. À la suppression d'une EvaluationEtudiant, alors on supprime le document associé (sens inverse du ON CASCADE) 
 
 

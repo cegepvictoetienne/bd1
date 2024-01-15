@@ -19,7 +19,12 @@ Le problème : nom programme et nom professeur sont dans deux tables différente
 
 ## Relation Programme - Enseignant
 
-![](images/2_programme_responsable.png)
+```mermaid  
+erDiagram  
+    enseignants ||--o{ programmes : " " 
+    {!enseignants.mermaid!}
+    {!programmes.mermaid!}
+```
 
 ## Jointures
 
@@ -90,12 +95,18 @@ On veut afficher le code d'employé et le sigle du cours pour chaque groupe.
 
 ```sql
 SELECT enseignant, numero_groupe, sigle 
-    FROM Groupe NATURAL JOIN Cours;
+    FROM groupes NATURAL JOIN cours;
 ```
 
 ![](images/2_natural_join.png)
 
-![](images/2_cours_session.png)
+``` mermaid
+
+erDiagram  
+    cours ||--o{ groupes : " " 
+    {!cours.mermaid!}
+    {!groupes.mermaid!}
+```
 
 ### :material-cog: --- Exercice 2.5.2 ---
 
@@ -114,9 +125,9 @@ Quelle requête écrire ?
 On peut appliquer une jointure sur le résultat d'une jointure.
 
 ```mysql
-SELECT nom, titre, date_remise FROM Etudiant
-    INNER JOIN Evaluation_etudiant ON code = etudiant
-    INNER JOIN Document ON document = id_document;
+SELECT nom, titre, date_remise FROM etudiants
+    INNER JOIN evaluations_etudiants ON code = etudiant
+    INNER JOIN documents ON document = document_id;
 ```
 
 ![](images/2_jointures_multiples.png)

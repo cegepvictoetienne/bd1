@@ -1,8 +1,8 @@
 # Gestion des accès
 
-CRUD des utilisateurs
-Conférer et révoquer des privilèges
-Créer des rôles
+CRUD des utilisateurs  
+Conférer et révoquer des privilèges  
+Créer des rôles  
 
 ## Pourquoi gérer les rôles
 
@@ -98,7 +98,7 @@ GRANT SELECT ON * TO 'visiteurs’;
 Pour ajouter le privilège d’écriture et de modification sur la table Etudiant
 
 ```mysql
-GRANT INSERT, UPDATE ON Etudiant TO 'visiteurs';
+GRANT INSERT, UPDATE ON etudiants TO 'visiteurs';
 ```
 
 ### Révoquer un privilège
@@ -113,7 +113,7 @@ REVOKE priviliege1, privilege2 ON [* | table]
 Par exemple, on révoque le privilège d’ajout des visiteurs sur la table Etudiant.
 
 ```mysql
-REVOKE UPDATE ON Etudiant FROM ‘visiteurs’;
+REVOKE UPDATE ON etudiants FROM ‘visiteurs’;
 ```
 
 ## Déterminer l'utilisateur connecté
