@@ -39,19 +39,19 @@ On remarque que les colonnes (en minuscules) sont écrites dans la boîte sous l
 
 ``` mermaid
 erDiagram  
-    p[Etudiants] {
+    p[etudiants] {
         _ code PK
         _ nom
         _ annee_admission
     }
 
-    q[Cours] {
+    q[cours] {
         _ cours_id PK
         _ nom
         _ duree
     }
 
-    r[Programmes] {
+    r[programmes] {
         _ cours_id PK
         _ nom
         _ duree
