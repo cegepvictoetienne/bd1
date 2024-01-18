@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
     
     
       
@@ -1377,8 +1377,7 @@
 <h2 id="normes-de-code-du-langage-sql">Normes de code du langage SQL</h2>
 <ul>
 <li>Mots-clés du langage en MAJUSCULE (ex.: CREATE, SELECT, etc)</li>
-<li>Identifiants en minuscules (notation _, pas de CamelCase)</li>
-<li>Nom de tables et de BD commencent par une MAJUSCULE</li>
+<li>Identifiants et noms de tables en minuscules (notation snake<em>_</em>case, pas de CamelCase)  </li>
 <li>Commentaires multi-lignes: /<em> … </em>/</li>
 <li>Commentaire jusqu'à la fin de la ligne: #</li>
 <li>On termine une requête par un ;</li>
@@ -1413,7 +1412,7 @@
 </code></pre></div>
 <p><img alt="❗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2757.svg" title=":exclamation:" />La BD sera celle utilisée pour toutes les requêtes tant que l'instruction <strong>USE</strong> n'aura pas été rappelée.</p>
 <p>Pour créer une table, la syntaxe est la suivante:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nom_table</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">nom_colonne1</span><span class="w"> </span><span class="k">TYPE</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">nom_colonne2</span><span class="w"> </span><span class="k">TYPE</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="p">...);</span>
@@ -1428,17 +1427,19 @@ etudiants {
         DATETIME date_naissance
         VARCHAR(10) programme
      }</code></pre>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Etudiants</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="n">annee_admission</span><span class="w"> </span><span class="kt">YEAR</span><span class="p">);</span>
+<span class="w">    </span><span class="n">annee_admission</span><span class="w"> </span><span class="kt">YEAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">date_naissance</span><span class="w"> </span><span class="kt">DATETIME</span><span class="p">,</span>
+<span class="w">    </span><span class="n">programme</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
 </code></pre></div>
 <h2 id="afficher-les-tables">Afficher les tables</h2>
 <p>Pour afficher toutes les tables de la BD active, on utilise l'instruction :</p>
 <div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">TABLES</span><span class="p">;</span>
 </code></pre></div>
 <p>Pour afficher la structure d'une table, on utilise l'instruction :</p>
-<div class="highlight"><pre><span></span><code><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">Nom_table</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">nom_table</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="-exercice-142-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 1.4.2 ---</h2>
 <p>Créez la table représentant le modèle suivant.</p>
@@ -1471,15 +1472,24 @@ etudiants {
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w"> </span>
-<span class="w">    </span><span class="n">adresse</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">));</span>
+<span class="w">    </span><span class="n">annee_admission</span><span class="w"> </span><span class="kt">YEAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">date_naissance</span><span class="w"> </span><span class="kt">DATETIME</span><span class="p">,</span>
+<span class="w">    </span><span class="n">programme</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
 </code></pre></div>
 <h2 id="auto-increment">Auto-incrément</h2>
 <p>Dans le cas où l'on ajoute un identifiant unique (id), on peut indiquer au SGBD d'incrémenter automatiquement sa valeur à chaque enregistrement. </p>
 <p>Cela nous évite de devoir manuellement gérer la mise à jour de l'identifiant.</p>
-<p>Cette fonction est disponible que si le type de colonne est INTEGER.</p>
+<p>Cette fonction est disponible que si le type de colonne est <strong>INTEGER</strong>.</p>
 <h2 id="-exercice-143-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 1.4.3 ---</h2>
 <p>Pour définir un auto-incrément, il faut indiquer <strong>AUTO_INCREMENT</strong> après le type de la colonne.</p>
-<p>Créer la table Cours. La colonne id_cours doit être auto-incrémentée. Afficher la table après pour voir l'impact de l'incrémentation automatique.</p>
+<pre class="mermaid"><code>erDiagram  
+    p[cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree
+        VARCHAR(255) nom
+    }</code></pre>
+<p>Créer la table <strong>cours</strong>. La colonne cours_id doit être auto-incrémentée. Afficher la table après pour voir l'impact de l'incrémentation automatique.</p>
 <h2 id="valeurs-par-defaut">Valeurs par défaut</h2>
 <p>À la création d'une table, on peut indiquer une valeur par défaut.</p>
 <p>Tous les nouveaux enregistrements auront cette valeur pour la colonne sauf si une autre valeur est indiquée.</p>
@@ -1487,16 +1497,15 @@ etudiants {
 <div class="highlight"><pre><span></span><code><span class="n">nom_colonne</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">valeur</span>
 </code></pre></div>
 <p>Pour ajouter une valeur par défaut sur un diagramme ER on l'indique avec le symbole = après le type.</p>
-<p>Par exemple, dans la table Cours la durée par défaut est de 60 heures.</p>
+<p>Par exemple, dans la table <strong>cours</strong> la durée par défaut est de 60 heures.</p>
 <p><pre class="mermaid"><code>erDiagram  
-    p[Cours] {
+    p[cours] {
         INTEGER cours_id PK
-        CHAR(11) sigle
         TINYINT duree "=60"
         VARCHAR(255) nom
     }</code></pre>
 La requête pour créer la table cours serait donc:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
 <span class="w">    </span><span class="n">cours_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">  </span>
 <span class="w">    </span><span class="n">duree</span><span class="w"> </span><span class="kt">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">  </span>
 <span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
@@ -1504,35 +1513,35 @@ La requête pour créer la table cours serait donc:</p>
 <h2 id="modifier-une-table">Modifier une table</h2>
 <p>Pour modifier une table, trois opérations sont possibles : ajouter une colonne, modifier une colonne, supprimer une colonne.</p>
 <p>La requête est:</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_de_la_table</span><span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nom_de_la_table</span><span class="w"> </span>
 <span class="w">    </span><span class="n">opération1</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">opération2</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">;</span>
 </code></pre></div>
 <h3 id="ajouter-une-colonne">Ajouter une colonne</h3>
 <p>L'instruction est ADD suivi de la définition de la colonne</p>
-<p>Par exemple, on a oublié une colonne dans la table Cours (on veut le résultat de droite)</p>
+<p>Par exemple, on a oublié une colonne dans la table <strong>cours</strong> (on veut le résultat de droite)</p>
 <pre class="mermaid"><code>erDiagram 
-    p[Cours] {
+    p[cours] {
         INTEGER cours_id PK
         TINYINT duree "=60"
         VARCHAR(255) nom
     } 
-    q[Cours] {
+    q[cours] {
         INTEGER cours_id PK
         CHAR(11) sigle
         TINYINT duree "=60"
         VARCHAR(255) nom
     }</code></pre>
 <p>La requête pour corriger la table est:</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span>
 <span class="w">    </span><span class="k">ADD</span><span class="w"> </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="modifier-une-colonne">Modifier une colonne</h3>
 <p>Pour modifier une colonne existante, on utilise l'instruction MODIFY COLUMN suivie de la nouvelle définition de la colonne.</p>
-<p>On a créé la table Cours avec la requête suivante:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
+<p>On a créé la table <strong>cours</strong> avec la requête suivante:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
 <span class="w">    </span><span class="n">cours_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="w"> </span><span class="p">(</span><span class="mi">11</span><span class="p">),</span><span class="w">  </span>
+<span class="w">    </span><span class="n">sigle</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">(</span><span class="mi">11</span><span class="p">),</span><span class="w">  </span>
 <span class="w">    </span><span class="n">duree</span><span class="w"> </span><span class="kt">SMALLINT</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">));</span>
 </code></pre></div>
@@ -1544,8 +1553,8 @@ La requête pour créer la table cours serait donc:</p>
         VARCHAR(255) nom
     }</code></pre>
 <p>La requête de modification devrait être:</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w">   </span>
-<span class="w">    </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">   </span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span><span class="w">   </span>
+<span class="w">    </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">cours_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span><span class="w">   </span>
 <span class="w">    </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">duree</span><span class="w"> </span><span class="kt">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
 </code></pre></div>
 <pre class="mermaid"><code>erDiagram 
@@ -1559,8 +1568,8 @@ La requête pour créer la table cours serait donc:</p>
 <p>On utilise l'instruction:</p>
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">nom_colonne</span>
 </code></pre></div>
-<p>Pour supprimer la colonne sigle de la table Cours, on utilise la requête suivante :</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Cours</span><span class="w"> </span>
+<p>Pour supprimer la colonne sigle de la table <strong>cours</strong>, on utilise la requête suivante :</p>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">cours</span><span class="w"> </span>
 <span class="w">    </span><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sigle</span><span class="p">;</span>
 </code></pre></div>
 
@@ -1609,10 +1618,10 @@ La requête pour créer la table cours serait donc:</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>
