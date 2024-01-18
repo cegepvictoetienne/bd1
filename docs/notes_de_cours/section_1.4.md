@@ -2,14 +2,14 @@
 
 ## Normes de code du langage SQL
 
-- Mots-clés du langage en MAJUSCULE (ex.: CREATE, SELECT, etc)
+- Mots-clés du langage en MAJUSCULE (ex.: CREATE, SELECT, etc.)
 - Identifiants et noms de tables en minuscules (notation snake*_*case, pas de CamelCase)  
-- Commentaires multi-lignes: /* … */
-- Commentaire jusqu'à la fin de la ligne: #
-- On termine une requête par un ;
-- Apostrophes simples ' ' pour délimiter les caractères littéraux (string)
+- Commentaires multi-lignes: `  /* */  `
+- Commentaire jusqu'à la fin de la ligne: `#`
+- On termine une requête par un `;`
+- Apostrophes simples `' '` pour délimiter les caractères littéraux (string)
 
-Les guillemets " " fonctionnent seulement dans certains cas, les apostrophes simples ' ' fonctionnent dans tous les cas.
+Les guillemets `" "` fonctionnent seulement dans certains cas, les apostrophes simples `' '` fonctionnent dans tous les cas.
 
 ## Créer une BD
 
@@ -35,7 +35,9 @@ DROP DATABASE Nom_bd;
 
 Toutes les tables et les enregistrements sont automatiquement supprimés. 
 
-__Attention! Aucune confirmation n'est demandée.__
+!!! warning "Attention"
+    Aucune confirmation n'est demandée lors de la suppression.
+
 
 ## :material-cog: --- Exercice 1.4.1 ---
 
@@ -130,7 +132,8 @@ DROP TABLE nom_table;
 
 Tous les enregistrements sont automatiquement supprimés.
 
-__Attention! Aucune confirmation n'est demandée.__
+!!! warning "Attention"
+    Aucune confirmation n'est demandée lors de la suppression de la table.
 
 ## Clé primaire
 

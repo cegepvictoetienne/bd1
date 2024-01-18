@@ -11,8 +11,10 @@ Imaginons maintenant que l'on souhaite stocker des informations sur quel étudia
 |Tony Stark|1234567|H22|420-2A6-VI|90|Bruce Wayne|8765|
 |Thor Odison|6789012|H22|420-2A6-VI|90|Bruce Wayne|8765|
 
-Problèmes ? 
-* Répétition des valeurs : perte d'espace mémoire !
+ 
+!!! note "Problèmes ?"
+    * Répétition des valeurs = perte d'espace mémoire !
+    * Difficile de faire des modifications (ex. : changer le nom de l'enseignant)
 
 ## Relations entre tables
 
@@ -23,7 +25,7 @@ C'est ce que l'on appelle une clé étrangère (__FOREIGN KEY__).
 On remarque la direction de la flèche, de la table appelée « enfant » vers la table 
 « parent ».
 
-On ajoute dans la table enfant un champ enseignant et une annotation de clé étrangère. Donc ici chaque Cours possède un enseignant.
+On ajoute dans la table enfant un champ enseignant et une annotation de clé étrangère. Donc ici chaque `cours` possède un `enseignant`.
 
 ``` mermaid
 erDiagram  
@@ -43,10 +45,10 @@ Pour faire une analogie, on pourrait comporarer une table isolée à du code qui
 Pour indiquer une clé étrangère, on ajoute la contrainte suivante dans la requête de création de la table.
 
 ```mysql
-FOREIGN KEY (nom_colonne) REFERENCES Table_parent(cle_primaire)
+FOREIGN KEY (nom_colonne) REFERENCES table_parent(cle_primaire)
 ```
 
-Exemple avec la table Cours
+Exemple avec la table `cours`
 
 ```mysql
 CREATE TABLE cours (  
@@ -58,10 +60,9 @@ CREATE TABLE cours (
     FOREIGN KEY (enseignant) REFERENCES enseignants (code_employe));
 ```
 
-Ici rien ne change dans la création de la table enseignants (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).
+Ici rien ne change dans la création de la table `enseignants` (la table ne sait pas qu'elle est utilisée comme clé étrangère ailleurs).
 
 ## Suppression de tables qui contiennent des relations
-
 
 ``` mermaid
 erDiagram  
@@ -71,11 +72,12 @@ erDiagram
     
 ```
 
-Peut-on supprimer la table Enseignant sans supprimer la table Cours? Pourquoi?
+Peut-on supprimer la table `enseignants` sans supprimer la table `cours`?   Pourquoi?
 
-:exclamation:Pour pouvoir supprimer une table, celle-ci ne doit pas être référencée par une autre table. Autrement dit, il faut que sa clé primaire ne soit pas une clé étrangère pour une ou plusieurs autres tables.
+!!! warning "Attention"
+    Pour pouvoir supprimer une table, celle-ci ne doit pas être référencée par une autre table. Autrement dit, il faut que sa clé primaire ne soit pas une clé étrangère pour une ou plusieurs autres tables.
 
-Si l'on pouvait faire la suppression, la table *Cours* aurait une colonne qui contiendrait des clés d'une table inexistante.
+Si l'on pouvait faire la suppression, la table `cours` aurait une colonne qui contiendrait des clés d'une table inexistante.
 
 ## Ordre de création
 
@@ -97,9 +99,9 @@ Une BD permet de gérer les inscriptions des étudiants à leurs cours. Comment 
 
 On ajoute une table dont le rôle dont les enregistrements représentent chaque relation.
 
-Par exemple, on ajouterait une table « Inscription » pour représenter notre association. Comme Inscription est créée spécialement pour représenter une association, elle est appelée table d'association.
+Par exemple, on ajouterait une table `inscriptions` pour représenter notre association. Comme `inscriptions` est créée spécialement pour représenter une association, elle est appelée table d'association.
 
-On voit ici que la table Inscription assure l'association entre Cours et Etudiant.
+On voit ici que la table `inscriptions` assure l'association entre `cours`  et `etudiants`.
 
 On peut voir que deux tables sont associées si l'on peut suivre avec notre doigt d'une table à l'autre en empruntant les flèches comme des chemins (ici le sens des flèches n'a pas d'importance).
 
@@ -115,7 +117,7 @@ erDiagram
 
 ## Mais... un instant!
 
-Dans la table Inscription la clé primaire est-elle vraiment composée de *deux* colonnes?
+Dans la table `inscriptions` la clé primaire est-elle vraiment composée de *deux* colonnes?
 
 Oui, c'est possible: c'est appelé une *clé composée*. 
 
@@ -142,21 +144,21 @@ PRIMARY KEY (nom_colonne1, nom_colonne2, … )
 
 Ne fonctionne pas :
 ```mysql
-CREATE TABLE inscription(
+CREATE TABLE inscriptions(
     etudiant NUMERIC(7) PRIMARY KEY, 
     cours INTEGER PRIMARY KEY,
-    FOREIGN KEY (etudiant) REFERENCES etudiant (code),
+    FOREIGN KEY (etudiant) REFERENCES etudiants (code),
     FOREIGN KEY (cours) REFERENCES cours (cours_id));
 ```
 
 Bonne écriture :
 
 ```mysql
-CREATE TABLE inscription(
+CREATE TABLE inscriptions(
     etudiant NUMERIC(7), 
     cours INTEGER,
     PRIMARY KEY (etudiant, cours),
-    FOREIGN KEY (etudiant) REFERENCES etudiant (code),
+    FOREIGN KEY (etudiant) REFERENCES etudiants (code),
     FOREIGN KEY (cours) REFERENCES cours (id_cours));
 ```
 

@@ -14,7 +14,8 @@ Pour les données entières, on trouve les types suivants :
 
 ![](images/1_range_integer.png)
 
-*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/integer-types.html](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)*
+!!! manuel 
+    *Tiré de [https://dev.mysql.com/doc/refman/8.0/en/integer-types.html](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)*
 
 Pour les valeurs décimales, on trouve deux catégories : celles à valeur exacte (virgule fixe) et à valeur approximée (virgule flottante).
 
@@ -39,7 +40,8 @@ Cinq types de données temporelles sont disponibles.
 
 ![](images/1_donnes_dates.png)
 
-*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)*
+!!! manuel
+    *Tiré de [https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)*
 
 **DATE** permet de stocker des dates de 1000-01-01 à 9999-12-31. Le format des dates (tous les types de dates) est AAAA-MM-JJ (_en anglais YYYY-MM-DD_).
 
@@ -72,9 +74,16 @@ Le type __CHAR__ permet de stocker jusqu'à 255 caractères. Le type __VARCHAR__
 
 La différence entre __CHAR__ et __VARCHAR__ est que __CHAR__ réserve toujours tout l'espace disponible. __VARCHAR__ utilise un caractère délimiteur lui permettant d'utiliser que l'espace requis plus un bit (pour le délimiteur) s'il y a 255 caractères et moins et 2 caractères s'il y a plus de 255 caractères.
 
-![](images/1_char_varchar.png)
 
-*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/char.html](https://dev.mysql.com/doc/refman/8.0/en/char.html)*
+Valeur|CHAR (4)|Espace requis|VARCHAR (4)|Espace requis
+-|-|-|-|-
+`''`|`'    '`|4 octets|`''`|1 octet
+`'ab'`|`'ab  '`|4 octets|`'ab'`|3 octets
+`'abcd'`|`'abcd'`|4 octets|`'abcd'`|5 octets
+`'abcdefgh'`|`'abcd'`|4 octets|`'abcd'`|5 octets
+
+!!! manuel
+    *Tiré de [https://dev.mysql.com/doc/refman/8.0/en/char.html](https://dev.mysql.com/doc/refman/8.0/en/char.html)*
 
 Généralement, on préfère utiliser VARCHAR si la taille de l'entrée peut varier.
 
@@ -82,7 +91,8 @@ Bien qu'il soit rare que l'on entrepose de longs textes dans une BD (on préfèr
 
 ![](images/1_blob_textes.png)
 
-*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings](https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings)*  
+!!! manuel
+    *Tiré de [https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings](https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings)*  
 
 Donc un __BLOB__ demande en espace `L+2` bytes où `L < 2^{16}`.
 
