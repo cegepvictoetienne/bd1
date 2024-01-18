@@ -57,7 +57,8 @@ Pour créer une table, il faut d'abord sélectionner une BD. La sélection se fa
 USE Nom_bd;
 ```
 
-:exclamation:La BD sera celle utilisée pour toutes les requêtes tant que l'instruction **USE** n'aura pas été rappelée.
+!!! note "Note"  
+    La BD sera celle utilisée pour toutes les requêtes tant que l'instruction **USE** n'aura pas été rappelée.
 
 Pour créer une table, la syntaxe est la suivante:
 
