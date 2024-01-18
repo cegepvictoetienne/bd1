@@ -1,0 +1,52 @@
+article a[href^="http"]::after,
+article a[href^="https://"]::after
+{
+  content: '';
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+:root {
+  --md-admonition-icon--manuel: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 25 31.25" enable-background="new 0 0 25 25" xml:space="preserve"><g><g><path d="M20,21.5H7c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h12c0.276,0,0.5-0.224,0.5-0.5V5c0-1.379-1.122-2.5-2.5-2.5H7 C5.622,2.5,4.5,3.621,4.5,5v15c0,1.379,1.122,2.5,2.5,2.5h13c0.276,0,0.5-0.224,0.5-0.5S20.276,21.5,20,21.5z M5.5,5 c0-0.827,0.673-1.5,1.5-1.5h10c0.827,0,1.5,0.673,1.5,1.5v12.5H7c-0.562,0-1.082,0.187-1.5,0.501V5z"/><path d="M8,7.5h8c0.276,0,0.5-0.224,0.5-0.5S16.276,6.5,16,6.5H8C7.724,6.5,7.5,6.724,7.5,7S7.724,7.5,8,7.5z"/><path d="M15,9.5H9c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S15.276,9.5,15,9.5z"/></g></g></svg>');
+  --md-admonition-icon--codesandbox: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="code-sandbox"><path d="M11.957 24a.496.496 0 0 1-.25-.067l-9.957-5.75a.5.5 0 0 1-.25-.433V6.25a.5.5 0 0 1 .25-.433l9.957-5.75a.502.502 0 0 1 .5 0l9.957 5.75a.5.5 0 0 1 .25.429l.086 11.452a.5.5 0 0 1-.25.437l-10.043 5.798a.496.496 0 0 1-.25.067zM2.5 17.461l9.457 5.461 9.541-5.508-.082-10.874-9.459-5.463L2.5 6.539v10.922zm10.462 3.578a.502.502 0 0 1-.5-.5v-7.927a.5.5 0 0 1 .252-.434l6.969-3.984a.5.5 0 0 1 .748.434v4.56a.502.502 0 0 1-.256.437l-2.93 1.64v3.075a.5.5 0 0 1-.249.432l-3.783 2.2a.507.507 0 0 1-.251.067zm.5-8.138v6.768l2.783-1.619v-3.08c0-.181.098-.348.256-.437l2.93-1.64V9.489l-5.969 3.412zm6.469.287h.01-.01zm-8.974 7.851a.488.488 0 0 1-.251-.068l-3.783-2.2a.5.5 0 0 1-.249-.432v-3.077l-2.93-1.639a.5.5 0 0 1-.256-.437V8.627a.497.497 0 0 1 .748-.434l6.969 3.984a.5.5 0 0 1 .252.434v7.927a.502.502 0 0 1-.5.501zm-3.283-2.988 2.783 1.619v-6.768L4.488 9.489v3.404l2.93 1.639a.5.5 0 0 1 .256.437v3.082zm4.266-6.754a.498.498 0 0 1-.248-.066L4.736 7.26a.5.5 0 0 1-.003-.866L8.46 4.231a.501.501 0 0 1 .501 0l3.018 1.742 2.997-1.72a.498.498 0 0 1 .497 0l3.687 2.105a.5.5 0 0 1 .001.868l-6.971 4.006a.518.518 0 0 1-.25.065zM5.985 6.822l5.954 3.399 5.966-3.428-2.68-1.531-2.999 1.721a.502.502 0 0 1-.499 0L8.712 5.242l-2.727 1.58z"></path></svg>');
+}
+
+.md-typeset .admonition.manuel,
+.md-typeset details.manuel {
+  border-color: rgb(43, 155, 70);
+}
+.md-typeset .manuel > .admonition-title,
+.md-typeset .manuel > summary {
+  background-color: rgba(43, 155, 70, 0.1);
+}
+.md-typeset .manuel > .admonition-title::before,
+.md-typeset .manuel > summary::before {
+  background-color: rgb(43, 155, 70);
+  -webkit-mask-image: var(--md-admonition-icon--manuel);
+  mask-image: var(--md-admonition-icon--manuel);
+}
+
+.md-typeset .admonition.codesandbox,
+.md-typeset details.codesandbox {
+  border-color: rgb(173, 3, 252);
+}
+.md-typeset .codesandbox > .admonition-title,
+.md-typeset .codesandbox > summary {
+  background-color: rgba(173, 3, 252, 0.1);
+}
+.md-typeset .codesandbox > .admonition-title::before,
+.md-typeset .codesandbox > summary::before {
+  background-color: rgb(173, 3, 252);
+  -webkit-mask-image: var(--md-admonition-icon--codesandbox);
+  mask-image: var(--md-admonition-icon--codesandbox);
+}
+
+/* Maximum space for text block */
+.md-grid {
+  max-width: 100%; /* or 100%, if you want to stretch to full-width */
+}
