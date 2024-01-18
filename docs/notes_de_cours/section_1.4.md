@@ -3,8 +3,7 @@
 ## Normes de code du langage SQL
 
 - Mots-clés du langage en MAJUSCULE (ex.: CREATE, SELECT, etc)
-- Identifiants en minuscules (notation _, pas de CamelCase)
-- Nom de tables et de BD commencent par une MAJUSCULE
+- Identifiants et noms de tables en minuscules (notation snake*_*case, pas de CamelCase)  
 - Commentaires multi-lignes: /* … */
 - Commentaire jusqu'à la fin de la ligne: #
 - On termine une requête par un ;
@@ -61,7 +60,7 @@ USE Nom_bd;
 Pour créer une table, la syntaxe est la suivante:
 
 ```mysql
-CREATE TABLE Nom_table (
+CREATE TABLE nom_table (
     nom_colonne1 TYPE, 
     nom_colonne2 TYPE, 
     ...);
@@ -77,10 +76,12 @@ erDiagram
 ```
 
 ```mysql
-CREATE TABLE Etudiants (
+CREATE TABLE etudiants (
     code INTEGER, 
     nom VARCHAR(255), 
-    annee_admission YEAR);
+    annee_admission YEAR,
+    date_naissance DATETIME,
+    programme VARCHAR(10));
 ```
 
 ## Afficher les tables
@@ -94,7 +95,7 @@ SHOW TABLES;
 Pour afficher la structure d'une table, on utilise l'instruction :
 
 ```mysql
-DESCRIBE Nom_table;
+DESCRIBE nom_table;
 ```
 
 ## :material-cog: --- Exercice 1.4.2 ---
@@ -139,7 +140,9 @@ Pour indiquer qu'un champ est une clé primaire, on indique __PRIMARY KEY__ apr�
 CREATE TABLE etudiants (
     code INTEGER PRIMARY KEY, 
     nom VARCHAR(255), 
-    adresse VARCHAR(255));
+    annee_admission YEAR,
+    date_naissance DATETIME,
+    programme VARCHAR(10));
 ```
 
 ## Auto-incrément
@@ -148,13 +151,23 @@ Dans le cas où l'on ajoute un identifiant unique (id), on peut indiquer au SGBD
 
 Cela nous évite de devoir manuellement gérer la mise à jour de l'identifiant.
 
-Cette fonction est disponible que si le type de colonne est INTEGER.
+Cette fonction est disponible que si le type de colonne est __INTEGER__.
 
 ## :material-cog: --- Exercice 1.4.3 ---
 
 Pour définir un auto-incrément, il faut indiquer __AUTO_INCREMENT__ après le type de la colonne.
 
-Créer la table Cours. La colonne id_cours doit être auto-incrémentée. Afficher la table après pour voir l'impact de l'incrémentation automatique.
+``` mermaid
+erDiagram  
+    p[cours] {
+        INTEGER cours_id PK
+        CHAR(11) sigle
+        TINYINT duree
+        VARCHAR(255) nom
+    }
+```
+
+Créer la table __cours__. La colonne cours_id doit être auto-incrémentée. Afficher la table après pour voir l'impact de l'incrémentation automatique.
 
 ## Valeurs par défaut
 
@@ -170,13 +183,12 @@ nom_colonne TYPE DEFAULT valeur
 
 Pour ajouter une valeur par défaut sur un diagramme ER on l'indique avec le symbole = après le type.
 
-Par exemple, dans la table Cours la durée par défaut est de 60 heures.
+Par exemple, dans la table __cours__ la durée par défaut est de 60 heures.
 
 ``` mermaid
 erDiagram  
-    p[Cours] {
+    p[cours] {
         INTEGER cours_id PK
-        CHAR(11) sigle
         TINYINT duree "=60"
         VARCHAR(255) nom
     }
@@ -184,7 +196,7 @@ erDiagram
 La requête pour créer la table cours serait donc:
 
 ```mysql
-CREATE TABLE Cours (  
+CREATE TABLE cours (  
     cours_id INTEGER PRIMARY KEY AUTO_INCREMENT,  
     duree TINYINT DEFAULT 60,  
     nom VARCHAR(255);
@@ -197,7 +209,7 @@ Pour modifier une table, trois opérations sont possibles : ajouter une colonne,
 La requête est:
 
 ```mysql
-ALTER TABLE Nom_de_la_table 
+ALTER TABLE nom_de_la_table 
     opération1, 
     opération2 ... ;
 ```
@@ -207,16 +219,16 @@ ALTER TABLE Nom_de_la_table
 
 L'instruction est ADD suivi de la définition de la colonne
 
-Par exemple, on a oublié une colonne dans la table Cours (on veut le résultat de droite)
+Par exemple, on a oublié une colonne dans la table __cours__ (on veut le résultat de droite)
 
 ``` mermaid
 erDiagram 
-    p[Cours] {
+    p[cours] {
         INTEGER cours_id PK
         TINYINT duree "=60"
         VARCHAR(255) nom
     } 
-    q[Cours] {
+    q[cours] {
         INTEGER cours_id PK
         CHAR(11) sigle
         TINYINT duree "=60"
@@ -227,7 +239,7 @@ erDiagram
 La requête pour corriger la table est:
 
 ```mysql
-ALTER TABLE Cours
+ALTER TABLE cours
     ADD sigle CHAR(11);
 ```
 
@@ -235,12 +247,12 @@ ALTER TABLE Cours
 
 Pour modifier une colonne existante, on utilise l'instruction MODIFY COLUMN suivie de la nouvelle définition de la colonne.
 
-On a créé la table Cours avec la requête suivante:
+On a créé la table __cours__ avec la requête suivante:
 
 ```mysql
-CREATE TABLE Cours (  
+CREATE TABLE cours (  
     cours_id INTEGER, 
-    sigle CHAR (11),  
+    sigle CHAR(11),  
     duree SMALLINT, 
     nom VARCHAR(255));
 ```
@@ -258,8 +270,8 @@ erDiagram
 La requête de modification devrait être:
 
 ```mysql
-ALTER TABLE Cours   
-    MODIFY COLUMN id INTEGER PRIMARY KEY AUTO_INCREMENT,   
+ALTER TABLE cours   
+    MODIFY COLUMN cours_id INTEGER PRIMARY KEY AUTO_INCREMENT,   
     MODIFY COLUMN duree TINYINT DEFAULT 60;
 ```
   
@@ -281,9 +293,9 @@ On utilise l'instruction:
 DROP COLUMN nom_colonne
 ```
 
-Pour supprimer la colonne sigle de la table Cours, on utilise la requête suivante :
+Pour supprimer la colonne sigle de la table __cours__, on utilise la requête suivante :
 
 ```mysql
-ALTER TABLE Cours 
+ALTER TABLE cours 
     DROP COLUMN sigle;
 ```

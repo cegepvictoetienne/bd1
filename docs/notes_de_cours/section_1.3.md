@@ -1,8 +1,8 @@
 # Types de données
 
-*Données numériques
-*Données temporelles
-*Données alphanumériques
+* Données numériques  
+* Données temporelles  
+* Données alphanumériques  
 
 Les bases de données sont fortement typées. Chaque colonne peut contenir un type de donnée unique. Il est impossible de le modifier après la création.
 
@@ -10,11 +10,11 @@ Il faut porter une attention particulière aux types, car l'espace de stockage e
 
 ## Numériques
 
-Pour les données entières, on trouve les types suivants
+Pour les données entières, on trouve les types suivants :  
 
 ![](images/1_range_integer.png)
 
-*Tiré de https://dev.mysql.com/doc/refman/8.0/en/integer-types.html*
+*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/integer-types.html](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)*
 
 Pour les valeurs décimales, on trouve deux catégories : celles à valeur exacte (virgule fixe) et à valeur approximée (virgule flottante).
 
@@ -26,7 +26,7 @@ Pour chacun, il faut spécifier deux valeurs pour déterminer leur précision, s
 
 Par exemple NUMERIC (5, 2) permet de stocker de -999,99 à 999,99
 
-Pour les types en virgule flottante deux types sont disponibles: **FLOAT** et **DOUBLE**.
+Pour les types en virgule flottante deux types sont disponibles : **FLOAT** et **DOUBLE**.
 
 |Types|Octets de stockage|Valeur min (>0)|Valeur max|
 |:-:|:-:|:-:|:-:|
@@ -39,13 +39,13 @@ Cinq types de données temporelles sont disponibles.
 
 ![](images/1_donnes_dates.png)
 
-*Tiré de https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html*
+*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)*
 
 **DATE** permet de stocker des dates de 1000-01-01 à 9999-12-31. Le format des dates (tous les types de dates) est AAAA-MM-JJ (_en anglais YYYY-MM-DD_).
 
 **TIME** stocke les heures de -838:59:59 à 838:59:59. Le format de toutes les dates est hh:mm:ss (_en anglais hh:mm:ss_).
 
-Différence entre __DATETIME__ et __TIMESTAMP__
+Différence entre __DATETIME__ et __TIMESTAMP__ :  
 
 __DATETIME__ stocke les dates sous format textuel. Le format supporte les dates de 1000-01-01 00:00:00 à 9999-12-31 23:59:59.
 
@@ -55,7 +55,7 @@ Le type __YEAR__ permet de stocker des années à 2 ou 4 chiffres.
 
 Pour les années à 2 chiffres, MySQL applique la conversion suivante.
 
-0 à 69 → 2000 à 2069
+0 à 69 → 2000 à 2069  
 70 à 99 → 1970 à 1999
 
 ## Alphanumériques
@@ -74,7 +74,7 @@ La différence entre __CHAR__ et __VARCHAR__ est que __CHAR__ réserve toujours 
 
 ![](images/1_char_varchar.png)
 
-*Tiré de https://dev.mysql.com/doc/refman/8.0/en/char.html*
+*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/char.html](https://dev.mysql.com/doc/refman/8.0/en/char.html)*
 
 Généralement, on préfère utiliser VARCHAR si la taille de l'entrée peut varier.
 
@@ -82,13 +82,13 @@ Bien qu'il soit rare que l'on entrepose de longs textes dans une BD (on préfèr
 
 ![](images/1_blob_textes.png)
 
-*Tiré de  https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings*
+*Tiré de [https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings](https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html#data-types-storage-reqs-strings)*  
 
-Donc un __BLOB__ demande en espace $L+2$ bytes où $L < 2^{16}$.
+Donc un __BLOB__ demande en espace `L+2` bytes où `L < 2^{16}`.
 
-On résout pour $2^{16} - 1 =65 535 + 2=65 537$ octets (64 Ko) sont nécessaires pour stocker 65 535 caractères. (en français avec $+/- 6$ mots par lettre en moyenne cela représente un texte d'environ 1100 mots).
+On résout pour `2^{16} - 1 =65 535 + 2=65 537` octets (64 Ko) sont nécessaires pour stocker 65 535 caractères. (en français avec `+/- 6` lettres par mot en moyenne cela représente un texte d'environ 1100 mots).
 
-__LONGBLOB__ permet de contenir un texte d'environ 1 million de pages! (à 500 mots par page)
+__LONGBLOB__ permet de contenir un texte d'environ 1 million de pages! (à 500 mots par page)  
 
 Dans le cadre du cours, il faut utiliser __BLOB__ plutôt que __TEXT__.
 
@@ -110,16 +110,22 @@ Par exemple, dans une table de donnée de compte en banque, on veut conserver l'
 
 On crée donc une énumération qui prend les 3 valeurs possibles.
 
+```sql
+ENUM('Placement', 'Chèque', 'Epargne')
+```  
+
 ## :material-cog: --- Exercice 1.3.1 ---
 
 Choisissez le type de données approprié pour les situations suivantes :
 
-- Température extérieure
-- Date de naissance
-- Date de remise d'un travail
-- Nom d'utilisateur
-- Montant d'argent
-- Quantité de retraits effectués d'un compte en banque
-- Identifiant unique
-- Description d'un produit
-- Sorte d'une carte (Pique, cœur,…)
+- Température extérieure  
+- Date de naissance  
+- Date et heure de remise d'un travail  
+- Nom d'utilisateur  
+- Montant d'argent  
+- Quantité de retraits effectués d'un compte en banque  
+- Identifiant unique  
+- Description d'un produit  
+- Sorte d'une carte (Pique, cœur, carreau, trèfle)  
+- Numéro de téléphone  
+- Photo d'un produit  
