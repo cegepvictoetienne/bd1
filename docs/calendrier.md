@@ -9,8 +9,8 @@ th {background-color: #28B463;}
 | 1   | 1     | 17 janv | 1.1, 1.2  | Introduction, Diagramme entité-relation      | Créer un BD                  |                             |            |
 |     | 2     | 19 janv | 1.2 à 1.4 | Types de données et création de table        |                              | Atelier 1                   |            |
 | 2   | 3     | 24 janv | 1.5       | Clés étrangères et relations                 |                              | Atelier 2                   | Atelier 1  |
-|     | 4     | 26-janv | 1.5       | Create/Update/Delete                         |                              |                             | Atelier 2  |
-| 3   | 5     | 31 janv | 2.1, 2.2  | Sélection simple, filtrage et logique        | Requête CRUD                 | Atelier 3                   |            |
+|     | 4     | 26-janv | 2.1       | Create/Update/Delete                         |                              |                             | Atelier 2  |
+| 3   | 5     | 31 janv | 2.2  | Sélection simple, filtrage et logique        | Requête CRUD                 | Atelier 3                   |            |
 |     | 6     | 02 févr | 2.3       | Opérations arithm, chaînes, REGEX            |                              | Atelier 4 - formatif formel | Atelier 3  |
 | 4   | 7     | 07 févr | 2.4       | Dates                                        |                              | Atelier 5                   | Atelier 4  |
 |     | 8     | 09-févr | 2.5       | Jointures et aggrégats                       |                              |                             | Atelier 5  |

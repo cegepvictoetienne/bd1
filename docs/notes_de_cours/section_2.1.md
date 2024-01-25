@@ -82,7 +82,7 @@ Par exemple, cette instruction est valide :
 
 ```mysql
 INSERT INTO etudiants VALUES      
-    (1234567, '420.A0', 'Anthony Stark', 2018) 
+    (1234567, 'Anthony Stark', 2018, '1963-10-25', '420.A0' ) 
 ```
 
 ``` mermaid
@@ -105,7 +105,7 @@ erDiagram
 L'instruction suivante n'est pas valide car l'ordre des colonnes n’est pas respecté:
 
 ```mysql
-INSERT INTO etudiants VALUES ('Anthony Stark', 2018, '420.A0', 1234567);
+INSERT INTO etudiants VALUES ('1963-10-25', 'Anthony Stark', 2018, '420.A0', 1234567);
 ```
 
 ### Utiliser la valeur par défaut

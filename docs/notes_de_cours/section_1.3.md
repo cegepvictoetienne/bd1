@@ -45,7 +45,7 @@ Cinq types de données temporelles sont disponibles.
 
 **DATE** permet de stocker des dates de 1000-01-01 à 9999-12-31. Le format des dates (tous les types de dates) est AAAA-MM-JJ (_en anglais YYYY-MM-DD_).
 
-**TIME** stocke les heures de -838:59:59 à 838:59:59. Le format de toutes les dates est hh:mm:ss (_en anglais hh:mm:ss_).
+**TIME** stocke les heures de -838:59:59 à 838:59:59. Le format de toutes les dates est hh\:mm\:ss (_en anglais hh\:mm\:ss_).
 
 Différence entre __DATETIME__ et __TIMESTAMP__ :  
 
