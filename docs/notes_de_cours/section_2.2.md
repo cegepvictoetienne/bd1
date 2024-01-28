@@ -119,7 +119,83 @@ erDiagram
 
 ### :material-cog: --- Exercice 2.2.1 ---
 
-À partir du script Ecole.sql
+À partir du script [ecole.sql](/ecole.sql), créez la base de données **ecole** et répondez aux questions suivantes.
+
+``` mermaid
+erDiagram  
+    
+    enseignants ||--o{ programmes : "responsable"
+    enseignants {
+        NUMERIC(8) code_employe PK
+        VARCHAR(255) nom
+        NUMERIC(9) num_assurance_sociale
+        TINYINT anciennete
+    }
+
+    enseignants ||--o{ cours : "enseigne"
+    cours {
+        INTEGER cours_id PK
+        VARCHAR(255) nom_cours 
+        CHAR(10) sigle 
+        TINYINT duree   "=60"
+        TINYINT nombre_semaine   "=15"
+        NUMERIC(8) enseignant FK
+    }
+
+    groupes ||--|{ cours : ""
+    groupes ||--|{ sessions : ""
+    groupes {
+        INTEGER groupe_id PK
+        INTEGER cours_id FK
+        VARCHAR(4) session_code FK
+        TINYINT numero_groupe
+    }  
+
+    programmes {
+        CHAR(6) code_programme PK
+        VARCHAR(255) nom
+        NUMERIC(8) prof_responsable FK
+    }
+
+    etudiants }o--|| programmes : "est inscrit à"
+    etudiants {
+        NUMERIC(7) code_etudiant PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        CHAR(6) code_programme FK
+    }
+
+    sessions {
+        VARCHAR(4) session_code PK
+        VARCHAR(255) session_saison
+        DATE date_debut
+        DATE date_fin
+    }
+
+    etudiants ||--o{ inscriptions : ""
+    inscriptions }o--|| groupes : ""
+    inscriptions {
+        NUMERIC(7) code_etudiant PK
+        INTEGER groupe_id PK
+    }
+
+    evaluations }o--|| groupes : ""
+    evaluations {
+        INTEGER evaluation_id PK
+        INTEGER groupe_id FK
+        VARCHAR(255) nom_evaluation
+        NUMERIC(5_2) note_max
+        DATE date_evaluation
+    }
+
+    evaluations_etudiants }o--|| evaluations : ""
+    evaluations_etudiants {
+        NUMERIC(7) code_etudiant PK,FK
+        INTEGER evaluation_id PK,FK
+        NUMERIC(5_2) note
+    }
+    
+```
 
 A. Sélectionnez les codes d'employé des enseignants qui ont au moins 5 ans d'ancienneté.  
 B. Sélectionnez le nom des étudiants admis entre 2019 et 2020.  
