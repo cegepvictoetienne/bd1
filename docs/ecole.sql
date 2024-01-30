@@ -11,7 +11,7 @@ CREATE TABLE enseignants (
 
 CREATE TABLE cours (
 	cours_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    nom_cours VARCHAR(255),
+    nom VARCHAR(255),
     sigle CHAR(10),
     duree TINYINT DEFAULT 60,
     nombre_semaine TINYINT DEFAULT 15,
@@ -79,7 +79,7 @@ CREATE TABLE evaluations_etudiants (
 
 
 INSERT INTO enseignants (code_employe, nom, num_assurance_sociale, anciennete) VALUES (9876,'Clark Kent', 150150150, 8), (8765,'Bruce Wayne', 260260260,14), (7654, 'Kara Danvers', 888777666,0), (6573, 'Richard Grayson', 222444666, 4);
-INSERT INTO cours (nom_cours, sigle, enseignant) VALUES ('Base de données 1', '420-2B4-VI', 9876), ('Base de données 2', '420-2B5-VI', 8765), ('Programmation 1', '420-1B2-VI', 7654), ('Programmation 2', '420-1B3-VI', 7654), ('Programmation 3', '420-1B4-VI', 6573);
+INSERT INTO cours (nom, sigle, enseignant, duree) VALUES ('Base de données 1', '420-2B4-VI', 9876, 60), ('Développement Web 2', '420-2B5-VI', 8765, 75), ('Programmation 1', '420-1B2-VI', 7654, 90), ('Programmation 2', '420-2B3-VI', 7654, 90), ('Mathématique de l\'ordinateur', '320-1B4-VI', null, 45), ('Fonctionnement de l\'ordinateur', '420-3B1-VI', null, 60);
 INSERT INTO programmes (code_programme, nom, prof_responsable) VALUES ('420.01', 'Informatique appliquée', 9876), ('420.02', 'Informatique de gestion', 7654);
 INSERT INTO etudiants (code_etudiant, nom, annee_admission, code_programme) VALUES (1234567, 'Anthony Stark', 2018, '420.01'), (2345678, 'Steve Rogers', 2018, '420.01'), (3456789, 'Natasha Romanov', 2019, '420.02'), (4567890, 'Bruce Banner', 2019, '420.02'),
 	(5678901, 'Clinton Barton', 2019, '420.02'), (6789012, 'Thor Odinson', 2019, '420.01'), (7890123, 'Stan Lee', 2019, '420.02');

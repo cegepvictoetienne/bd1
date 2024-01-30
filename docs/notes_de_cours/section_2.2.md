@@ -135,7 +135,7 @@ erDiagram
     enseignants ||--o{ cours : "enseigne"
     cours {
         INTEGER cours_id PK
-        VARCHAR(255) nom_cours 
+        VARCHAR(255) nom 
         CHAR(10) sigle 
         TINYINT duree   "=60"
         TINYINT nombre_semaine   "=15"
