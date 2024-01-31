@@ -258,15 +258,3 @@ Plus de  classes : https://dev.mysql.com/doc/refman/8.0/en/regexp.html#regexp-sy
 |-|Trait d'union, doit toujours être à la fin d'une classe|
 
 Par exemple **[^ab]** vérifie que ni « a » ni « b » apparaîssent.
-
-### Options
-
-À la fin d'une REGEX on peut indiquer certaines options. Cela ne fonctionne pas en MySQL. Voici les options les plus communes.
-
-|Lettre|Option|
-|:-:||
-|g|*Greedy* : retourne toutes les occurences où la REGEX est trouvée (Pas en SQL)|
-|U|*Ungreedy* : retourne uniquement la première occurence où la REGEX est trouvée (Pas en SQL)|
-|m|*Multiline* : ^ et $ indique le début et la fin d'une ligne|
-|i|*Case insensitive* : la recherche n'est pas sensible à la casse|
-|c|*Case sensitive* : la recherche est sensible à la casse|
