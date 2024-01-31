@@ -31,11 +31,12 @@ Pour rechercher simplement sur des chaînes de caractères (CHAR, VARCHAR) on ut
 
 Les patterns disposes de 3 caractères spéciaux :
 
-- **%** : correspond à 0, 1 ou plusieurs caractères
-- **_** : correspond à 1 unique caractère
-- **\\** : permet d’échapper les caractères % ou _
+- **%** : correspond à 0, 1 ou plusieurs caractères  
+- **_** : correspond à 1 unique caractère  
+- **\\** : permet d’échapper les caractères % ou _  
 
-Rechercher sur un objet TEXT risque de prendre énormément de temps. C'est le type d'opération qu'on évite à moins d'y être contraint.
+!!! warning "Attention"
+    Rechercher sur un objet TEXT risque de prendre énormément de temps. C'est le type d'opération qu'on évite à moins d'y être contraint.
 
 Rechercher tous les mots qui commencent par *des*:
 
@@ -54,7 +55,7 @@ Rechercher des mots terminant par le symbole %:
 On veut sélectionner les pondérations et le titre de toutes les évaluation comportant le mot « final » ou « finale »
 
 ```mysql
-SELECT ponderation, titre FROM Evaluation 
+SELECT ponderation, titre FROM evaluation 
   WHERE titre LIKE '%final%';
 ```
 
@@ -104,10 +105,10 @@ Pour indiquer le début d'une chaîne, on utilise le symbole **^**, et pour la f
 
 ### Répétitions 
 
-Les REGEX offrent 3 différents caractères spéciaux pour la répétition :
-* **\*** : indique que le caractère peut s'y trouver 0, 1 ou plusieurs fois
-* **?** : indique que le caractère peut s'y trouver 0 ou 1 fois
-* **+** : indique que le caractère doit s'y trouver au moins une fois (1 ou plusieurs)
+Les REGEX offrent 3 différents caractères spéciaux pour la répétition :  
+* **\*** : indique que le caractère peut s'y trouver 0, 1 ou plusieurs fois  
+* **?** : indique que le caractère peut s'y trouver 0 ou 1 fois  
+* **+* : indique que le caractère doit s'y trouver au moins une fois (1 ou plusieurs)  
 
 |Chaîne|Regex|Trouvé|
 ||||
@@ -127,7 +128,7 @@ Les REGEX offrent 3 différents caractères spéciaux pour la répétition :
 
 ### :material-cog: --- Exercice 2.3.1 ---
 
-Écrivez les REGEX pour trouver les informations suivantes parmis les mots suivants :
+Écrivez les REGEX pour trouver les informations suivantes parmis les mots suivants :  
 
 chat
 
@@ -143,13 +144,13 @@ valet
 
 animal
 
-Utilisez le site <https://regex101.com/> pour vous aider.
+Utilisez le site [Regex 101](https://regex101.com/r/M5fA4m/1) pour vous aider.
 
-A. Les mots contenant « chat » (3 mots)
-B. Les mots commençant par « ch » (4 mots)
-C. Les mots contenant un ou deux 2 « t » (6 mots)
-D. Les mots finissant par « et » ou « e » (4 mots)
-E. Les mots contenant « a » suivis de 1 ou plusieurs « t » (3 mots)
+A. Les mots contenant « chat » (3 mots)  
+B. Les mots commençant par « ch » (4 mots)  
+C. Les mots contenant un ou deux 2 « t » (6 mots)  
+D. Les mots finissant par « et » ou « e » (4 mots)  
+E. Les mots contenant « a » suivis de 1 ou plusieurs « t » (3 mots)  
 
 ### Répétitions (suite)
 
@@ -176,6 +177,9 @@ On indique une classe avec **[*min*-*max*]**. On peut juxtaposé des intervalles
 |[a-zA-Z]|N'importe quelle lettre majuscule ou minuscule|
 |[a-z-]|N'importe quelle lettre minuscule et le trait d'union (toujours à la fin !)|
 |[a-zA-Z0-9]|N'importe quelle lettre ou nombre
+|[à-ÿ]|N'importe quelle lettre accentuée|
+|[à-ÿÀ-Ÿ]|N'importe quelle lettre accentuée majuscule ou minuscule|
+|[a-zà-ÿA-ZÀ-Ÿ0-9]|N'importe quelle lettre, nombre ou lettre accentuée|
 
 |Énoncé|REGEX|
 |||
@@ -186,13 +190,33 @@ On indique une classe avec **[*min*-*max*]**. On peut juxtaposé des intervalles
 ### :material-cog: --- Exercice 2.3.2 ---
 
 Écrivez les REGEX pour trouver les informations suivantes parmis les mots suivants :
-chat, chaton, chatte, carotte, chalet, valet, animal
 
-Utilisez le site https://regex101.com/ pour vous aider.
+chat
 
-A. Les mots de 4 lettres (1 mot)
-B. Les mots débutant par « cha » et ayant au moins 5 lettres (3 mots)
-C. Les mots qui contiennent au moins 3 voyelles. (2 mots)
+chaton
+
+chatte
+
+carotte
+
+août
+
+chalet
+
+valet
+
+animal
+
+école
+
+
+
+Utilisez le site [Regex 101](https://regex101.com/r/C2qPWK/1) pour vous aider.  
+
+A. Les mots de 4 lettres (1 mot)  
+B. Les mots débutant par « cha » et ayant au moins 5 lettres (3 mots)  
+C. Les mots qui contiennent au moins 3 voyelles. (2 mots)  
+D. Les mots qui contiennent un caractère accentué (2 mots)
 
 ### Classes spéciales
 
@@ -200,10 +224,10 @@ Les REGEX définissent un certains nombres de classes et de caractères spéciau
 
 |Classe|Signification|
 |:-:||
-|\w|Tout caractère de mot (lettre et nombres) [a-zA-Z0-9_]|
-|\d|Tout nombre [0-9]|
-|\s|Espaces [\n\r\t ]|
-|\W \D \S|La négation de la classe associé à la minuscule|
+|\\w|Tout caractère de mot (lettre et nombres) [a-zA-Z0-9_]|
+|\\d|Tout nombre [0-9]|
+|\\s|Espaces [\\n\\r\\t ]|
+|\\W \\D \\S|La négation de la classe associé à la minuscule|
 
 ### Classes spéciales MySQL
 
@@ -215,11 +239,11 @@ Les REGEX dans MySQL définissent des classes spéciales qui leur sont propres. 
 
 |Nom de la classe|Contenu|
 |||
-|alnum|Caractères alphanumériques (comme \w sauf _)
+|alnum|Caractères alphanumériques (comme \\w sauf _)
 |alpha|Caractères de l'alphabet|
-|space|Caractères d'espacement (semblable à \s)|
+|space|Caractères d'espacement (semblable à \\s)|
 |cntrl|Caractères de contrôles (comme tabulation ou retour à la ligne)|
-|digit|Caractères numériques (comme \d)|
+|digit|Caractères numériques (comme \\d)|
 |lower, upper|Caractères alphabétiques minuscules ou majuscules|
 
 Plus de  classes : https://dev.mysql.com/doc/refman/8.0/en/regexp.html#regexp-syntax
