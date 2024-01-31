@@ -213,9 +213,9 @@ animal
 
 Utilisez le site [Regex 101](https://regex101.com/r/C2qPWK/1) pour vous aider.  
 
-A. Les mots de 4 lettres (1 mot)  
-B. Les mots débutant par « cha » et ayant au moins 5 lettres (3 mots)  
-C. Les mots qui contiennent au moins 3 voyelles. (2 mots)  
+A. Les mots de 4 lettres sans accent (1 mot)  
+B. Les mots débutant par « cha » et ayant au moins 5 lettres sans accent (3 mots)  
+C. Les mots qui contiennent au moins 3 voyelles sans accent. (2 mots)  
 D. Les mots qui contiennent un caractère accentué (2 mots)
 
 ### Classes spéciales
