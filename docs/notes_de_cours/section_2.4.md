@@ -100,18 +100,31 @@ Les deux arguments doivent être du même type.
 Par exemple, on peut exprimer la longueur d'une session en terme de jours, mais cela n'est pas toujours parlant.
 
 ```sql
-SELECT semestre, annee, 
-    datediff(fin_session, debut_session) AS nombre_jours 
+SELECT session_code, session_saison, datediff(date_fin, date_debut) as nombre_jours 
     FROM sessions;
 ```
 
-![](images/2_duree_session.png)
+|session_code|session_saison|nombre_jours|
+|:-:|:-:|:-:|
+A20|Automne|125|  
+A21|Automne|125|  
+H21|Hiver|125|  
 
 ## Construire une date à partir d'un nombre de jour
 
 La fonction **from_days** permet de construire la date à partir d'un nombre de jours.
 
 Toutefois, cette fonction ne devrait pas être utilisée si le résultat est hors des limites habituels des dates.
+
+```sql
+SELECT from_days(739342); # Retourne 2024-04-01
+```
+
+L'opération inverse est possible avec la fonction **to_days**.
+
+```sql
+SELECT to_days('2024-04-01'); # Retourne 739342
+```
 
 ## Différence de DATETIME ?
 
@@ -124,7 +137,7 @@ Pour ajouter du temps à un type **TIME** on utilise la fonction addtime.
 Cette fonction ajoute deux types time ensemble.
 
 ```mysql
-addtime ('00:02:15', '00:03:18') 
+SELECT addtime ('00:02:15', '00:03:18') 
 -- retourne 0 h 5 m 33 s
 ```
 
@@ -154,11 +167,13 @@ Cette fonction s’utilise exactement comme adddate.
 
 ### :material-cog: --- Exercice 2.4.1 ---
 
-On veut le titre des documents qui :  
+Utiliser [ecole2.sql](../ecole2.sql) pour répondre aux questions suivantes.  
+
+On veut le titre des documents des évaluations des étudiants qui :  
 A. ont été remis au mois de mai  
 B. ont été remis dans les deux dernières années  
 
-On veut le semestre et l'année des sessions qui :  
+On veut la saison le code de session des sessions qui :  
 C. Durent plus de 17 semaines  
 
 ## Manipulation de timestamp
