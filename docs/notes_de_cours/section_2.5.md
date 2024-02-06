@@ -1,10 +1,10 @@
 # Jointures et agrégats
 
-Jointures internes
-Jointures naturelles
-Atelier
-Agrégats de données
-Atelier
+- Jointures internes  
+- Jointures naturelles  
+- Atelier  
+- Agrégats de données  
+- Atelier  
 
 ## Problème 
 
@@ -28,12 +28,12 @@ erDiagram
 
 ## Jointures
 
-Une jointure permet de « joindre » deux tables ensemble pour en créer une seule. Ici la table résultant n'est pas une « vraie » table au sens où elle n'est pas enregistrer dans la base de données.
+Une jointure permet de « joindre » deux tables ensemble pour en créer une seule. Ici la table résultant n'est pas une « vraie » table au sens où elle n'est pas enregistrée dans la base de données.
 
-Il existe 3 types de jointures :
-- Jointures internes et naturelles (vues en BD1)
-- Jointures à gauche et à droite (vues en BD2)
-- Jointures externes ou complètes (vues en BD2)
+Il existe 3 types de jointures :  
+- Jointures internes et naturelles (vues en BD1)  
+- Jointures à gauche et à droite (vues en BD2)  
+- Jointures externes ou complètes (vues en BD2)  
 
 ### Jointures internes
 
@@ -53,8 +53,8 @@ SELECT * FROM Nom_table_1 INNER JOIN Nom_table_2
 Donc dans l'exemple précédent
 
 ```mysql
-SELECT Programme.nom, Enseignant.nom FROM Enseignant INNER JOIN Programme
-    ON Enseignant.code_employe = Programme.responsable;
+SELECT programmes.nom, enseignants.nom FROM enseignants INNER JOIN programmes
+    ON enseignants.code_employe = programmes.responsable;
 ```
 
 On préfixe les colonnes des noms de table pour éviter les ambiguité de nom.
@@ -64,9 +64,9 @@ On préfixe les colonnes des noms de table pour éviter les ambiguité de nom.
 Lorsqu'il n'y a pas de risque d'ambiguité de nom, on peut omettre le nom des tables comme préfixe. On peut aussi utiliser les alias pour clarifier le nom des colonnes.
 
 ```mysql
-SELECT Programme.nom AS 'Nom programme', Enseignant.nom AS 'Responsable' 
-    FROM Enseignant INNER JOIN Programme
-    ON code_employe = responsable;
+SELECT programmes.nom AS 'Nom programme', enseignants.nom AS 'Responsable' 
+    FROM enseignants INNER JOIN programmes
+    ON code_employe = prof_responsable;
 ```
 
 ![](images/2_resultat_jointure.png)
@@ -110,9 +110,9 @@ erDiagram
 
 ### :material-cog: --- Exercice 2.5.2 ---
 
-A. Sélectionnez le titre des évaluations pour lequel aucun document n'est associé.
- A 
-B. Sélectionnez l'année admission et le nom de l'étudiant pour chaque étudiant des programmes sous la responsabilité de l'enseignant portant le code 7654.
+A. Sélectionnez le titre des évaluations pour lequel aucun document n'est associé.  
+
+B. Sélectionnez l'année admission et le nom de l'étudiant pour chaque étudiant des programmes sous la responsabilité de l'enseignant portant le code 7654.  
 
 ## Problème
 
@@ -125,9 +125,9 @@ Quelle requête écrire ?
 On peut appliquer une jointure sur le résultat d'une jointure.
 
 ```mysql
-SELECT nom, titre, date_remise FROM etudiants
-    INNER JOIN evaluations_etudiants ON code = etudiant
-    INNER JOIN documents ON document = document_id;
+SELECT cours.nom as 'Cours', evaluations.nom_evaluation as 'Titre évaluation' FROM cours 
+    INNER JOIN groupes ON cours.cours_id = groupes.cours_id 
+    INNER JOIN evaluations ON groupes.groupe_id = evaluations.groupe_id;
 ```
 
 ![](images/2_jointures_multiples.png)
@@ -136,9 +136,9 @@ SELECT nom, titre, date_remise FROM etudiants
 
 ### :material-cog: --- Exercice 2.5.3 ---
 
-A. Sélectionnez pour l'étudiante Nathasha Romanov le titre de tous les documents qu'elle a remis.
+A. Sélectionnez pour le cours de Programmation 2 le nom de tous les documents remis par les étudiants.
 
-B. Trouvez la première année durant laquelle le cours portant le sigle 420-2B4-VI s'est donné.  
+B. Trouvez la première année durant laquelle le cours portant le sigle 420-1B2-VI s'est donné.  
 
 ## Agrégats
 
@@ -153,8 +153,8 @@ Il faut faire attention dans la sélection des colonnes pour n'afficher que des 
 Sélectionner le nombre d'étudiant dans chaque groupe.
 
 ```mysql
-SELECT groupe, count(etudiant) FROM Inscription 
-    GROUP BY groupe;
+SELECT groupe_id, count(code_etudiant) FROM inscriptions
+    GROUP BY groupe_id;
 ```
 
 ![](images/2_inscription.png)
@@ -165,17 +165,16 @@ SELECT groupe, count(etudiant) FROM Inscription
 
 A. Comptez le nombre d'évaluations pour chaque groupe. Affichez seulement l'id du groupe et le nombre d'évaluations.
 
-B. Comptez le nombre de groupes pour chaque session. Affichez le nombre de groupe, le semestre et l'année de chaque session.
+B. Comptez le nombre de groupes pour chaque session. Affichez le nombre de groupe, la saison et le code de chaque session.
 
 ### Agrégats multiples
 
 Il est possible de former les agrégats par plusieurs critères. Par exemple, on souhaite obtenir le nombre de document remis pour chaque étudiant par groupe.
 
 ```mysql
-SELECT count(id_document), etudiant, groupe FROM Document 
-    INNER JOIN EvaluationEtudiant ON id_document = document
-    INNER JOIN Evaluation ON EvaluationEtudiant.id_evaluation = Evaluation.id_evaluation
-    GROUP BY etudiant, groupe;
+SELECT count(evaluations_etudiants.evaluation_id), groupe_id, code_etudiant  FROM evaluations_etudiants 
+    INNER JOIN evaluations ON evaluations_etudiants.evaluation_id = evaluations.evaluation_id
+    GROUP BY groupe_id, code_etudiant;
 ```
 
 ![](images/2_agregations_multiples.png)
@@ -201,9 +200,9 @@ DINSTINCTION IMPORTANTE :
 On veut les groupes de 3 étudiants et plus :
 
 ```mysql
-SELECT groupe, count(etudiant) FROM Inscription
-    GROUP BY groupe
-    HAVING count(etudiant) >= 3;
+SELECT groupe_id, count(code_etudiant) FROM inscriptions
+    GROUP BY groupe_id
+    HAVING count(code_etudiant) >= 3;
 ```
 
 ![](images/2_having.PNG)
@@ -213,16 +212,17 @@ SELECT groupe, count(etudiant) FROM Inscription
 On peut utiliser les alias pour éviter de réécrire plusieurs fois le résultat d'une même fonction.
 
 ```mysql
-SELECT groupe, count(etudiant) AS nombre_etudiants FROM Inscription
+SELECT groupe_id, count(code_etudiant) AS nombre_etudiants FROM inscriptions
     GROUP BY groupe
     HAVING nombre_etudiants >= 3;
 ```
 
-*Notez bien* : le nom nombre_etudiants est inscrit tel quel sans guillemet, c'est pourquoi il est accessible. Avec des guillemets, cela aurait changé l'affichage, mais nous n'aurions pas pu l'utiliser dans la clause **HAVING**.
+!!! note 
+    le nom nombre_etudiants est inscrit tel quel sans guillemet, c'est pourquoi il est accessible. Avec des guillemets, cela aurait changé l'affichage, mais nous n'aurions pas pu l'utiliser dans la clause **HAVING**.
 
 ## :material-cog: --- Exercice 2.5.6 ---
 
-A. Sélectionnez le nombre de cours pour chaque session (id_session seulement) où il ne se donne pas plus de 2 cours;
+A. Sélectionnez le nombre de cours pour chaque session (session_code seulement) où il ne se donne pas plus de 2 cours;
 
 B. Sélectionnez le nombre d'étudiants admis par année après 2019.
 
@@ -242,4 +242,4 @@ count(DISTINCT colonne)
 
 ## :material-cog: --- Exercice 2.5.7 ---
 
-Sélectionnez les sigle des cours ayant plus de 2 évaluations lorsqu'ils se sont donnés. Chaque sigle doit apparaître qu'une seule fois.
+Sélectionnez les sigles des cours ayant plus de 2 évaluations lorsqu'ils se sont donnés. Chaque sigle doit apparaître qu'une seule fois.
