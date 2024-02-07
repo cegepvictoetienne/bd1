@@ -173,7 +173,7 @@ On veut le titre des documents des évaluations des étudiants qui :
 A. ont été remis au mois de mai  
 B. ont été remis dans les deux dernières années  
 
-On veut la saison le code de session des sessions qui :  
+On veut la saison et le code de session des sessions qui :  
 C. Durent plus de 17 semaines  
 
 ## Manipulation de timestamp
@@ -204,23 +204,3 @@ MySQL offre plusieurs fonctions pour gérer des informations de différents fuse
 Toutes les fonctions de manipulation du temps sont décrites ici:
 
 https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html
-
-## Curiosité de date
-
-Il y a longtemps, le calendrier Julien (de Jules César) a été introduit avec une semaine  jours et des cycles annuels basés sur le Soleil. Malheureusement, avec l'exactitude des méthodes de mesure de l'époque, l'année julienne devait être corrigée.
-
-En 1582, le monde occidental a passé au calendrier Grégorien (demande du pape Grégoire XIII). qui régularise les années et les durées des jours en introduisant les années bisextiles (sur un cycle de 400 ans).
-
-Par contre, le passage a demandé un ajustement particulier...
-
-## Correction d'octobre 1582
-
-Voici le calendrier du mois d'octobre 1582. Les 10 jours supprimés sont entre autre les 9 années bissextile en trop entre le sixième et le seizième siècle (500, 600, 700, 900, 1000, 1100, 1300, 1400 et 1500). 
-
-![](images/2_julien_gregorien.png)
-
-## Calendrier Grégorien proleptique
-
-Un tel calendrier est un calendrier Grégorien rétropoler à partir d'aujourd'hui. Les dates retirées dans la correction sont inclues dans le calendrier Grégorien proleptique. 
-
-Il s'agit de ce calendrier que MySQL utilise, donc les dates retirées sont valides (exemple 8 octobre 1582), même si elles n'ont jamais réellement existées. 

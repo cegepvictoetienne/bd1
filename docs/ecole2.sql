@@ -78,7 +78,10 @@ CREATE TABLE evaluations_etudiants (
     PRIMARY KEY (evaluation_id, code_etudiant)
 );
 
-
+CREATE TABLE periodes (
+    periode_id INT PRIMARY KEY AUTO_INCREMENT,
+    heure_debut TIME,
+    heure_fin TIME);
 
 INSERT INTO enseignants (code_employe, nom, num_assurance_sociale, anciennete) VALUES (9876,'Clark Kent', 150150150, 8), (8765,'Bruce Wayne', 260260260,14), (7654, 'Kara Danvers', 888777666,0), (6573, 'Richard Grayson', 222444666, 4);
 INSERT INTO cours (nom, sigle, enseignant, duree) VALUES ('Base de données 1', '420-2B4-VI', 9876, 60), ('Développement Web 2', '420-2B5-VI', 8765, 75), ('Programmation 1', '420-1B2-VI', 7654, 90), ('Programmation 2', '420-2B3-VI', 7654, 90), ('Mathématique de l\'ordinateur', '320-1B4-VI', null, 45), ('Fonctionnement de l\'ordinateur', '420-3B1-VI', null, 60);
@@ -110,3 +113,14 @@ INSERT INTO inscriptions (code_etudiant, groupe_id) VALUES (1234567, 1), (123456
  (8, 3456789, 12,'2021-04-12','presentation.pptx'),
  (9, 1234567, 41,'2021-05-03','examen_final.zip'),
  (9, 3456789, 42,'2021-05-04','examen_final.zip');
+
+INSERT INTO periodes (heure_debut, heure_fin) VALUES
+    ('08:15', '09:05'),
+    ('09:15', '10:05'),
+    ('10:15', '11:05'),
+    ('11:15', '12:05'),
+    ('12:15', '13:05'),
+    ('13:15', '14:05'),
+    ('14:15', '15:05'),
+    ('15:15', '16:05'),
+    ('16:15', '17:05');
