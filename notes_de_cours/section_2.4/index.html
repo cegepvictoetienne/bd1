@@ -935,33 +935,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#curiosite-de-date" class="md-nav__link">
-    <span class="md-ellipsis">
-      Curiosité de date
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#correction-doctobre-1582" class="md-nav__link">
-    <span class="md-ellipsis">
-      Correction d'octobre 1582
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calendrier-gregorien-proleptique" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calendrier Grégorien proleptique
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1674,7 +1647,7 @@ https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals</p>
 <p>On veut le titre des documents des évaluations des étudiants qui :<br />
 A. ont été remis au mois de mai<br />
 B. ont été remis dans les deux dernières années  </p>
-<p>On veut la saison le code de session des sessions qui :<br />
+<p>On veut la saison et le code de session des sessions qui :<br />
 C. Durent plus de 17 semaines  </p>
 <h2 id="manipulation-de-timestamp">Manipulation de timestamp</h2>
 <p>Deux fonctions permettent la manipulation des timestamps:</p>
@@ -1693,16 +1666,6 @@ C. Durent plus de 17 semaines  </p>
 <p>MySQL offre plusieurs fonctions pour gérer des informations de différents fuseaux horaires.</p>
 <p>Toutes les fonctions de manipulation du temps sont décrites ici:</p>
 <p>https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html</p>
-<h2 id="curiosite-de-date">Curiosité de date</h2>
-<p>Il y a longtemps, le calendrier Julien (de Jules César) a été introduit avec une semaine  jours et des cycles annuels basés sur le Soleil. Malheureusement, avec l'exactitude des méthodes de mesure de l'époque, l'année julienne devait être corrigée.</p>
-<p>En 1582, le monde occidental a passé au calendrier Grégorien (demande du pape Grégoire XIII). qui régularise les années et les durées des jours en introduisant les années bisextiles (sur un cycle de 400 ans).</p>
-<p>Par contre, le passage a demandé un ajustement particulier...</p>
-<h2 id="correction-doctobre-1582">Correction d'octobre 1582</h2>
-<p>Voici le calendrier du mois d'octobre 1582. Les 10 jours supprimés sont entre autre les 9 années bissextile en trop entre le sixième et le seizième siècle (500, 600, 700, 900, 1000, 1100, 1300, 1400 et 1500). </p>
-<p><img alt="" src="../images/2_julien_gregorien.png" /></p>
-<h2 id="calendrier-gregorien-proleptique">Calendrier Grégorien proleptique</h2>
-<p>Un tel calendrier est un calendrier Grégorien rétropoler à partir d'aujourd'hui. Les dates retirées dans la correction sont inclues dans le calendrier Grégorien proleptique. </p>
-<p>Il s'agit de ce calendrier que MySQL utilise, donc les dates retirées sont valides (exemple 8 octobre 1582), même si elles n'ont jamais réellement existées. </p>
 
 
 
