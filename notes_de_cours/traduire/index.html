@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://bd1.kerzo.ca/notes_de_cours/section_4.3/">
+        <link rel="canonical" href="https://bd1.kerzo.ca/notes_de_cours/traduire/">
       
       
-        <link rel="prev" href="../section_4.2/">
+        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../section_5.1/">
+        <link rel="next" href="../deboguage/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>4.3 Gestion des accès - Cours Bases de donn&eacute;es 1</title>
+        <title>Comment traduire du français en SQL - Cours Bases de donn&eacute;es 1</title>
       
     
     
@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gestion-des-acces" class="md-skip">
+        <a href="#comment-traduire-une-requete-du-francais-a-sql" class="md-skip">
           Aller au contenu
         </a>
       
@@ -153,7 +153,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.3 Gestion des accès
+              Comment traduire du français en SQL
             
           </span>
         </div>
@@ -269,11 +269,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../traduire/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   Dépannage
@@ -341,12 +343,10 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../section_4.1/" class="md-tabs__link">
           
   
@@ -504,8 +504,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -514,12 +516,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -533,7 +535,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Dépannage
@@ -544,10 +546,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../traduire/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Comment traduire du français en SQL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -556,6 +578,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#traduire-une-requete-du-francais-a-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traduire une requête du français à SQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traduire une requête du français à SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etapes-pour-traduire-une-requete-du-francais-a-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étapes pour traduire une requête du français à SQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-exercice-a11-" class="md-nav__link">
+    <span class="md-ellipsis">
+       --- Exercice A.1.1 ---
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1028,8 +1148,6 @@
       
   
   
-    
-  
   
   
     
@@ -1040,12 +1158,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
@@ -1059,7 +1177,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Section 4
@@ -1112,30 +1230,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    4.3 Gestion des accès
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../section_4.3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1144,194 +1242,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#pourquoi-gerer-les-roles" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pourquoi gérer les rôles
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#crud-des-utilisateurs" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRUD des utilisateurs
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CRUD des utilisateurs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modifier-un-utilisateur" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modifier un utilisateur
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#supprimer-un-utilisateur" class="md-nav__link">
-    <span class="md-ellipsis">
-      Supprimer un utilisateur
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#niveaux-de-privilege" class="md-nav__link">
-    <span class="md-ellipsis">
-      Niveaux de privilège
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Niveaux de privilège">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#conferer-un-privilege" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conférer un privilège
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#revoquer-un-privilege" class="md-nav__link">
-    <span class="md-ellipsis">
-      Révoquer un privilège
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#determiner-lutilisateur-connecte" class="md-nav__link">
-    <span class="md-ellipsis">
-      Déterminer l'utilisateur connecté
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Déterminer l'utilisateur connecté">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-exercice-431-" class="md-nav__link">
-    <span class="md-ellipsis">
-       --- Exercice 4.3.1 ---
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#les-roles" class="md-nav__link">
-    <span class="md-ellipsis">
-      Les rôles
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Les rôles">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#definir-un-role" class="md-nav__link">
-    <span class="md-ellipsis">
-      Définir un rôle
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conferer-ou-revoquer-un-privilege-a-un-role" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conférer ou révoquer un privilège à un rôle
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assigner-un-role-a-un-utilisateur" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assigner un rôle à un utilisateur
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modifier-le-role-affecte-un-utilisateur" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modifier le rôle affecté un utilisateur
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#autres-fonctions-utiles-pour-la-gestion-des-roles" class="md-nav__link">
-    <span class="md-ellipsis">
-      Autres fonctions utiles pour la gestion des rôles
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-exercice-432-" class="md-nav__link">
-    <span class="md-ellipsis">
-       --- Exercice 4.3.2 ---
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1532,168 +1442,250 @@
   
 
 
-<h1 id="gestion-des-acces">Gestion des accès</h1>
-<p>CRUD des utilisateurs<br />
-Conférer et révoquer des privilèges<br />
-Créer des rôles  </p>
-<h2 id="pourquoi-gerer-les-roles">Pourquoi gérer les rôles</h2>
-<p>On développe un site web avec les contraintes de sécurité suivantes.</p>
+<h1 id="comment-traduire-une-requete-du-francais-a-sql">Comment traduire une requête du français à SQL</h1>
+<h2 id="traduire-une-requete-du-francais-a-sql">Traduire une requête du français à SQL</h2>
+<h3 id="introduction">Introduction</h3>
+<p>La traduction d'une requête du français à SQL est une étape importante dans le développement d'une application. Cette étape est souvent négligée, mais elle est essentielle pour s'assurer que la requête est correcte et qu'elle répond aux besoins de l'application.</p>
+<p>Dans ce document, nous allons voir comment traduire une requête du français à SQL. Nous allons commencer par un exemple simple, puis nous verrons des exemples plus complexes.</p>
+<h3 id="etapes-pour-traduire-une-requete-du-francais-a-sql">Étapes pour traduire une requête du français à SQL</h3>
+<ol>
+<li>
+<p>Trouver le verbe d'action : le verbe d'action indique le type de requête SQL que nous devons utiliser. Par exemple, si le verbe d'action est "Affichez", cela indique que nous devons utiliser une requête SELECT.  </p>
+</li>
+<li>
+<p>Identifier le sujet : le sujet indique les données que nous devons sélectionner. Par exemple, si le sujet est "les étudiants", cela indique que nous devons sélectionner les données de la table "etudiants".</p>
+</li>
+<li>
+<p>Identifier les objets : les objets indiquent les colonnes que nous devons sélectionner. Par exemple, si les objets sont "le nom et le prénom", cela indique que nous devons sélectionner les colonnes "nom" et "prénom" de la table "etudiants".</p>
+</li>
+<li>
+<p>Identifier les conditions : les conditions indiquent les critères que nous devons utiliser pour sélectionner les données. Par exemple, si les conditions sont "qui ont obtenu une note supérieure à 10", cela indique que nous devons utiliser une clause WHERE.</p>
+</li>
+<li>
+<p>Identifier l'ordre : l'ordre indique comment nous devons trier les données. Par exemple, si l'ordre est "par ordre alphabétique", cela indique que nous devons utiliser une clause ORDER BY.</p>
+</li>
+<li>
+<p>Identifier le nombre de résultats : le nombre de résultats indique combien de résultats nous devons afficher. Par exemple, si le nombre de résultats est "les 10 premiers", cela indique que nous devons utiliser une clause LIMIT.</p>
+</li>
+</ol>
+<h3 id="exemple-1">Exemple 1</h3>
+<p>Supposons que nous voulons traduire la phrase suivante en SQL :</p>
+<p><strong>"Affichez le nom et le prénom de tous les étudiants."</strong></p>
+<p>Il faut analyser la phrase pour en extraire les éléments clés. </p>
+<p>Dans ce cas, les éléments clés sont :</p>
 <ul>
-<li>Les programmeurs peuvent modifier des tables, des déclencheurs et des enregistrements. </li>
-<li>L’administrateur de la BD peut ajouter des utilisateurs et accomplir toutes les opérations des développeurs</li>
-<li>Les visiteurs peuvent uniquement ajouter, lire, modifier, ou supprimer des enregistrements.</li>
+<li>"Affichez" : cela indique que nous devons utiliser une requête SELECT. D'autres mots de cette catégorie pourraient être "Sélectionnez" ou "Montrez".</li>
 </ul>
-<p>De cette façon, si un mot de passe utilisé dans le site web est volé, l’accès à la BD est limité. </p>
-<h2 id="crud-des-utilisateurs">CRUD des utilisateurs</h2>
-<p>Pour ajouter un nouvel utilisateur, on utilise la syntaxe suivante:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">mot_de_passe</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 </code></pre></div>
-<p>Exemple:
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;12345’;</span>
-</code></pre></div></p>
-<p>Il existe toujours un utilisateur de base : root@localhost</p>
-<h3 id="modifier-un-utilisateur">Modifier un utilisateur</h3>
-<p>Pour changer un mot de passe, la requête est:</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">nouveau_mot_de_passe</span><span class="p">;</span>
+<ul>
+<li>"les étudiants" : cela indique que nous devons sélectionner les données de la table "étudiants".</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="p">;</span>
 </code></pre></div>
-<p>Exemple:
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;54321&#39;</span><span class="p">;</span>
-</code></pre></div></p>
-<p>Pour renommer un utilisateur, la requête est :</p>
-<div class="highlight"><pre><span></span><code><span class="k">RENAME</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">ancien_nom</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">nouveau_nom</span><span class="p">;</span>
+<ul>
+<li>"le nom et le prénom" : cela indique que nous devons sélectionner les colonnes "nom" et "prénom" de la table "étudiants".</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="p">;</span>
 </code></pre></div>
-<p>Exemple :
-<div class="highlight"><pre><span></span><code><span class="k">RENAME</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">visiteurs</span><span class="p">;</span>
-</code></pre></div></p>
-<h3 id="supprimer-un-utilisateur">Supprimer un utilisateur</h3>
-<p>Pour retirer un utilisateur, on utilise la requête:</p>
-<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="p">;</span>
+<ul>
+<li>"tous" : cela indique que nous devons sélectionner toutes les lignes de la table "étudiants", donc pas de condition WHERE.</li>
+</ul>
+<p>La requête SQL finale est donc :</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="p">;</span>
 </code></pre></div>
-<p>Exemple :</p>
-<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteurs</span><span class="p">;</span>
+<h3 id="exemple-2">Exemple 2</h3>
+<p>Supposons que nous voulons traduire la phrase suivante en SQL :</p>
+<p><strong>"Faire la liste des noms et prénoms de tous les étudiants qui ont été admis en 2021."</strong>  </p>
+<p>Dans ce cas, les éléments clés sont :  </p>
+<ul>
+<li>"Faire la liste" : cela indique que nous devons utiliser une requête SELECT.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 </code></pre></div>
-<h2 id="niveaux-de-privilege">Niveaux de privilège</h2>
-<p>Les niveaux de privilèges accordent certains droits d’accès pour modifier des parties de la BD. Les niveaux (non exhaustif) sont</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ALL (tout)</td>
-<td>DELETE</td>
-<td>REFERENCES (crée des clés étrangères)</td>
-</tr>
-<tr>
-<td>ALTER</td>
-<td>DROP</td>
-<td>SELECT</td>
-</tr>
-<tr>
-<td>CREATE</td>
-<td>DROP ROLE</td>
-<td>SHOW DATABASES</td>
-</tr>
-<tr>
-<td>CREATE ROLE</td>
-<td>EXECUTE (routines)</td>
-<td>TRIGGER</td>
-</tr>
-<tr>
-<td>CREATE ROUTINE</td>
-<td>FILE</td>
-<td>UPDATE</td>
-</tr>
-<tr>
-<td>CREATE USER</td>
-<td>INSERT</td>
-<td>USAGE</td>
-</tr>
-</tbody>
-</table>
-<h3 id="conferer-un-privilege">Conférer un privilège</h3>
-<p>Pour assigner un privilège à un rôle, on utilise une requête GRANT.</p>
-<div class="highlight"><pre><span></span><code>GRANT priviliege1, privilege2 ON [* | table] TO nom_utilisateur;
+<ul>
+<li>"les étudiants" : cela indique que nous devons sélectionner les données de la table "étudiants".  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
 </code></pre></div>
-<p>On ajoute le privilège de lecture sur toutes les tables de la base de données ecole aux visiteurs.</p>
-<div class="highlight"><pre><span></span><code><span class="k">USE</span><span class="w"> </span><span class="n">Ecole</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;visiteurs’;</span>
+<ul>
+<li>"les noms et prénoms" : cela indique que nous devons sélectionner les colonnes "nom" et "prénom" de la table "étudiants".  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
 </code></pre></div>
-<p>Pour ajouter le privilège d’écriture et de modification sur la table Etudiant</p>
-<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;visiteurs&#39;</span><span class="p">;</span>
+<ul>
+<li>
+<p>"qui ont été admis en 2021" : cela indique que nous devons utiliser une clause WHERE pour sélectionner les étudiants qui ont été admis en 2021.  </p>
+<ul>
+<li>Ici, nous devons identifier la colonne qui contient l'année d'admission. Supposons que cette colonne s'appelle "date_admission".  </li>
+</ul>
+</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">date_admission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2021</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="revoquer-un-privilege">Révoquer un privilège</h3>
-<p>La requête de retrait de privilège est REVOKE.</p>
-<div class="highlight"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="n">priviliege1</span><span class="p">,</span><span class="w"> </span><span class="n">privilege2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_utilisateur</span><span class="p">;</span>
+    - Cependant, la date d'admission est souvent stockée sous forme de date. Si c'est le cas, nous devons utiliser une fonction pour extraire l'année de la date. La fonction pour extraire l'année de la date s'appelle "YEAR".</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">YEAR</span><span class="p">(</span><span class="n">date_admission</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2021</span><span class="p">;</span>
 </code></pre></div>
-<p>Par exemple, on révoque le privilège d’ajout des visiteurs sur la table Etudiant.</p>
-<div class="highlight"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">‘visiteurs’</span><span class="p">;</span>
+<p>La requête SQL finale est donc :</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">YEAR</span><span class="p">(</span><span class="n">date_admission</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2021</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="determiner-lutilisateur-connecte">Déterminer l'utilisateur connecté</h2>
-<p>La fonction USER() retourne l’utilisateur actuellement connecté à la base de données.</p>
-<p>Exemple:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">();</span>
-</code></pre></div></p>
-<div class="highlight"><pre><span></span><code>| USER()         |
-|-|
-| root@localhost |
+<h3 id="exemple-3">Exemple 3</h3>
+<p>Supposons que nous voulons traduire la phrase suivante en SQL :</p>
+<p><strong>"Affichez le nom, le prénom et le nombre d'années d'expérience de tous les employés qui ont plus de 5 ans d'expérience, du plus expérimenté au moins expérimenté."</strong>  </p>
+<p>Dans ce cas, les éléments clés sont :</p>
+<ul>
+<li>"Affichez" : cela indique que nous devons utiliser une requête SELECT.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 </code></pre></div>
-<h3 id="-exercice-431-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.3.1 ---</h3>
-<p>Créez un nouvel utilisateur qui possède tous les privilèges.</p>
-<p>Déconnectez-vous en fermant Workbench et reconnectez-vous avec le nouvel utilisateur.</p>
-<h2 id="les-roles">Les rôles</h2>
-<p>Que faire si on a 8 programmeurs qui ont chacun leur accès distinct (nom et mot de passe), mais qui doivent tous avoir le même niveau de privilège.</p>
-<p>Imaginez qu’on ajoute une table. Doit-on modifier les accès de tous les utilisateurs ?</p>
-<p>Ça serait plus simple d’avoir une structure contenant les privilèges.</p>
-<p><strong>Un rôle est une liste d’accès</strong>. Plutôt que de définir les accès par utilisateur, on peut leur assigner un rôle. </p>
-<p>Donc tous les utilisateurs avec les mêmes privilèges d’accès auront le même rôle. Cela facilite grandement le changement de privilèges.</p>
-<h3 id="definir-un-role">Définir un rôle</h3>
-<p>On utilise CREATE ROLE pour créer un nouveau rôle et DROP ROLE pour le supprimer.</p>
-<p>Il n'y a pas de requête pour changer le nom d'un rôle.</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
+<ul>
+<li>"les employés" : cela indique que nous devons sélectionner les données de la table "employés".  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employes</span>
 </code></pre></div>
-<h3 id="conferer-ou-revoquer-un-privilege-a-un-role">Conférer ou révoquer un privilège à un rôle</h3>
-<p>On remplace le nom d’utilisateur dans la requête GRANT ou REVOKE par le nom du rôle.</p>
-<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">privilege</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*|</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
-<span class="k">REVOKE</span><span class="w"> </span><span class="n">privilege</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
+<ul>
+<li>"le nom et le prénom" : cela indique que nous devons sélectionner les colonnes "nom" et "prénom" de la table "employés".  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employes</span>
 </code></pre></div>
-<p>Par exemple, on permet au programmeur de créer des tables et des clés étrangères.</p>
-<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="p">,</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">programmeur</span><span class="p">;</span>
+<ul>
+<li>"le nombre d'années d'expérience" : Dans la table "employés", il n'y a pas de colonne "nombre d'années d'expérience". Cependant, nous pouvons calculer le nombre d'années d'expérience en soustrayant la date d'embauche de la date actuelle. La fonction pour soustraire des dates avec l'année comme valeur de retour s'appelle "TIMESTAMPDIFF" et la fonction pour la date actuelle s'appelle "NOW".   </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre_annees_experience</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employes</span>
 </code></pre></div>
-<h3 id="assigner-un-role-a-un-utilisateur">Assigner un rôle à un utilisateur</h3>
-<p>On peut affecter un rôle directement à la création</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">mot</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">passe</span>
-<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">role1</span><span class="p">,</span><span class="w"> </span><span class="n">role2</span><span class="p">...;</span>
+<ul>
+<li>"qui ont plus de 5 ans d'expérience" : cela indique que nous devons utiliser une clause WHERE pour sélectionner les employés qui ont plus de 5 ans d'expérience.  Nous avons déjà calculé le nombre d'années d'expérience, donc nous pouvons utiliser cette colonne dans la clause WHERE.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre_annees_experience</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employes</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<p>Exemple:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">alice</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;chat&#39;</span>
-<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">programmeur</span><span class="w"> </span><span class="p">;</span>
+<ul>
+<li>"du plus expérimenté au moins expérimenté" : cela indique que nous devons utiliser une clause ORDER BY pour trier les employés par nombre d'années d'expérience, du plus expérimenté au moins expérimenté.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre_annees_experience</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employes</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">nombre_annees_experience</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="modifier-le-role-affecte-un-utilisateur">Modifier le rôle affecté un utilisateur</h3>
-<p>On peut modifier les rôles avec</p>
-<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">role1</span><span class="p">,</span><span class="w"> </span><span class="n">role2</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">utilisateur1</span><span class="p">,</span><span class="w"> </span><span class="n">utilisateur2</span><span class="p">...</span>
+<p>La requête SQL finale est donc :</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre_annees_experience</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employes</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">TIMESTAMPDIFF</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w">  </span><span class="n">date_embauche</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">nombre_annees_experience</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="exemple-4">Exemple 4</h3>
+<p>Supposons que nous voulons traduire la phrase suivante en SQL :</p>
+<p><strong>"Affichez le nom et le résultat des 3 étudiants ayant obtenu la meilleure note à l'examen final."</strong></p>
+<p>Dans ce cas, les éléments clés sont :</p>
+<ul>
+<li>"Affichez" : cela indique que nous devons utiliser une requête SELECT.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+</code></pre></div>
+<ul>
+<li>"le nom et le résultat" : cela indique que nous devons sélectionner les colonnes "nom" et "résultat" de la table "étudiants".  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
+</code></pre></div>
+<ul>
+<li>"des 3 étudiants" : cela indique que nous devons sélectionner les 3 premiers étudiants. Nous pouvons utiliser une clause LIMIT pour cela.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>"ayant obtenu la meilleure note à l'examen final" : cela indique que nous devons utiliser une clause ORDER BY pour trier les étudiants par résultat, du meilleur au moins bon.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<p>La requête SQL finale est donc :</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="-exercice-a11-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice A.1.1 ---</h3>
+<p>Avec le schéma de la base de données suivant, traduisez les phrases suivantes en SQL :</p>
+<pre class="mermaid"><code>erDiagram  
 
-<span class="k">REVOKE</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">utilisateur</span><span class="p">;</span>
-</code></pre></div>
-<h3 id="autres-fonctions-utiles-pour-la-gestion-des-roles">Autres fonctions utiles pour la gestion des rôles</h3>
-<p>Afficher l'utilisateur connecté
-<div class="highlight"><pre><span></span><code><span class="k">USER</span><span class="p">()</span><span class="w"> </span>
-</code></pre></div></p>
-<p>Afficher tous les rôles de l’utilisateur connecté
-<div class="highlight"><pre><span></span><code><span class="nf">CURRENT_ROLE</span><span class="p">()</span>
-</code></pre></div></p>
-<p>Afficher les privilèges
-<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">utilisateur</span>
-</code></pre></div></p>
-<h3 id="-exercice-432-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.3.2 ---</h3>
-<p>Créer un rôle enseignant qui peut modifier les tables Évaluation et Évaluation_etudiant ainsi qu’un rôle responsable qui peut changer la table Cours, Inscription, Groupe, Session et Etudiant.</p>
-<p>Ajouter un utilisateur appelé Scott Summers qui est enseignant et Jean Grey qui est enseignante et responsable.</p>
+    enseignants ||--o{ programmes : "responsable"
+    enseignants {
+        NUMERIC(8) code_employe PK
+        VARCHAR(255) nom
+        NUMERIC(9) num_assurance_sociale
+        DATE date_embauche
+    }
+
+    enseignants ||--o{ cours : "enseigne"
+    cours {
+        INTEGER cours_id PK
+        VARCHAR(255) nom 
+        CHAR(10) sigle 
+        TINYINT duree   "=60"
+        TINYINT nombre_semaine   "=15"
+        NUMERIC(8) enseignant FK
+    }
+
+    groupes ||--|{ cours : ""
+    groupes ||--|{ sessions : ""
+    groupes {
+        INTEGER groupe_id PK
+        INTEGER cours_id FK
+        VARCHAR(4) session_code FK
+        TINYINT numero_groupe
+    }  
+
+    programmes {
+        CHAR(6) code_programme PK
+        VARCHAR(255) nom
+        NUMERIC(8) prof_responsable FK
+    }
+
+    etudiants }o--|| programmes : "est inscrit à"
+    etudiants {
+        NUMERIC(7) code_etudiant PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        CHAR(6) code_programme FK
+    }
+
+    sessions {
+        VARCHAR(4) session_code PK
+        VARCHAR(255) session_saison
+        DATE date_debut
+        DATE date_fin
+    }
+
+    etudiants ||--o{ inscriptions : ""
+    inscriptions }o--|| groupes : ""
+    inscriptions {
+        NUMERIC(7) code_etudiant PK
+        INTEGER groupe_id PK
+    }
+
+    evaluations }o--|| groupes : ""
+    evaluations {
+        INTEGER evaluation_id PK
+        INTEGER groupe_id FK
+        VARCHAR(255) nom_evaluation
+        NUMERIC(5_2) note_max
+        DATE date_evaluation
+    }
+
+    evaluations_etudiants }o--|| evaluations : ""
+    evaluations_etudiants {
+        NUMERIC(7) code_etudiant PK,FK
+        INTEGER evaluation_id PK,FK
+        NUMERIC(5_2) note
+    }
+</code></pre>
+<p>A. Affichez le nom et le sigle de tous les cours.  </p>
+<p>B. Affichez le nom et le sigle de tous les cours enseignés par l'enseignant avec le code 12345678.</p>
+<p>C. Affichez le nom du cours et sa durée par semaine pour tous les cours.</p>
+<p>D. Faite la liste des noms et les années d'ancienneté des 3 enseignants les plus anciens.  </p>
 
 
 
