@@ -54,7 +54,7 @@ Donc dans l'exemple précédent
 
 ```mysql
 SELECT programmes.nom, enseignants.nom FROM enseignants INNER JOIN programmes
-    ON enseignants.code_employe = programmes.responsable;
+    ON enseignants.code_employe = programmes.prof_responsable;
 ```
 
 On préfixe les colonnes des noms de table pour éviter les ambiguité de nom.
@@ -75,13 +75,11 @@ SELECT programmes.nom AS 'Nom programme', enseignants.nom AS 'Responsable'
 
 A. Sélectionnez le nom de chaque étudiant et le nom du programme dans lequel il est inscrit. Triez les résultats par programme.
 
-B. Sélectionnez pour chaque document le code de l'étudiant qui l'a remis. Affichez le nom du document et le code de l'étudiant.
+B. Pour chaque document de la table **evaluations_etudiants**, sélectionnez le nom du document et le code de l'étudiant qui l'a remis.
 
 ### Jointure naturelle
 
-Une jointure naturelle fonctionne comme la jointure interne, mais ne nécessite pas de préciser sur quelle colonne se fait la jointure.
-
-Les colonnes portant le même nom entre les 2 tables servent à effectuer la jointure. 
+Une jointure naturelle est comme une jointure interne. Elle est plus simple à écrire mais nécessite obligatoirement que les colonnes à faire correspondre **portent exactement le même nom**.
 
 ATTENTION : si plus d'une paire de colonne portent le même nom, alors la jointure naturelle vérifira que les deux paires concordent.
 

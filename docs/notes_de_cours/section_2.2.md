@@ -119,7 +119,7 @@ erDiagram
 
 ### :material-cog: --- Exercice 2.2.1 ---
 
-À partir du script [ecole.sql](/ecole.sql), créez la base de données **ecole** et répondez aux questions suivantes.
+À partir du script [ecole.sql](../ecole.sql), créez la base de données **ecole** et répondez aux questions suivantes.
 
 ``` mermaid
 erDiagram  

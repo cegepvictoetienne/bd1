@@ -4,6 +4,9 @@ repo_url: https://github.com/jaixan/db1
 
 nav:
   - 'Accueil': index.md
+  - 'Dépannage':
+      - 'Comment traduire du français en SQL': notes_de_cours/traduire.md
+      - 'Déboguage': notes_de_cours/deboguage.md
   - 'Section 1':
       - 1.1 Introduction: notes_de_cours/section_1.1.md
       - 1.2 Composantes: notes_de_cours/section_1.2.md
