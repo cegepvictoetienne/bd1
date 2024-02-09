@@ -26,6 +26,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://bd1.kerzo.ca/notes_de_cours/feuilles/</loc>
+         <lastmod>2024-02-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://bd1.kerzo.ca/notes_de_cours/section_1.1/</loc>
          <lastmod>2024-02-09</lastmod>
          <changefreq>daily</changefreq>
