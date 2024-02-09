@@ -16,10 +16,10 @@ th {background-color: #28B463;}
 |     | 8     | 09-févr | 2.5       | Jointures et aggrégats                       |                              |                             | Atelier 5  |
 | 5   | 9     | 14 févr | 2.5       | Jointures et aggrégats                       |                              | Atelier 6                   |            |
 |     | 10    | 16 févr | 2.6       | Fonctions statistiques                       |                              | Atelier 7                   | Atelier 6  |
-| 6   | 11    | 21 févr |           | Révision formatif                            |                              | **TP à remettre cours 21**      | Atelier 7  |
-|     | 12    | 23 févr |           | **Sommatif requêtes**                            |                              |                             |            |
-| 7   | 13    | 28 févr |           | Regex avancé                                 |                              | Atelier 8                   |            |
-|     | 14    | 01 mars | 3.1 à 3.3 | Sauvegardes et automatisation                | Sauvegarder/restaurer une BD |                             | Atelier 8  |
+| 6   | 11    | 21 févr |           | {--Révision formatif--}<br/>{++Examen de pratique ++}                            |                              | {--**TP à remettre cours 21**--}      | Atelier 7  |
+|     | 12    | 23 févr |           | {--**Sommatif requêtes**--}<br/>{++Révision de tout avant l'examen++}                             |                              |                             |            |
+| 7   | 13    | 28 févr |           | {--Regex avancé--}<br/>{++**Examen sommatif requêtes** ++}                               |                              | {--Atelier 8--}                   |            |
+|     | 14    | 01 mars | 3.1 à 3.3 | Sauvegardes et automatisation                | Sauvegarder/restaurer une BD |  {--**TP à remettre cours 21**--}                           | {--Atelier 8--}   |
 | 8   | 15    | 13 mars | 4.1       | Contraintes intégrités                       | Confidentialité et cohérence | Atelier 9                   |            |
 |     | 16    | 15 mars | 4.2       | Cryptage et sécurité                         |                              |                             | Atelier 9  |
 | 9   | 17    | 22-mars | 4.3       | Gestion des accès                            |                              |                             |            |
