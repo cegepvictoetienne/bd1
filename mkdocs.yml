@@ -7,6 +7,7 @@ nav:
   - 'Dépannage':
       - 'Comment traduire du français en SQL': notes_de_cours/traduire.md
       - 'Déboguage': notes_de_cours/deboguage.md
+      - 'Feuilles de triche': notes_de_cours/feuilles.md
   - 'Section 1':
       - 1.1 Introduction: notes_de_cours/section_1.1.md
       - 1.2 Composantes: notes_de_cours/section_1.2.md

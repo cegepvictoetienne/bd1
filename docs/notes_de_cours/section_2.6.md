@@ -1,8 +1,8 @@
 # Fonctions statistiques et filtrage
 
-Fonctions statistiques
-Opérateurs d'ensemble
-Atelier
+- Fonctions statistiques  
+- Opérateurs d'ensemble  
+- Atelier  
 
 Plusieurs fonctions statistiques existent dans les agrégats.
 
@@ -28,30 +28,31 @@ Sauf pour **count**, les fonctions sont  appellées sur des colonnes de type num
 Affichez la note minimale qu’un étudiant a obtenue à l’évaluation portant l’id 5.
 
 ```mysql
-SELECT min(note) FROM Evaluation_etudiant
-    WHERE id_evaluation = 5;
+SELECT min(note) FROM evaluations_etudiants
+    WHERE evaluation_id = 5;
 ```
 
 ## :material-cog: --- Exercice 2.6.1 ---
 
-A. Sélectionnez la valeur de la plus haute note obtenue à l'évaluation 18.
+A. Sélectionnez la valeur de la plus haute note obtenue à l'évaluation 9.
  
-B. Sélectionnez le nom de l'étudiant ayant obtenu la plus haute note à l'évaluation 18.
+B. Sélectionnez le nom de l'étudiant ayant obtenu la plus haute note à l'évaluation 9.
  
-C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 5.
+C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 2.
 
-D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 13.
+D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 7.
 
 ## Afficher toutes les valeurs
 
 Pour s'aider dans le debogage, on peut afficher le contenu d'un groupe. La fonction qui permet cela est **GROUP_CONCAT**.
 
-Par exemple, voici le nom des étudiants inscrit au programme 420.A0.
+Par exemple, voici le nom des étudiants inscrit au programme 420.01.
 
 ```mysql
-SELECT GROUP_CONCAT (Etudiant nom), Programme.nom, FROM Etudiant 
-    INNER JOIN Programme ON programme = Programme.code 
-    WHERE Programme.code = '420.A0';
+SELECT GROUP_CONCAT(etudiants.nom), count(*) FROM etudiants 
+    INNER JOIN programmes ON etudiants.code_programme = programmes.code_programme 
+    WHERE programmes.code_programme = '420.01'
+    GROUP BY etudiants.nom;
 ```
 
 ## Opérateurs d'ensemble
@@ -106,8 +107,8 @@ On peut aussi utiliser l'opérateur de négation **NOT** devant l'opérateur **I
 
 Sélectionnez le nom des étudiants qui ont suivi au moins l'un des cours suivants :
 
-  - 420-1D6-VI
-  - 420-2B4-VI
-  - 420-2A6-VI
+- 420-2B4-VI
+- 420-2B3-VI
+- 420-3B1-VI 
  
 Sélectionnez les documents remis avant le 16 octobre 2020 ou après la fin de la session automne 2020 (19 décembre 2020)
