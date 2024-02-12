@@ -1488,9 +1488,11 @@
 
 
 <h1 id="fonctions-statistiques-et-filtrage">Fonctions statistiques et filtrage</h1>
-<p>Fonctions statistiques
-Opérateurs d'ensemble
-Atelier</p>
+<ul>
+<li>Fonctions statistiques  </li>
+<li>Opérateurs d'ensemble  </li>
+<li>Atelier  </li>
+</ul>
 <p>Plusieurs fonctions statistiques existent dans les agrégats.</p>
 <p>On a déjà vu la fonction count qui permet de compter le nombre d’enregistrements.</p>
 <p>On peut utiliser les fonctions statistiques hors des agrégats de données. Par contre, la restriction aux colonnes non agrégées s’applique.</p>
@@ -1532,20 +1534,21 @@ Atelier</p>
 </table>
 <h3 id="trouver-le-minimum">Trouver le minimum</h3>
 <p>Affichez la note minimale qu’un étudiant a obtenue à l’évaluation portant l’id 5.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">note</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Evaluation_etudiant</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id_evaluation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">note</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">evaluations_etudiants</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">evaluation_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="-exercice-261-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 2.6.1 ---</h2>
-<p>A. Sélectionnez la valeur de la plus haute note obtenue à l'évaluation 18.</p>
-<p>B. Sélectionnez le nom de l'étudiant ayant obtenu la plus haute note à l'évaluation 18.</p>
-<p>C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 5.</p>
-<p>D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 13.</p>
+<p>A. Sélectionnez la valeur de la plus haute note obtenue à l'évaluation 9.</p>
+<p>B. Sélectionnez le nom de l'étudiant ayant obtenu la plus haute note à l'évaluation 9.</p>
+<p>C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 2.</p>
+<p>D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 7.</p>
 <h2 id="afficher-toutes-les-valeurs">Afficher toutes les valeurs</h2>
 <p>Pour s'aider dans le debogage, on peut afficher le contenu d'un groupe. La fonction qui permet cela est <strong>GROUP_CONCAT</strong>.</p>
-<p>Par exemple, voici le nom des étudiants inscrit au programme 420.A0.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">GROUP_CONCAT</span><span class="w"> </span><span class="p">(</span><span class="n">Etudiant</span><span class="w"> </span><span class="n">nom</span><span class="p">),</span><span class="w"> </span><span class="n">Programme</span><span class="p">.</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Etudiant</span><span class="w"> </span>
-<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Programme</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">programme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Programme</span><span class="p">.</span><span class="k">code</span><span class="w"> </span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Programme</span><span class="p">.</span><span class="k">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;420.A0&#39;</span><span class="p">;</span>
+<p>Par exemple, voici le nom des étudiants inscrit au programme 420.01.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">GROUP_CONCAT</span><span class="p">(</span><span class="n">etudiants</span><span class="p">.</span><span class="n">nom</span><span class="p">),</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span>
+<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">programmes</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">programmes</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">programmes</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;420.01&#39;</span>
+<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">etudiants</span><span class="p">.</span><span class="n">nom</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="operateurs-densemble">Opérateurs d'ensemble</h2>
 <p>Des opérateurs existent sur les ensembles pour simplifier les requêtes de sélection.</p>
@@ -1579,9 +1582,9 @@ Atelier</p>
 <h2 id="-exercice-262-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 2.6.2 ---</h2>
 <p>Sélectionnez le nom des étudiants qui ont suivi au moins l'un des cours suivants :</p>
 <ul>
-<li>420-1D6-VI</li>
 <li>420-2B4-VI</li>
-<li>420-2A6-VI</li>
+<li>420-2B3-VI</li>
+<li>420-3B1-VI </li>
 </ul>
 <p>Sélectionnez les documents remis avant le 16 octobre 2020 ou après la fin de la session automne 2020 (19 décembre 2020)</p>
 
