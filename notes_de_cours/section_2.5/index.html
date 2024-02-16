@@ -1870,7 +1870,7 @@ erDiagram
 <p>Dans certains cas, en combinant les jointures avec les agrégats, on peut dupliquer des résultats.</p>
 <p>Pour s'assurer que les résultats ne sont pas dupliquer, on doit utiliser le mot-clé <strong>DISTINCT</strong>. On peut utiliser le mot-clé de deux façons</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Dans une requête SELECT pour avoir que les valeurs différentes</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">DISTICT</span><span class="w"> </span><span class="n">colonne</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">colonne</span>
 
 <span class="c1">-- Dans la fonction count pour compter le nombre de valeurs distinctes</span>
 <span class="nf">count</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">colonne</span><span class="p">)</span>
