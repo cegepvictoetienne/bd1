@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pourquoi-sauvegarder-une-bd" class="md-skip">
+        <a href="#pourquoi-faire-des-sauvegardes-backups-dune-bd" class="md-skip">
           Aller au contenu
         </a>
       
@@ -1026,9 +1026,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pourquoi-sauvegarder-une-bd" class="md-nav__link">
+  <a href="#pourquoi-faire-des-sauvegardes-backups-dune-bd" class="md-nav__link">
     <span class="md-ellipsis">
-      Pourquoi sauvegarder une BD?
+      Pourquoi faire des sauvegardes (backups) d'une BD?
     </span>
   </a>
   
@@ -1428,9 +1428,8 @@
 
   <h1>3.1 Établir une stratégie de sauvegarde de la BD</h1>
 
-<p>Établir une stratégie de sauvegarde de la BD</p>
-<h2 id="pourquoi-sauvegarder-une-bd">Pourquoi sauvegarder une BD?</h2>
-<p>Pouvoir restaurer la BD dans les cas de :</p>
+<h2 id="pourquoi-faire-des-sauvegardes-backups-dune-bd">Pourquoi faire des sauvegardes (<em>backups</em>) d'une BD?</h2>
+<p>Afin de pouvoir restaurer la BD en cas de :</p>
 <ul>
 <li>Destruction accidentelle (DROP *)</li>
 <li>Bris de serveur (usure/Ti-Guy qui a encore échappé son café)</li>
@@ -1450,28 +1449,31 @@
 <li>2 copies «onsite» (sur le même lieu physique)</li>
 <li>1 copie «offsite» (dans un emplacement physique différent)</li>
 </ul>
+<p>Cette règle est applicable à tout type de sauvegardes, pas seulement les bases de données</p>
 <h2 id="etapes-dune-strategie-de-sauvegarde">Étapes d’une stratégie de sauvegarde</h2>
 <ol>
 <li>
-<p>Déterminer les données à sauvegarder?</p>
+<p>Déterminer les données à sauvegarder</p>
 </li>
 <li>
-<p>Qu’est-ce qui est critique?</p>
+<p>Qu’est-ce qui est critique? On peut grouper ainsi:</p>
 <ul>
-<li>Grouper par groupe : critique pour survivre, important pour opérer, optimal pour le développement</li>
+<li>critique pour survivre</li>
+<li>important pour opérer</li>
+<li>optimal pour le développement</li>
 </ul>
 </li>
 <li>
 <p>Qu’est-ce qui est suffisamment important pour investir dans sa sauvegarde?</p>
 <ul>
-<li>Dans cette question, évaluez le rapport quantité/coût. Faire une sauvegarde de Facebook (+/- 100 Po) est plus lourd qu’une sauvegarde de Wikipédia (+/- 10TB).</li>
+<li>Dans cette question, évaluez le rapport quantité/coût. Faire une sauvegarde de Facebook (+/- 100 Po) est plus lourd qu’une sauvegarde de Wikipédia (+/- 10To).</li>
 </ul>
 </li>
 <li>
-<p>Déterminer la fréquence des sauvegardes?</p>
+<p>Déterminer la fréquence des sauvegardes</p>
 </li>
 <li>
-<p>Sauvegardes périodiques (quotidienne, hebdomadaire)</p>
+<p>Sauvegardes périodiques (quotidienne, hebdomadaire, autre?)</p>
 <ul>
 <li>Quelle quantité de travail on peut se permettre de perdre?</li>
 </ul>
@@ -1501,26 +1503,29 @@
 <p>Tester (régulièrement) et assurer la maintenance</p>
 </li>
 <li>
-<p>Ne pas tenter la loi de Murphy/loi de l’emmerdement maximal</p>
-</li>
-<li>La journée que vous avez besoin de restaurer la sauvegarde, il y a intérêt à ce que ça fonctionne</li>
-<li>Tenez compte des modifications aux structures de données<ul>
+<p>Tenez compte des modifications aux structures de données</p>
+<ul>
 <li>Avec l’évolution du projet, la stratégie de sauvegarde doit évoluer</li>
 </ul>
 </li>
+<li>Ne pas tenter <a href="https://fr.wikipedia.org/wiki/Loi_de_Murphy">la loi de Murphy</a>. Le jour où vous aurez besoin de restaurer la BD, il y a intérêt à ce que ça fonctionne.</li>
 </ol>
 <h2 id="types-de-sauvegarde">Types de sauvegarde</h2>
 <ul>
-<li>Sauvegarde complète<ul>
-<li>Crée une copie complète de toutes les données</li>
-<li>Pour : facile à mettre en place et diminue les risques d’incohérence à la restauration</li>
-<li>Contre : demande beaucoup d’espace de stockage, car duplique l’information</li>
+<li>
+<p>Sauvegarde <strong>complète</strong></p>
+<ul>
+<li>Crée une copie complète de toutes les données.</li>
+<li>Facile à mettre en place et diminue les risques d’incohérence à la restauration.</li>
+<li>Demande toutefois <strong>beaucoup</strong> d’espace de stockage car même l’information qui n'a pas changée.</li>
 </ul>
 </li>
-<li>Sauvegarde différentielle<ul>
-<li>Crée une copie seulement des changements</li>
-<li>Pour : ne duplique pas l’information de sauvegarde</li>
-<li>Contre : système de restauration plus complexe qui peut s’effondrer si l’historique est corrompu.</li>
+<li>
+<p>Sauvegarde <strong>différentielle</strong></p>
+<ul>
+<li>Crée une copie des éléments qui ont <em>changés</em> uniquement.</li>
+<li>Sauvegarde plus rapide.</li>
+<li>Restauration toutefois plus complexe et qui peut s'effondrer si l'historique est corrompu.</li>
 </ul>
 </li>
 </ul>

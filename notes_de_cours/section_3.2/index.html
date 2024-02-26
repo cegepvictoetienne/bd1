@@ -1069,22 +1069,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#table-corrompue" class="md-nav__link">
+  <a href="#dumping-dans-un-fichier-texte-non-sql" class="md-nav__link">
     <span class="md-ellipsis">
-      Table corrompue
+      Dumping dans un fichier texte non SQL
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dumping-dans-un-fichier-texte" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dumping dans un fichier texte
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dumping dans un fichier texte">
+    <nav class="md-nav" aria-label="Dumping dans un fichier texte non SQL">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1123,6 +1114,15 @@
   <a href="#charger-a-partir-dun-fichier-csv" class="md-nav__link">
     <span class="md-ellipsis">
       Charger à partir d'un fichier CSV
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-corrompue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table corrompue
     </span>
   </a>
   
@@ -1464,53 +1464,46 @@
 
 
 <h1 id="sauvegarder-et-restaurer-une-bd">Sauvegarder et restaurer une BD</h1>
-<p>Dumping
-Charger une sauvegarde
-Dumping dans un format texte
-Charger des données d’un format texte</p>
 <h2 id="dumping">Dumping</h2>
-<p>Le «dumping» consiste à générer le code SQL pour recréer complètement la base de données (CREATE DATABASE, TABLE et INSERT INTO).</p>
-<p>Ce fichier comporte de nombreuses instructions SQL supplémentaires pour assurer que les données sont restaurées normalement.</p>
-<p>Dans une invite de commande située là où votre exécutable MySQL est placé, entrez la commande suivante (Windows)</p>
-<div class="highlight"><pre><span></span><code><span class="go">.\mysqldump.exe --databases nom1 nom2 … &gt; chemin/fichier.sql –unom_utilisateur –p</span>
+<p>Le «dumping» permet de générer le code SQL COMPLET qui pourra servir à recréer automatiquement toute la BD (CREATE DATABASE, CREATE TABLE et INSERT INTO).</p>
+<p>Ce fichier SQL comporte de nombreuses instructions supplémentaires pour assurer que les données sont restaurées normalement.</p>
+<ul>
+<li>Procédure (sur Windows):<ul>
+<li>Ouvrez une invite de commande en mode administrateur (cherchez CMD, ensuite bouton de droite, exécuter en tant qu'Administrateur)</li>
+<li>Utilisez la commande CD (nom de dossier) pour vous rendre dans le dossier où est situé votre exécutable MySQL (généralement dans C:\Program Files\Ampps\mysql\bin). Attention il se trouve peut-être aussi une version dans les dossiers de Workbench, mais ce n'est probablement pas celle que vous utilisez dans le cours).</li>
+<li>La commande à entrer (générique) est la suivante:</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="go">mysqldump.exe --databases nom &gt; chemin\fichier.sql –u nom_utilisateur –p</span>
 </code></pre></div>
-<p>Exemple :
-<div class="highlight"><pre><span></span><code><span class="go">.\mysqldump.exe --databases ecole … &gt; ../ecole_backup.sql –uroot –p</span>
-<span class="go">```` </span>
-
-<span class="go">Puis saisissez le mot de passe du compte.</span>
-
-<span class="go">Dans le répertoire parent, vous trouverez le fichier ecole_backup.sql.</span>
-
-<span class="go">Pour exporter toutes les bases de données, on remplace </span>
-<span class="go">«--databases nom1» par «--all-databases»</span>
-
-<span class="go">On peut omettre l’option databases si l’on en exporte qu’une</span>
-
-<span class="go">```console</span>
-<span class="go">.\mysqldump.exe nom_db &gt; chemin/fichier.sql –unom_utilisateur –p</span>
+<p>Exemple pour la BD ecole que l'on veut "dumper" dans le même dossier:
+<div class="highlight"><pre><span></span><code><span class="go">mysqldump.exe --databases ecole &gt; backup_ecole.sql –u root –p</span>
 </code></pre></div></p>
+<p>Puis saisissez le mot de passe du compte (par défaut, c'est <em>mysql</em>). Vous trouverez ensuite dans le dossier courant le fichier backup_ecole.sql.</p>
+<p>On peut faire un dump de plusieurs BD à la fois (va créer un seul gros fichier SQL) en les séparant par des virugles:</p>
+<div class="highlight"><pre><span></span><code><span class="go">mysqldump.exe --databases nom1, nom2, nom3 &gt; chemin\fichier.sql –u nom_utilisateur –p</span>
+</code></pre></div>
+<p>Pour exporter toutes les BD, on peut remplacer <strong>--databases nom</strong> par <strong>--all-databases</strong>.</p>
+<p>On peut omettre l’option --databases si l’on en exporte qu’une seule:</p>
+<div class="highlight"><pre><span></span><code><span class="go">mysqldump.exe nom &gt; chemin\fichier.sql –u nom_utilisateur –p</span>
+</code></pre></div>
 <h2 id="charger-une-bd-a-partir-dun-fichier-de-sauvegarde">Charger une BD à partir d’un fichier de sauvegarde</h2>
-<p>Pour charger la BD, c’est simple : il suffit d’exécuter le script mysql!</p>
-<p>Soit à travers Workbench ou avec l'invite de commandes</p>
+<p>Pour charger (donc restaurer) la BD, c’est simple : il suffit d’exécuter le script mysql.</p>
+<p>Soit à travers Workbench ou avec l'invite de commandes :</p>
 <div class="highlight"><pre><span></span><code><span class="go">mysql &lt; fichier.sql</span>
 </code></pre></div>
-<h2 id="table-corrompue">Table corrompue</h2>
-<p>Une instruction permet de récupérer les données d’une table dont le fichier de sauvegarde serait corrompu.</p>
-<div class="highlight"><pre><span></span><code><span class="k">REPAIR</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="k">EXTENDED</span><span class="p">;</span>
-</code></pre></div>
-<p>https://dev.mysql.com/doc/refman/8.0/en/repair-table.html</p>
-<h2 id="dumping-dans-un-fichier-texte">Dumping dans un fichier texte</h2>
-<p>Il est possible d’exporter le contenu des tables dans des fichiers de format texte afin de les lire avec d’autres logiciels.</p>
-<p>On trouve notamment le format <em>Comma Separeted Values</em> lisible par <em>Excel</em>. </p>
+<h2 id="dumping-dans-un-fichier-texte-non-sql">Dumping dans un fichier texte non SQL</h2>
+<p>Il est possible d’exporter le contenu des tables dans des fichiers de format texte (pas SQL) afin de les lire avec d’autres logiciels.</p>
+<p>On trouve notamment le format <strong>CSV</strong> (<em>Comma Separeted Values</em>) que l'on peut ouvrir par exemple avec <em>Excel</em>.</p>
 <h3 id="le-format-csv">Le format CSV</h3>
-<p>Le format CSV vient avec un standard français et anglais (avec un simple logiciel comme Notepad++ et une toute petite REGEX, vous pouvez facilement effectuer la conversion)</p>
+<p>Le format CSV vient avec un standard français et anglais (avec un simple logiciel comme Notepad++ et un REGEX, vous pouvez facilement effectuer la conversion)</p>
 <ul>
 <li>Standard anglais : séparateur de colonne «,»</li>
 <li>Standard français : séparateur de colonne «;»</li>
 </ul>
-<p>Séparateur de ligne : (r)n (retour de ligne)
-Encapsulation des chaînes de caractère " "</p>
+<p>Séparateur de ligne : \r\n (retour de ligne)</p>
+<p>Encapsulation des chaînes de caractère " "</p>
 <table>
 <thead>
 <tr>
@@ -1537,13 +1530,13 @@ Encapsulation des chaînes de caractère " "</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Format anglais</strong>
-Id_personne,nom,prenom
+<p>Contenu du fichier si format <strong>anglais</strong> :</p>
+<p>Id_personne,nom,prenom
 2,Shutt,Steve
 5,Stastny,Peter
 7,Dryden,Ken</p>
-<p><strong>Format français</strong>
-Id_personne;nom;prenom
+<p>Contenu du fichier si format <strong>français</strong> :</p>
+<p>Id_personne;nom;prenom
 2;Shutt;Steve
 5;Stastny;Peter
 7;Dryden;Ken</p>
@@ -1558,10 +1551,11 @@ Id_personne;nom;prenom
 <p>Une instruction existe aussi à partir de l’invite de commande.</p>
 <h3 id="gestion-de-droits">Gestion de droits</h3>
 <p>Par défaut (et pour d’évidentes raisons de sécurité), MySQL limite les endroits où il est possible d’exporter un fichier texte.</p>
-<p>Dans votre fichier my.ini, il faut ajouter l’instruction suivante </p>
+<p>Dans votre fichier <strong>my.ini</strong> (disponible généralement dans C:\Program Files\Ampps\mysql\ampps), il faut ajouter l’instruction suivante sous la section [mysqld]:</p>
 <p>[mysqld]
 secure_file_priv = ""</p>
 <p>N’oubliez de redémarrez mysql après.</p>
+<p>Le fichier csv sera disponible dans C:\Program Files\Ampps\mysql\data\nom_bd</p>
 <h2 id="charger-a-partir-dun-fichier-csv">Charger à partir d'un fichier CSV</h2>
 <p>Pour lire un fichier CSV, on utilise l’instruction suivante:</p>
 <div class="highlight"><pre><span></span><code><span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">INFILE</span><span class="w"> </span><span class="s1">&#39;nom_fichier&#39;</span><span class="w"> </span>
@@ -1571,6 +1565,11 @@ secure_file_priv = ""</p>
 <span class="w">    </span><span class="k">LINES</span><span class="w"> </span><span class="k">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">;</span>
 </code></pre></div>
 <p>Une instruction existe aussi à partir de l’invite de commande.</p>
+<h2 id="table-corrompue">Table corrompue</h2>
+<p>Une instruction permet d'essayer de récupérer les données d’une table corrompue (ex.: si vous ne disposez pas du fichier de sauvegarde). La récupération avec cette commande n'est pas garantie:</p>
+<div class="highlight"><pre><span></span><code><span class="k">REPAIR</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="k">EXTENDED</span><span class="p">;</span>
+</code></pre></div>
+<p>Plus de détail ici: <a href="https://dev.mysql.com/doc/refman/8.0/en/repair-table.html">https://dev.mysql.com/doc/refman/8.0/en/repair-table.html</a></p>
 
 
 

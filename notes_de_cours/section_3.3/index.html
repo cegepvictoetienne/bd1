@@ -1429,24 +1429,23 @@
 
 <h1 id="automatisation-des-sauvegardes">Automatisation des sauvegardes</h1>
 <h2 id="script-bat">Script bat</h2>
-<p>Le script bat permet de programmer un script s’exécutant dans l’invite de commande. C’est à peu près l’équivalent Windows des scripts bash des environnements UNIX.</p>
+<p>Le script bat permet de programmer un script s’exécutant dans l’invite de commande. C’est à peu près l’équivalent Windows des scripts bash des environnements UNIX/LINUX.</p>
 <h3 id="sauvegarder-la-base-de-donnees">Sauvegarder la base de données</h3>
-<p><strong>Contenu du fichier .bat</strong>:</p>
-<p>:: declaration variable
-SET "date=%DATE:/=-%"</p>
-<p>:: instructions
-ECHO ================
-ECHO Sauvegarde auto
-ECHO ================
-I:ProgrammesAmppsmysqlbinmysqldump.exe --all-databases &gt; C:UsersAlexandreDesktopbackup_%date%.sql -uroot -pmysql
-ECHO Sauvegarde realisee avec succes</p>
+<p><strong>Contenu du fichier .bat</strong> (exemple... il faut que ces dossiers soient les bons!).</p>
+<p>Pour ne pas à avoir à taper le mot de passe manuellement, on rajoute l'option -p suivi du mot de passe (sans espace entre le -p et le mot de passe). Attention, ceci montre un mot de passe en texte clair, donc assurez-vous que ce script est visible seulement aux administrateurs.</p>
+<p>SET date=%DATE%<br />
+ECHO ================<br />
+ECHO Sauvegarde auto<br />
+ECHO ================<br />
+C:\program files\ampps\mysql\bin\mysqldump.exe --all-databases &gt; C:\backups_sql\backup_%date%.sql -u root -pmysql<br />
+ECHO Sauvegarde terminee</p>
 <h3 id="appeler-le-script">Appeler le script</h3>
 <p>Maintenant, plus qu’à double cliquer sur le script bat pour qu’il s’exécute.</p>
 <p><img alt="" src="../images/bat_1.png" /></p>
 <h2 id="programmer-la-tache">Programmer la tâche</h2>
 <p>Avec le planificateur de tâche Windows (Task Scheduler), vous pouvez indiquer à Windows de démarrer une tâche à un moment donné.</p>
 <p>Une tâche peut consister à exécuter un script bat par exemple.</p>
-<p>Le planificateur se trouve dans « Outils d’administration Windows » </p>
+<p>Le planificateur se trouve dans « Outils d’administration Windows » dans Windows 10, ou « Outils Windows » dans Windows 11.</p>
 <p><img alt="" src="../images/bat_2.png" /></p>
 
 
