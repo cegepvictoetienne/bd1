@@ -1,8 +1,6 @@
-Établir une stratégie de sauvegarde de la BD
+## Pourquoi faire des sauvegardes (*backups*) d'une BD?
 
-## Pourquoi sauvegarder une BD?
-
-Pouvoir restaurer la BD dans les cas de :
+Afin de pouvoir restaurer la BD en cas de :
 
 * Destruction accidentelle (DROP *)
 * Bris de serveur (usure/Ti-Guy qui a encore échappé son café)
@@ -26,18 +24,22 @@ Présentée comme un standard, la règle du 3-2-1 est la suivante:
 * 2 copies «onsite» (sur le même lieu physique)
 * 1 copie «offsite» (dans un emplacement physique différent)
 
+Cette règle est applicable à tout type de sauvegardes, pas seulement les bases de données
+
 ## Étapes d’une stratégie de sauvegarde
 
-1. Déterminer les données à sauvegarder?
+1. Déterminer les données à sauvegarder
 
-* Qu’est-ce qui est critique?
-    * Grouper par groupe : critique pour survivre, important pour opérer, optimal pour le développement
+* Qu’est-ce qui est critique? On peut grouper ainsi:
+      * critique pour survivre
+      * important pour opérer
+      * optimal pour le développement
 * Qu’est-ce qui est suffisamment important pour investir dans sa sauvegarde?
-    * Dans cette question, évaluez le rapport quantité/coût. Faire une sauvegarde de Facebook (+/- 100 Po) est plus lourd qu’une sauvegarde de Wikipédia (+/- 10TB).
+    * Dans cette question, évaluez le rapport quantité/coût. Faire une sauvegarde de Facebook (+/- 100 Po) est plus lourd qu’une sauvegarde de Wikipédia (+/- 10To).
 
-2. Déterminer la fréquence des sauvegardes?
+2. Déterminer la fréquence des sauvegardes
 
-* Sauvegardes périodiques (quotidienne, hebdomadaire)
+* Sauvegardes périodiques (quotidienne, hebdomadaire, autre?)
     * Quelle quantité de travail on peut se permettre de perdre?
 * Sauvegarde exceptionnelle
     * Quand ces sauvegardes sont-elles requises?
@@ -53,18 +55,18 @@ Présentée comme un standard, la règle du 3-2-1 est la suivante:
 
 4. Tester (régulièrement) et assurer la maintenance
 
-* Ne pas tenter la loi de Murphy/loi de l’emmerdement maximal
-  * La journée que vous avez besoin de restaurer la sauvegarde, il y a intérêt à ce que ça fonctionne
 * Tenez compte des modifications aux structures de données
     * Avec l’évolution du projet, la stratégie de sauvegarde doit évoluer
+* Ne pas tenter [la loi de Murphy](https://fr.wikipedia.org/wiki/Loi_de_Murphy). Le jour où vous aurez besoin de restaurer la BD, il y a intérêt à ce que ça fonctionne.
 
 ## Types de sauvegarde
 
-* Sauvegarde complète
-    * Crée une copie complète de toutes les données
-    * Pour : facile à mettre en place et diminue les risques d’incohérence à la restauration
-    * Contre : demande beaucoup d’espace de stockage, car duplique l’information
-* Sauvegarde différentielle
-    * Crée une copie seulement des changements
-    * Pour : ne duplique pas l’information de sauvegarde
-    * Contre : système de restauration plus complexe qui peut s’effondrer si l’historique est corrompu.
+* Sauvegarde **complète**
+    * Crée une copie complète de toutes les données.
+    * Facile à mettre en place et diminue les risques d’incohérence à la restauration.
+    * Demande toutefois **beaucoup** d’espace de stockage car même l’information qui n'a pas changée.
+
+* Sauvegarde **différentielle**
+    * Crée une copie des éléments qui ont *changés* uniquement.
+    * Sauvegarde plus rapide.
+    * Restauration toutefois plus complexe et qui peut s'effondrer si l'historique est corrompu.

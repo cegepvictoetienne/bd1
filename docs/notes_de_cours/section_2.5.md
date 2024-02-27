@@ -134,6 +134,87 @@ SELECT cours.nom as 'Cours', evaluations.nom_evaluation as 'Titre évaluation' F
 
 ### :material-cog: --- Exercice 2.5.3 ---
 
+Diagramme : 
+
+
+``` mermaid
+erDiagram  
+    
+    enseignants ||--o{ programmes : "responsable"
+    enseignants {
+        NUMERIC(8) code_employe PK
+        VARCHAR(255) nom
+        NUMERIC(9) num_assurance_sociale
+        TINYINT anciennete
+    }
+
+    enseignants ||--o{ cours : "enseigne"
+    cours {
+        INTEGER cours_id PK
+        VARCHAR(255) nom 
+        CHAR(10) sigle 
+        TINYINT duree   "=60"
+        TINYINT nombre_semaine   "=15"
+        NUMERIC(8) enseignant FK
+    }
+
+    groupes ||--|{ cours : ""
+    groupes ||--|{ sessions : ""
+    groupes {
+        INTEGER groupe_id PK
+        INTEGER cours_id FK
+        VARCHAR(4) session_code FK
+        TINYINT numero_groupe
+    }  
+
+    programmes {
+        CHAR(6) code_programme PK
+        VARCHAR(255) nom
+        NUMERIC(8) prof_responsable FK
+    }
+
+    etudiants }o--|| programmes : "est inscrit à"
+    etudiants {
+        NUMERIC(7) code_etudiant PK
+        VARCHAR(255) nom
+        YEAR annee_admission
+        CHAR(6) code_programme FK
+    }
+
+    sessions {
+        VARCHAR(4) session_code PK
+        VARCHAR(255) session_saison
+        DATE date_debut
+        DATE date_fin
+    }
+
+    etudiants ||--o{ inscriptions : ""
+    inscriptions }o--|| groupes : ""
+    inscriptions {
+        NUMERIC(7) code_etudiant PK
+        INTEGER groupe_id PK
+    }
+
+    evaluations }o--|| groupes : ""
+    evaluations {
+        INTEGER evaluation_id PK
+        INTEGER groupe_id FK
+        VARCHAR(255) nom_evaluation
+        NUMERIC(5_2) note_max
+        DATE date_evaluation
+    }
+
+    evaluations_etudiants }o--|| evaluations : ""
+    evaluations_etudiants {
+        NUMERIC(7) code_etudiant PK,FK
+        INTEGER evaluation_id PK,FK
+        DATE date_remise
+        VARCHAR(255) nom_document
+        NUMERIC(5_2) note
+    }
+    
+```
+
 A. Sélectionnez pour le cours de Programmation 2 le nom de tous les documents remis par les étudiants.
 
 B. Trouvez la première année durant laquelle le cours portant le sigle 420-1B2-VI s'est donné.  
@@ -232,7 +313,7 @@ Pour s'assurer que les résultats ne sont pas dupliquer, on doit utiliser le mot
 
 ```mysql
 -- Dans une requête SELECT pour avoir que les valeurs différentes
-SELECT DISTICT colonne
+SELECT DISTINCT colonne
 
 -- Dans la fonction count pour compter le nombre de valeurs distinctes
 count(DISTINCT colonne)
