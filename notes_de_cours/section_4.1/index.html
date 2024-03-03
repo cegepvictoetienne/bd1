@@ -1152,18 +1152,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rappel-des-contraintes" class="md-nav__link">
+  <a href="#rappel-des-contraintes-deja-vues" class="md-nav__link">
     <span class="md-ellipsis">
-      Rappel des contraintes
+      Rappel des contraintes déjà vues
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cascade" class="md-nav__link">
+  <a href="#suppression-en-cascade" class="md-nav__link">
     <span class="md-ellipsis">
-      Cascade
+      Suppression en CASCADE
     </span>
   </a>
   
@@ -1185,9 +1185,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cascade-suite" class="md-nav__link">
+  <a href="#mise-a-jour-en-cascade" class="md-nav__link">
     <span class="md-ellipsis">
-      Cascade (suite)
+      Mise-à-jour en CASCADE
     </span>
   </a>
   
@@ -1239,9 +1239,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#que-peut-contenir-un-check" class="md-nav__link">
+  <a href="#limitations-des-check" class="md-nav__link">
     <span class="md-ellipsis">
-      Que peut contenir un CHECK
+      Limitations des CHECK
     </span>
   </a>
   
@@ -1567,20 +1567,20 @@
 
 <h1 id="integrite-des-donnees">Intégrité des données</h1>
 <h2 id="contraintes-dintegrite">Contraintes d’intégrité</h2>
-<p>Une contrainte d’intégrité est une condition à vérifier sur un enregistrement afin de maintenir son intégrité (qu'elle contienne une valeur qui a un sens). Généralement, une contrainte d’intégrité a pour effet de restreindre les valeurs possibles d’une colonne.</p>
+<p>Une contrainte d’intégrité est une condition à vérifier sur un enregistrement afin qu'elle contienne une valeur qui a un sens. On utilise cela pour LIMITER (contraindre) les valeurs qu'un champs peut prendre. Cela permet donc de maintenir l'intégrité de la table.</p>
 <h3 id="cle-primaire-cle-etrangere-et-valeur-par-defaut">Clé primaire, clé étrangère et valeur par défaut</h3>
-<p>Les contraintes clé primaire, clé étrangère et valeur par défaut ont déjà été couvertes. On a pu voir que certaines sont spécifiées directement dans la déclaration d’une colonne (<strong>DEFAULT</strong>, <strong>PRIMARY KEY</strong>), tandis que d’autres sont spécifiés sur leur ligne à part (<strong>FOREIGN KEY</strong>, <strong>PRIMARY KEY</strong>). Ajouter un enregistrement ne respectant pas la contrainte déclenche une erreur.</p>
-<h3 id="rappel-des-contraintes">Rappel des contraintes</h3>
+<p>Les contraintes de clé primaire, de clé étrangère et de valeur par défaut ont déjà été couvertes. On a pu voir que certaines sont spécifiées directement dans la déclaration d’une colonne (<strong>DEFAULT</strong>, <strong>PRIMARY KEY</strong>), tandis que d’autres sont spécifiés sur leur ligne à part (<strong>FOREIGN KEY</strong>, <strong>PRIMARY KEY</strong>). Ajouter un enregistrement ne respectant pas la contrainte déclenche une erreur.</p>
+<h3 id="rappel-des-contraintes-deja-vues">Rappel des contraintes déjà vues</h3>
 <p>Clé primaire : <strong>PRIMARY KEY</strong>
 Force la valeur à être unique et est utilisé pour trouver rapidement un enregistrement. Permet l’utilisation par une clé étrangère. Une seule clé primaire permise par table.</p>
 <p>Clé étrangère : <strong>FOREIGN KEY</strong>
 Référence un enregistrement d’une autre table. Garanti que l’enregistrement existe.</p>
 <p>Valeur par défaut : <strong>DEFAULT</strong>
 Spécifie la valeur utilisée lorsqu’un enregistrement est créé et qu’aucune valeur n’est spécifiée. Si aucune valeur par défaut n’est indiquée, <strong>NULL</strong> est utilisée par le système.</p>
-<h3 id="cascade">Cascade</h3>
+<h3 id="suppression-en-cascade">Suppression en CASCADE</h3>
 <p>Jusqu’à présent le code suivant provoque une erreur.</p>
 <div class="highlight"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">enseignants</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">code_employe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">code_employe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8765</span><span class="p">;</span>
 </code></pre></div>
 <p>Parce que la table Programme contient une clé étrangère vers Enseignant et qu'elle ne pointerait sur rien si l'enseignant est supprimé.</p>
 <pre class="mermaid"><code>erDiagram  
@@ -1597,21 +1597,18 @@ Spécifie la valeur utilisée lorsqu’un enregistrement est créé et qu’aucu
         VARCHAR(255) nom
         NUMERIC(8) prof_responsable FK
     }</code></pre>
-<p>La stratégie cascade permet de supprimer tous les enregistrements sont référencés, donc qui posent problème.</p>
-<p>Par exemple, ici tous les cours associés aux professeurs seraient également supprimés.</p>
-<div class="highlight"><pre><span></span><code><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">colonne</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Nom_table</span><span class="p">(</span><span class="n">colonne</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
-</code></pre></div>
+<p>La stratégie ON DELETE CASCADE permet de supprimer tous les enregistrements qui sont référencés, donc qui posent problème.</p>
 <h2 id="-exercice-411-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.1 ---</h2>
-<p>À partir du diagramme Ecole.pdf, identifiez les enregistrements de quelles tables seraient supprimés si toutes les clés étrangères utilisent la stratégie Cascade et que l'on supprime une session.</p>
-<h3 id="cascade-suite">Cascade (suite)</h3>
-<p>La mise à jour en cascade permet de modifier la valeur d’une clé primaire et de mettre à jour simultanément toutes les clés étrangères (conserver l’intégrité).</p>
-<p>Utile seulement si la clé primaire n’est pas un identifiant autoincrémenté.</p>
+<p>À partir de la BD école (partez de la BD complète ecole2), identifiez les enregistrements de quelles tables seraient supprimés si toutes les clés étrangères utilisent la stratégie ON DELETE CASCADE, et que l'on supprime une <strong>session</strong>.</p>
+<h3 id="mise-a-jour-en-cascade">Mise-à-jour en CASCADE</h3>
+<p>La <strong>mise à jour</strong> en cascade permet de modifier la valeur d’une clé primaire et de mettre à jour simultanément toutes les clés étrangères (conserver l’intégrité).</p>
+<p>Cela est utile <strong>seulement</strong> si la clé primaire n’est pas un identifiant autoincrémenté.</p>
 <div class="highlight"><pre><span></span><code>FOREIGN KEY (colonne) REFERENCES Nom_table(colonne) ON UPDATE CASCADE
 </code></pre></div>
 <h3 id="cle-unique">Clé unique</h3>
-<p>Une clé unique est une façon de préciser qu’une valeur ou un groupe de valeur sont uniques dans la table.</p>
-<p>La clé primaire est un type particulier de clé unique.</p>
-<p><strong>ATTENTION</strong> : contrairement à une clé primaire, une clé unique peut être nulle et plusieurs enregistrements peuvent être nuls.</p>
+<p>Une clé unique est une façon de préciser qu’une valeur ou un groupe de valeur sont uniques dans la table. Avec une champs qui est unique, on ne peut pas entrer deux fois la même valeur.</p>
+<p>La <strong>clé primaire</strong> est un type particulier de clé unique.</p>
+<p><strong>ATTENTION</strong> : contrairement à une clé primaire, une clé unique peut être nulle et même si c'est unique, plusieurs enregistrements peuvent être nuls.</p>
 <p>Pour indiquer qu’une colonne est unique, on place le mot-clé UNIQUE après le nom de la colonne.</p>
 <p><div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">programmes</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
 <span class="w">    </span><span class="k">code</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
@@ -1648,7 +1645,7 @@ sessions {
         DATE fin_session "not null"   
     }</code></pre>
 <h3 id="nullite">Nullité</h3>
-<p>À l’exception des clés primaires, toutes les colonnes peuvent prendre la valeur nulle.</p>
+<p>Par défaut, à l’exception des clés primaires, toutes les colonnes peuvent prendre la valeur NULL.</p>
 <p>On peut empêcher la présence de valeur nulle dans une colonne en ajoutant <strong>NOT NULL</strong> après le type.</p>
 <p>Pour éviter des étudiants dont le nom est <strong>NULL</strong>, on ajoute
 <strong>| not null</strong> après le type sur le diagramme.</p>
@@ -1660,7 +1657,7 @@ sessions {
 </code></pre></div>
 <pre class="mermaid"><code>erDiagram  
     etudiants {
-        NUMERIC(8) code PK
+        NUMERIC(8) code_etudiant PK
         VARCHAR(255) nom "not null"
         YEAR annee_admission
         DATETIME date_naissance
@@ -1671,7 +1668,7 @@ sessions {
 <p>Modifiez le script de création de la base de données ecole pour inclure les contraintes suivantes :</p>
 <p>A) Deux programmes ne peuvent pas porter le même nom<br />
 B) Chaque programme doit toujours avoir un professeur responsable<br />
-C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22)<br />
+C) Un même numéro de groupe ne peut pas être affecté au même cours à la même session (il y a un seul groupe 1 de BD1 à la session H22).
 D) Si l'on supprime une Évaluation, on veut supprimer toutes les evaluations_etudiants associées.  </p>
 <h3 id="check">Check</h3>
 <p>La contrainte <strong>CHECK</strong> permet de vérifier que les valeurs suivent une certaine condition. On insère cette contrainte directement dans la définition de la table.</p>
@@ -1693,7 +1690,7 @@ D) Si l'on supprime une Évaluation, on veut supprimer toutes les evaluations_et
 <pre class="mermaid"><code>erDiagram  
 evaluations {
         INTEGER evaluation_id PK 
-        INTEGER group FK 
+        INTEGER groupe_id FK 
         VARCHAR(64) titre
         NUMERIC(4_1) ponderation
         DATETIME date_passage 
@@ -1703,7 +1700,7 @@ evaluations {
 <p>A) La note obtenue à une évaluation est positive<br />
 B) L'ancienneté d'un enseignant est entre 0 et 50<br />
 C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # est un entier) : ###-#A#-AA  </p>
-<h3 id="que-peut-contenir-un-check">Que peut contenir un CHECK</h3>
+<h3 id="limitations-des-check">Limitations des <em>CHECK</em></h3>
 <p>Certaines colonnes ne peuvent pas faire l’objet d’un CHECK dont:</p>
 <ul>
 <li>Colonne avec l’attribut AUTO_INCREMENT  </li>
@@ -1711,17 +1708,18 @@ C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # e
 </ul>
 <p>On ne peut pas non plus appeler les éléments suivants dans un CHECK :</p>
 <ul>
-<li>Fonction non native ou procédure stockée</li>
-<li>Variable</li>
-<li>Requête</li>
-<li>Fonction non déterministe comme NOW()</li>
+<li>Fonctions non natives (non incluses à SQL)</li>
+<li>Procédures stockées</li>
+<li>Variables</li>
+<li>Requêtes</li>
+<li>Fonctions non déterministe, tel que <em>NOW()</em></li>
 </ul>
 <p>Finalement, un CHECK peut contenir les éléments suivants :</p>
 <ul>
-<li>Opérateur arithmétique</li>
-<li>Opérateur de comparaison</li>
-<li>Fonction déterministe (count, avg, year, …)</li>
-<li>Comparaison / opération sur plusieurs colonnes d’une même table.</li>
+<li>Opérateurs arithmétiques</li>
+<li>Opérateurs de comparaison</li>
+<li>Fonctions déterministe (count, avg, year, …)</li>
+<li>Comparaisons / opérations sur plusieurs colonnes d’une même table.</li>
 </ul>
 <h3 id="tricher-et-eviter-les-check">Tricher et éviter les CHECK</h3>
 <p>À l’occasion, on peut vouloir insérer une valeur qui ne respecte pas une condition en raison d’un élément spécial.</p>
@@ -1732,14 +1730,13 @@ C) Les sigles des cours sont dans le format suivant (A est lettre majuscule, # e
 </code></pre></div>
 <p>Comme toute vérification, il faut une bonne raison pour l’éviter !</p>
 <h3 id="-exercice-414-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.1.4 ---</h3>
-<p>Implémentez, lorsque possible, les vérifications suivantes. Expliquez pourquoi lorsque vous ne pouvez pas les implémenter.</p>
-<p>A) Le nom des documents remis n'excède pas 64 caractères (fonction CHAR_LENGTH ?)<br />
-B) La note d’un étudiant n’excède jamais la pondération de l'évaluation<br />
-C) La durée d'une session n'excède pas 17 semaines<br />
-D) Pour une évaluation, tous les étudiants reçoivent une note<br />
-E) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)  </p>
+<p>Implémentez, lorsque possible, les vérifications (CHECK) suivantes. Expliquez pourquoi lorsque vous ne pouvez pas les implémenter.</p>
+<p>A) Le nom des documents remis n'excède pas 64 caractères (indice: fonction CHAR_LENGTH)<br />
+B) La durée d'une session n'excède pas 17 semaines<br />
+C) Pour une évaluation, tous les étudiants reçoivent une note<br />
+D) Tous les documents sont remis à la date du jour (si je le dépose le 15 mars, alors la valeur dans date_remise est le 15 mars)  </p>
 <h2 id="ajouter-ou-retirer-des-contraintes">Ajouter ou retirer des contraintes</h2>
-<p>On peut modifier les tables pour ajouter ou supprimer des contraintes</p>
+<p>Dans le cas où on n'a pas défini la contrainte lors de la création de la table, on peut modifier un table pour ajouter (ou supprimer) des contraintes.</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span>
 <span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="n">TYPE_CONTRAINTE</span><span class="w"> </span><span class="p">(</span><span class="n">contrainte</span><span class="p">)</span>
 
