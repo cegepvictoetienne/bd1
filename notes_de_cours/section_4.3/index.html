@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1175,25 +1175,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pourquoi-gerer-les-roles" class="md-nav__link">
+  <a href="#ajouter-un-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
-      Pourquoi gérer les rôles
+      Ajouter un utilisateur
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#crud-des-utilisateurs" class="md-nav__link">
-    <span class="md-ellipsis">
-      CRUD des utilisateurs
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CRUD des utilisateurs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#modifier-un-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
       Modifier un utilisateur
@@ -1201,18 +1191,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#supprimer-un-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
       Supprimer un utilisateur
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1305,15 +1290,6 @@
   <a href="#assigner-un-role-a-un-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
       Assigner un rôle à un utilisateur
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modifier-le-role-affecte-un-utilisateur" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modifier le rôle affecté un utilisateur
     </span>
   </a>
   
@@ -1545,39 +1521,36 @@
 
 
 <h1 id="gestion-des-acces">Gestion des accès</h1>
-<p>CRUD des utilisateurs<br />
-Conférer et révoquer des privilèges<br />
-Créer des rôles  </p>
-<h2 id="pourquoi-gerer-les-roles">Pourquoi gérer les rôles</h2>
-<p>On développe un site web avec les contraintes de sécurité suivantes.</p>
+<p>Depuis le début de la session, nous nous connectons dans MySQL avec l'utilisateur <em>root</em>, ce qui nous donne tous les droits. En règle générale, nous allons plutôt créer des utilisateurs avec moins de droits afin de limiter les accès.</p>
+<p>Par exemple, si on développe un site web, on préfère avoir les contraintes de sécurité suivantes dans MySQL:</p>
 <ul>
-<li>Les programmeurs peuvent modifier des tables, des déclencheurs et des enregistrements. </li>
-<li>L’administrateur de la BD peut ajouter des utilisateurs et accomplir toutes les opérations des développeurs</li>
-<li>Les visiteurs peuvent uniquement ajouter, lire, modifier, ou supprimer des enregistrements.</li>
+<li>Les <strong>visiteurs</strong> du site peuvent uniquement ajouter, lire, modifier, ou supprimer des enregistrements.</li>
+<li>Les <strong>programmeurs</strong> peuvent faire ce que font les visiteurs, en plus de pouvoir modifier des tables et des déclencheurs (à venir dans le cours).</li>
+<li>L’<strong>administrateur de la BD</strong> peut faire ce que font les programmeurs, en plus de pouvoir ajouter des utilisateurs et gérer la sécurité.</li>
 </ul>
 <p>De cette façon, si un mot de passe utilisé dans le site web est volé, l’accès à la BD est limité. </p>
-<h2 id="crud-des-utilisateurs">CRUD des utilisateurs</h2>
+<h2 id="ajouter-un-utilisateur">Ajouter un utilisateur</h2>
 <p>Pour ajouter un nouvel utilisateur, on utilise la syntaxe suivante:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">mot_de_passe</span><span class="p">;</span>
 </code></pre></div>
 <p>Exemple:
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;12345’;</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;12345&#39;</span><span class="p">;</span>
 </code></pre></div></p>
 <p>Il existe toujours un utilisateur de base : root@localhost</p>
-<h3 id="modifier-un-utilisateur">Modifier un utilisateur</h3>
-<p>Pour changer un mot de passe, la requête est:</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">nouveau_mot_de_passe</span><span class="p">;</span>
-</code></pre></div>
-<p>Exemple:
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;54321&#39;</span><span class="p">;</span>
-</code></pre></div></p>
+<h2 id="modifier-un-utilisateur">Modifier un utilisateur</h2>
 <p>Pour renommer un utilisateur, la requête est :</p>
 <div class="highlight"><pre><span></span><code><span class="k">RENAME</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">ancien_nom</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">nouveau_nom</span><span class="p">;</span>
 </code></pre></div>
 <p>Exemple :
 <div class="highlight"><pre><span></span><code><span class="k">RENAME</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">visiteurs</span><span class="p">;</span>
 </code></pre></div></p>
-<h3 id="supprimer-un-utilisateur">Supprimer un utilisateur</h3>
+<p>Pour changer un mot de passe, la requête est:</p>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">nouveau_mot_de_passe</span><span class="p">;</span>
+</code></pre></div>
+<p>Exemple:
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">visiteur</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;54321&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<h2 id="supprimer-un-utilisateur">Supprimer un utilisateur</h2>
 <p>Pour retirer un utilisateur, on utilise la requête:</p>
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="p">;</span>
 </code></pre></div>
@@ -1628,84 +1601,99 @@ Créer des rôles  </p>
 </tbody>
 </table>
 <h3 id="conferer-un-privilege">Conférer un privilège</h3>
-<p>Pour assigner un privilège à un rôle, on utilise une requête GRANT.</p>
+<p>Pour assigner un privilège à un rôle, on utilise une requête GRANT:</p>
 <div class="highlight"><pre><span></span><code>GRANT priviliege1, privilege2 ON [* | table] TO nom_utilisateur;
 </code></pre></div>
-<p>On ajoute le privilège de lecture sur toutes les tables de la base de données ecole aux visiteurs.</p>
-<div class="highlight"><pre><span></span><code><span class="k">USE</span><span class="w"> </span><span class="n">Ecole</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;visiteurs’;</span>
+<p>Ex.: on ajoute ici le privilège de lecture sur toutes les tables de la base de données ecole aux visiteurs:</p>
+<div class="highlight"><pre><span></span><code><span class="k">USE</span><span class="w"> </span><span class="n">ecole</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;visiteurs&#39;</span><span class="p">;</span>
 </code></pre></div>
-<p>Pour ajouter le privilège d’écriture et de modification sur la table Etudiant</p>
+<p>Ex.: on ajoute ici le privilège d’écriture et de modification sur la table etudiants:</p>
 <div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;visiteurs&#39;</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="revoquer-un-privilege">Révoquer un privilège</h3>
-<p>La requête de retrait de privilège est REVOKE.</p>
+<p>La requête de retrait de privilège est REVOKE:</p>
 <div class="highlight"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="n">priviliege1</span><span class="p">,</span><span class="w"> </span><span class="n">privilege2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span>
 <span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_utilisateur</span><span class="p">;</span>
 </code></pre></div>
-<p>Par exemple, on révoque le privilège d’ajout des visiteurs sur la table Etudiant.</p>
-<div class="highlight"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">‘visiteurs’</span><span class="p">;</span>
+<p>Ex.: on révoque ici le privilège d’ajout des visiteurs sur la table etudiants:</p>
+<div class="highlight"><pre><span></span><code><span class="k">REVOKE</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;visiteurs&#39;</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="determiner-lutilisateur-connecte">Déterminer l'utilisateur connecté</h2>
 <p>La fonction USER() retourne l’utilisateur actuellement connecté à la base de données.</p>
 <p>Exemple:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">();</span>
 </code></pre></div></p>
-<div class="highlight"><pre><span></span><code>| USER()         |
-|-|
-| root@localhost |
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>USER()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root@localhost</td>
+</tr>
+</tbody>
+</table>
 <h3 id="-exercice-431-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.3.1 ---</h3>
-<p>Créez un nouvel utilisateur qui possède tous les privilèges.</p>
+<p>Faites un <em>use ecole</em> et créez un nouvel utilisateur nommé <em>toto</em> qui possède tous les privilèges sur votre BD.</p>
 <p>Déconnectez-vous en fermant Workbench et reconnectez-vous avec le nouvel utilisateur.</p>
+<p>Essayez de faire un <em>use PlanetEpxress</em> (quel message d'erreur obtenez-vous?). Essayez maintenant de faire un <em>use ecole</em>.</p>
 <h2 id="les-roles">Les rôles</h2>
-<p>Que faire si on a 8 programmeurs qui ont chacun leur accès distinct (nom et mot de passe), mais qui doivent tous avoir le même niveau de privilège.</p>
-<p>Imaginez qu’on ajoute une table. Doit-on modifier les accès de tous les utilisateurs ?</p>
-<p>Ça serait plus simple d’avoir une structure contenant les privilèges.</p>
-<p><strong>Un rôle est une liste d’accès</strong>. Plutôt que de définir les accès par utilisateur, on peut leur assigner un rôle. </p>
-<p>Donc tous les utilisateurs avec les mêmes privilèges d’accès auront le même rôle. Cela facilite grandement le changement de privilèges.</p>
+<p>Imaginons que nous avons 12 programmeurs qui doivent chacun avoir un nom et un mot de passe, mais qui doivent tous avoir les mêmes privilèges sur les tables.</p>
+<p>Imaginez maintenant que l'on ajoute une table. Doit-on modifier les accès des 12 utilisateurs?</p>
+<p>Ça serait plus simple d’avoir une seule structure contenant les privilèges, et de pouvoir assigner cette structure à nos 12 programmeurs.</p>
+<p><strong>Un rôle est une liste d’accès</strong> qui répond à ce besoin. Plutôt que de définir les accès pour chaque utilisateur, on peut créer un rôle et assigner ce rôle à tous nos programmeurs. Ainsi, si on veut changer l'accès de tous les programmeurs, on pourra changer seulement le rôle.</p>
+<p>Tous les utilisateurs avec les mêmes privilèges ont le même rôle, ce qui facilite grandement le changement de privilèges.</p>
 <h3 id="definir-un-role">Définir un rôle</h3>
-<p>On utilise CREATE ROLE pour créer un nouveau rôle et DROP ROLE pour le supprimer.</p>
-<p>Il n'y a pas de requête pour changer le nom d'un rôle.</p>
+<p>On utilise CREATE ROLE pour créer un nouveau rôle et DROP ROLE pour le supprimer:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
 <span class="k">DROP</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
 </code></pre></div>
+<p>Note: il n'y a pas de requête pour changer le nom d'un rôle.</p>
 <h3 id="conferer-ou-revoquer-un-privilege-a-un-role">Conférer ou révoquer un privilège à un rôle</h3>
-<p>On remplace le nom d’utilisateur dans la requête GRANT ou REVOKE par le nom du rôle.</p>
+<p>Comme précédement, on utilise GRANT ou REVOKE mais on remplace le nom d’utilisateur par le nom du <strong>rôle</strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">privilege</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*|</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
 <span class="k">REVOKE</span><span class="w"> </span><span class="n">privilege</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">[</span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nom</span><span class="w"> </span><span class="k">table</span><span class="err">]</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nom_role</span><span class="p">;</span>
 </code></pre></div>
-<p>Par exemple, on permet au programmeur de créer des tables et des clés étrangères.</p>
+<p>Ex.: ici, on permet au rôle <em>programmeur</em> de créer des tables et des clés étrangères:</p>
 <div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="p">,</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">programmeur</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="assigner-un-role-a-un-utilisateur">Assigner un rôle à un utilisateur</h3>
-<p>On peut affecter un rôle directement à la création</p>
+<p>On peut affecter un rôle directement à la création:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">mot</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">passe</span>
-<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">role1</span><span class="p">,</span><span class="w"> </span><span class="n">role2</span><span class="p">...;</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">role1</span><span class="p">,</span><span class="w"> </span><span class="n">role2</span><span class="p">,</span><span class="w"> </span><span class="p">...;</span>
 </code></pre></div>
 <p>Exemple:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">alice</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;chat&#39;</span>
-<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">programmeur</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">programmeur</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="modifier-le-role-affecte-un-utilisateur">Modifier le rôle affecté un utilisateur</h3>
-<p>On peut modifier les rôles avec</p>
+<p>On peut modifier les rôles avec:</p>
 <div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">role1</span><span class="p">,</span><span class="w"> </span><span class="n">role2</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">utilisateur1</span><span class="p">,</span><span class="w"> </span><span class="n">utilisateur2</span><span class="p">...</span>
 
 <span class="k">REVOKE</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">utilisateur</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="autres-fonctions-utiles-pour-la-gestion-des-roles">Autres fonctions utiles pour la gestion des rôles</h3>
 <p>Afficher l'utilisateur connecté
-<div class="highlight"><pre><span></span><code><span class="k">USER</span><span class="p">()</span><span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">USER</span><span class="p">();</span>
 </code></pre></div></p>
 <p>Afficher tous les rôles de l’utilisateur connecté
-<div class="highlight"><pre><span></span><code><span class="nf">CURRENT_ROLE</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">CURRENT_ROLE</span><span class="p">();</span>
 </code></pre></div></p>
 <p>Afficher les privilèges
-<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">utilisateur</span>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">GRANTS</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">utilisateur</span><span class="p">;</span>
 </code></pre></div></p>
 <h3 id="-exercice-432-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.3.2 ---</h3>
-<p>Créer un rôle enseignant qui peut modifier les tables Évaluation et Évaluation_etudiant ainsi qu’un rôle responsable qui peut changer la table Cours, Inscription, Groupe, Session et Etudiant.</p>
-<p>Ajouter un utilisateur appelé Scott Summers qui est enseignant et Jean Grey qui est enseignante et responsable.</p>
+<ul>
+<li>Créer un <strong>rôle</strong> nommé <em>enseignant</em> qui peut modifier les tables <em>evaluations</em> et <em>evaluations_etudiants</em>.</li>
+<li>
+<p>Créer un <strong>rôle</strong> nommé <em>responsable</em> qui peut modifier les tables <em>cours</em>, <em>inscriptions</em>, <em>groupes</em>, <em>sessions</em> et <em>etudiants</em>.</p>
+</li>
+<li>
+<p>Ajouter un <strong>utilisateur</strong> nommé <em>Scott Summers</em> qui est <em>enseignant</em> et <em>Jean Grey</em> qui est à la fois <em>enseignante</em> et <em>responsable</em>.</p>
+</li>
+</ul>
 
 
 
@@ -1755,7 +1743,7 @@ Créer des rôles  </p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
         <script src="../../javascript/alltarget.js"></script>
       

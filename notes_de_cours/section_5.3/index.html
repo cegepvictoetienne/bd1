@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1664,16 +1664,16 @@
 </ul>
 <p>On inscrit des variables dans les paramètres OUT pour récupérer les valeurs. Si la variable contient déjà une valeur, il n'est pas possible de la récupérer dans la procédure.</p>
 <h3 id="exemple">Exemple</h3>
-<p><div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
+<div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">somme</span><span class="w"> </span><span class="p">(</span><span class="k">IN</span><span class="w"> </span><span class="n">_operande1</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">_operande2</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="k">OUT</span><span class="w"> </span><span class="n">_resultat</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span>
 <span class="k">BEGIN</span><span class="w">   </span>
 <span class="w">  </span><span class="k">SET</span><span class="w"> </span><span class="n">_resultat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_operande1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_operande2</span><span class="p">;</span>
 <span class="k">END</span><span class="w"> </span><span class="err">$$</span>
 <span class="k">DELIMITER</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
 </code></pre></div>
-On remarque ici :
-- L'absence d'instruction RETURN (interdit dans une procédure)
-- L'utilisation du OUT pour résultat</p>
+<p>On remarque ici :<br />
+- L'absence d'instruction RETURN (interdit dans une procédure)<br />
+- L'utilisation du OUT pour résultat  </p>
 <h3 id="invocation-de-procedure">Invocation de procédure</h3>
 <div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">resultat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">            </span><span class="c1">-- Déclaration d&#39;une variable</span>
 <span class="k">CALL</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">resultat</span><span class="p">);</span><span class="w">  </span><span class="c1">-- Invocation</span>
@@ -1960,7 +1960,7 @@ où _code et _message sont des variables locales</p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
         <script src="../../javascript/alltarget.js"></script>
       

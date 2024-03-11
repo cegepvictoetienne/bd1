@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fonctions-et-declancheurs" class="md-skip">
+        <a href="#fonctions-et-declencheurs" class="md-skip">
           Aller au contenu
         </a>
       
@@ -1326,9 +1326,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exemple-de-fonction" class="md-nav__link">
+  <a href="#exemple-de-fonction-deterministe" class="md-nav__link">
     <span class="md-ellipsis">
-      Exemple de fonction
+      Exemple de fonction déterministe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-de-fonction-non-deterministe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple de fonction non déterministe
     </span>
   </a>
   
@@ -1344,7 +1353,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exemple-de-fonction_1" class="md-nav__link">
+  <a href="#exemple-de-fonction" class="md-nav__link">
     <span class="md-ellipsis">
       Exemple de fonction
     </span>
@@ -1637,7 +1646,7 @@
   
 
 
-<h1 id="fonctions-et-declancheurs">Fonctions et déclancheurs</h1>
+<h1 id="fonctions-et-declencheurs">Fonctions et déclencheurs</h1>
 <h2 id="fonctions">Fonctions</h2>
 <p>Qu'est-ce qu'une fonction ?</p>
 <ul>
@@ -1650,29 +1659,29 @@
 <h3 id="types-de-fonction">Types de fonction</h3>
 <p>Plusieurs types de caractéristiques de fonctions existent dans MySQL. On en distingue principalement 2 :</p>
 <ul>
-<li>Caractère déterministe</li>
-<li>Contenu de la fonction (Type de requête qu'elle contient)</li>
+<li>Caractère déterministe  </li>
+<li>Contenu de la fonction (Type de requête qu'elle contient)  </li>
 </ul>
 <h3 id="caractere-deterministe">Caractère déterministe</h3>
 <p>Indique si la valeur de retour est déterminée seulement selon les paramètres ou non.</p>
 <p>2 valeurs possibles :</p>
 <ul>
-<li>DETERMINISTIC</li>
-<li>NOT DETERMINISTIC (NOW, RAND...)</li>
+<li>DETERMINISTIC  </li>
+<li>NOT DETERMINISTIC (NOW, RAND...)  </li>
 </ul>
 <h3 id="contenu">Contenu</h3>
 <p>4 valeurs représentent le contenu d’une fonction :</p>
-<p><strong>NO SQL</strong> : ne contient pas d’instruction SQL
-<strong>CONTAINS SQL</strong> : contient des instructions SQL
-<strong>READS SQL DATA</strong> : contient une opération SELECT
-<strong>MODIFIES SQL DATA</strong> : contient une opération <em>INSERT</em>, <em>UPDATE</em> ou <em>DELETE</em></p>
+<p><strong>NO SQL</strong> : ne contient pas d’instruction SQL<br />
+<strong>CONTAINS SQL</strong> : contient des instructions SQL<br />
+<strong>READS SQL DATA</strong> : contient une opération <em>SELECT</em><br />
+<strong>MODIFIES SQL DATA</strong> : contient une opération <em>INSERT</em>, <em>UPDATE</em> ou <em>DELETE</em>  </p>
 <p>On indique toujours une seule caractéristique de contenu. (<em>MODIFIES</em> implique <em>READS</em>). </p>
 <h3 id="exigence-minimale">Exigence minimale</h3>
 <p>Dans vos fonctions, vous devez préciser explicitement au moins une caractéristique de déterministe ou de contenu.</p>
 <p><strong>Pour le cours, il faut préciser les deux caractéristiques en tout temps</strong></p>
-<p><em>Par défaut</em> :
-Déterminisme : <strong>NOT DETERMINISTIC</strong>
-Valeur : <strong>CONTAINS SQL</strong></p>
+<p><em>Par défaut</em> :<br />
+Déterminisme : <strong>NOT DETERMINISTIC</strong><br />
+Valeur : <strong>CONTAINS SQL</strong>  </p>
 <p>Vous pouvez en préciser une de chaque type.</p>
 <h3 id="cas-des-fonctions-non-deterministe">Cas des fonctions non déterministe</h3>
 <p><em>ERREUR 1418</em> : This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you <em>might</em> want to use the less safe log_bin_trust_function_creators variable).</p>
@@ -1691,8 +1700,22 @@ Valeur : <strong>CONTAINS SQL</strong></p>
 
 <span class="k">DELIMITER</span><span class="w"> </span><span class="p">;</span>
 </code></pre></div>
-<h3 id="exemple-de-fonction">Exemple de fonction</h3>
-<p>Fonction qui retourne le nombre d’enregistrements de la table Étudiant.</p>
+<h3 id="exemple-de-fonction-deterministe">Exemple de fonction déterministe</h3>
+<p>Fonction qui retourne le produit de deux entiers.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">multiplier</span><span class="p">(</span><span class="n">_val1</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">_val2</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">DETERMINISTIC</span><span class="w"> </span><span class="k">NO</span><span class="w"> </span><span class="k">SQL</span>
+<span class="k">BEGIN</span><span class="w">   </span>
+<span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="n">_val1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_val2</span><span class="p">;</span>
+<span class="k">END</span><span class="w"> </span><span class="err">$$</span>
+
+<span class="k">DELIMITER</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+Pour exécuter la fonction</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">multiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="exemple-de-fonction-non-deterministe">Exemple de fonction non déterministe</h3>
+<p>Fonction qui retourne le nombre d’enregistrements de la table <strong>etudiants</strong>.</p>
 <div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">nombre_etudiants</span><span class="p">()</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">DETERMINISTIC</span><span class="w"> </span><span class="k">READS</span><span class="w"> </span><span class="k">SQL</span><span class="w"> </span><span class="k">DATA</span>
@@ -1711,7 +1734,7 @@ Valeur : <strong>CONTAINS SQL</strong></p>
 <p>On précise les paramètres entre les parenthèses en utilisant la syntaxe 
 <div class="highlight"><pre><span></span><code>nom_parametre TYPE
 </code></pre></div></p>
-<h3 id="exemple-de-fonction_1">Exemple de fonction</h3>
+<h3 id="exemple-de-fonction">Exemple de fonction</h3>
 <p>La fonction ajoute 1 à son argument.</p>
 <div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
 
@@ -1777,14 +1800,13 @@ Valeur : <strong>CONTAINS SQL</strong></p>
 <p>Comment résoudre les situations suivantes :</p>
 <ul>
 <li>Si l’on essaie d’ajouter une note plus grande que la note maximale d’évaluation, alors on affecte la note maximale</li>
-<li>Après la création d'une Evaluation, on crée un ligne de EvaluationEtudiant pour chaque étudiant du groupe</li>
-<li>Si l'on supprime une EvaluationEtudiant, alors on supprime le document associé (sens inverse du ON CASCADE) </li>
+<li>Après la création d'une Evaluation, on crée un ligne de Evaluation_Etudiant pour chaque étudiant du groupe</li>
 </ul>
 <p>Un déclencheur (appelé communément <em>Trigger</em>) permet d’effectuer un traitement immédiatement avant ou après l'une de ces opérations :</p>
 <ul>
-<li>INSERT </li>
-<li>UPDATE</li>
-<li>DELETE</li>
+<li>INSERT  </li>
+<li>UPDATE  </li>
+<li>DELETE  </li>
 </ul>
 <h3 id="syntaxe-des-declencheurs">Syntaxe des déclencheurs</h3>
 <div class="highlight"><pre><span></span><code><span class="k">DELIMITER</span><span class="w"> </span><span class="err">$$</span>
@@ -1857,18 +1879,18 @@ Quand on veut s’assurer que la donnée soit bien insérée avant de faire le t
  */
 </code></pre></div>
 <h3 id="demonstration">Démonstration</h3>
-<p>Si la date de passation d'une nouvelle évaluation est hors de la durée de la session, alors on lui affecte la valeur nulle.</p>
+<p>Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée de la session, alors on lui affecte la valeur nulle.</p>
 <h3 id="-exercice-522-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 5.2.2 ---</h3>
 <p>Ajoutez les déclencheurs permettant d'effectuer les traitements suivants</p>
 <p>A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable)<br />
-B. À la suppression d'une EvaluationEtudiant, alors on supprime le document associé (sens inverse du ON CASCADE) </p>
+B. Après la création d'une évaluation, on crée une ligne de evaluations_etudiants pour chaque étudiant du groupe avec la date de remise à null et le nom du document à null.</p>
 <h2 id="conflits-et-limitations-des-declencheurs-et-des-fonctions">Conflits et limitations des déclencheurs et des fonctions</h2>
 <p>Les cas de figure suivant sont interdits :</p>
 <ul>
-<li>Une fonction ne peut pas s'appeler elle-même</li>
-<li>Un déclencheur ne peut pas être appelé sur une table en modification par un déclencheur</li>
+<li>Une fonction ne peut pas s'appeler elle-même  </li>
+<li>Un déclencheur ne peut pas être appelé sur une table en modification par un déclencheur  </li>
 </ul>
-<p>Un déclencheur peut appeler une fonction et l'exécution d'une fonction pourrait activer un déclencheur.</p>
+<p>Un déclencheur peut appeler une fonction et l'exécution d'une fonction pourrait activer un déclencheur.  </p>
 <p><strong>Les appels implicits sont aussi interdits !</strong></p>
 <h3 id="exemple-de-schemas-dexecution-a-probleme">Exemple de schémas d'exécution à problème</h3>
 <p><img alt="" src="../images/5_fct_trigger.png" /></p>
@@ -1881,7 +1903,7 @@ B. À la suppression d'une EvaluationEtudiant, alors on supprime le document ass
 </ol>
 <p>Donc une table peut définir jusqu'à 6 déclencheurs.</p>
 <h3 id="demonstration_1">Démonstration</h3>
-<p>Si la date de passation d'une évaluation est hors de la durée de la session, alors on lui affecte la valeur nulle.</p>
+<p>Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée de la session, alors on lui affecte la valeur nulle.</p>
 <p>Gérez cette validation pour l'insertion et la modification.</p>
 <h3 id="-exercice-523-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 5.2.3 ---</h3>
 <p>C. Si l'évaluation ajoutée cause la somme des pondérations du cours à excéder 100%, alors la pondération devient 0. Gérez cette validation lors de l'ajout et de la modification.</p>
@@ -1908,7 +1930,7 @@ B. À la suppression d'une EvaluationEtudiant, alors on supprime le document ass
 <td>Mot-clé du langage</td>
 </tr>
 <tr>
-<td style="text-align: center;">Italique</td>
+<td style="text-align: center;"><em>Italique</em></td>
 <td>Terme définit plus loin</td>
 </tr>
 <tr>
@@ -1972,7 +1994,7 @@ B. À la suppression d'une EvaluationEtudiant, alors on supprime le document ass
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
         <script src="../../javascript/alltarget.js"></script>
       

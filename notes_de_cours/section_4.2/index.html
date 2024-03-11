@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1154,9 +1154,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cryptage-et-hashage" class="md-nav__link">
+  <a href="#hashage-et-cryptage" class="md-nav__link">
     <span class="md-ellipsis">
-      Cryptage et hashage
+      Hashage et Cryptage
     </span>
   </a>
   
@@ -1173,9 +1173,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sha2" class="md-nav__link">
+  <a href="#fonction-sha2" class="md-nav__link">
     <span class="md-ellipsis">
-      SHA2
+      Fonction SHA2
     </span>
   </a>
   
@@ -1200,9 +1200,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fonction-de-sha256" class="md-nav__link">
+  <a href="#le-sha256-en-details" class="md-nav__link">
     <span class="md-ellipsis">
-      Fonction de SHA256
+      Le SHA256 en détails
     </span>
   </a>
   
@@ -1283,8 +1283,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cryptage-de-la-bd-au-complet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cryptage de la BD au complet
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-exercice-421-" class="md-nav__link">
+    <span class="md-ellipsis">
+       --- Exercice 4.2.1 ---
+    </span>
+  </a>
   
 </li>
       
@@ -1512,20 +1530,17 @@
 
 
 <h1 id="confidentialite-des-donnees">Confidentialité des données</h1>
-<p>Cryptage et hashage
-Cryptage à clé symétrique
-Cryptage de la BD</p>
-<h2 id="cryptage-et-hashage">Cryptage et hashage</h2>
-<p>Il est très souvent nécessaire d'assurer la confidentialité des données. Ainsi, un administrateur de BDD ne peut pas voir les informations de certains champs ou tables.</p>
+<h2 id="hashage-et-cryptage">Hashage et Cryptage</h2>
+<p>Il est très souvent nécessaire d'assurer la confidentialité des données dans un BD afin que les administrateurs d'une base de données ne puisse en aucun cas voir les informations de certains champs ou tables (ex.: mots de passe).</p>
 <p>Quelle est la distinction entre le cryptage et le hashage?</p>
-<p><strong>Cryptage</strong> : transformation des données à l’aide d’une donnée secrète appelée clé</p>
-<p><strong>Hashage</strong> : transformation <em>non inversible</em> à l’aide d’un algorithme</p>
-<p>Doc : https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html</p>
+<p><strong>Hashage</strong> : transformation <em>non inversible</em> à l’aide d’un algorithme.</p>
+<p><strong>Cryptage</strong> : transformation des données à l’aide d’une donnée secrète appelée <strong>clé</strong>. Aussi appelé <em>chiffrement</em>.</p>
+<p>Doc : <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html">https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html</a></p>
 <h2 id="hashage">Hashage</h2>
 <p>Une fonction de hashage accepte généralement une seule chaîne en entrée et retourne une valeur correspondant à l’entrée (appelé <em>hash</em>).</p>
 <p>La fonction peut produire un <em>hash</em> unique pour chaque entrée (fonction injective) ou permettre à plusieurs entrées de partager le même <em>hash</em>. Le deuxième cas est celui le plus rencontré.</p>
-<p>Il faut évidemment évaluer le risque de collision de <em>hash</em> (partage de valeur). Pour le <em>hash</em> de Git, ce risque est estimé à environ $1 times 10^{-48}$, soit de tirer au hasard un atome sur la Terre. </p>
-<p>Les fonctions utilisables par MySQL (et d'autres langages) sont</p>
+<p>Il existe un risque de <em>collision</em> (deux valeurs de <em>hash</em> qui par hasard seraient identiques pour la même chaîne de caractères). Exemple: pour le <em>hash</em> de Git, ce risque est estimé à environ 10^48, soit moins de chance de tirer au hasard deux fois le même atome parmis tous les atomes qui composent la Terre.</p>
+<p>Les fonctions utilisables par MySQL (et d'autres langages) sont:</p>
 <table>
 <thead>
 <tr>
@@ -1553,7 +1568,7 @@ Cryptage de la BD</p>
 </tbody>
 </table>
 <p>Elles retournent toutes un hash en hexadécimal. On peut le convertir en binaire en utilisant la fonction <strong>UNHEX</strong>().</p>
-<h3 id="sha2">SHA2</h3>
+<h3 id="fonction-sha2">Fonction SHA2</h3>
 <p>La fonction SHA2 permet d’utiliser divers algorithmes. Les algorithmes sont SHA-224, SHA-256, SHA-384 et SHA-512.</p>
 <p>L’algorithme retourne un nombre de bits égal au nombre après le SHA (par exemple SHA-256 retourne un nombre binaire de 256 bits).</p>
 <p>Le standard est d’utiliser au moins 256 bits. On voit souvent 256 et 512 être utilisés.</p>
@@ -1582,22 +1597,23 @@ Cryptage de la BD</p>
 </ul>
 <p>Désavantage :</p>
 <ul>
-<li>Impossible d’avoir accès à la donnée originale</li>
+<li>Impossible d’avoir accès à la donnée originale (on peut seulement vérifier qu'une entrée est bonne ou mauvaise).</li>
 </ul>
 <h3 id="quand-utiliser-le-hashage">Quand utiliser le hashage?</h3>
 <ul>
 <li>Pour les données que nous n’avons pas besoin de consulter</li>
 <li>Vérification d’intégrité de fichier ou de transport (checksum) </li>
 </ul>
-<h3 id="fonction-de-sha256">Fonction de SHA256</h3>
-<p>https://qvault.io/cryptography/how-sha-2-works-step-by-step-sha-256/#:~:text=SHA%2D2%20is%20an%20algorithm,is%20the%20output%20size%2C%20256.</p>
+<h3 id="le-sha256-en-details">Le SHA256 en détails</h3>
+<p>Fonctionnement: <a href="https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm">https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm</a>.</p>
+<p><em>En résumé</em>:</p>
 <ol>
-<li>Convertir en binaire</li>
-<li>Ajouter un 1</li>
-<li>Allonger avec des 0 à la fin pour obtenir un multiple de 512 moins 64 bits</li>
-<li>Ajouter la longueur de l'entrée originale en binaire sur 64 bits.</li>
+<li>Convertion de la chaine en binaire</li>
+<li>Ajout d'un 1 à la fin.</li>
+<li>Allongement avec des 0 à la fin jusqu'à un multiple de 512 moins 64 bits</li>
+<li>Ajout de la longueur de l'entrée originale en binaire sur 64 bits.</li>
 </ol>
-<p><strong>Exemple</strong></p>
+<p><em>Exemple</em>:</p>
 <ol>
 <li>Allo -&gt; <strong>01100001 01101100 01101100 01101111</strong></li>
 <li>01100001 01101100 01101100 01101111 <strong>1</strong></li>
@@ -1619,7 +1635,7 @@ Cryptage de la BD</p>
    <strong>00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000100</strong></li>
 <li>Initialisation des 8 constantes de hash qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines des 8 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19)</li>
 </ol>
-<p><strong>Exemple</strong></p>
+<p><em>Exemple avec la racine de 2</em></p>
 <p>Racine de 2 = 1.41421356237
 Partie fractionnaire = 41421356237
 En binaire = 1101010000010011110011001100111</p>
@@ -1631,10 +1647,9 @@ En binaire = 1101010000010011110011001100111</p>
 </ol>
 <h2 id="cryptage">Cryptage</h2>
 <p>Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».</p>
-<p>Texte clair + clé 🡺 texte crypté
-Texte crypté + clé 🡺 texte clair </p>
+<p>Texte clair + clé =&gt; texte crypté<br />
+Texte crypté + clé =&gt; texte clair </p>
 <p>On appelle cryptage à clé symétrique lorsque la clé servant à crypter et à décrypter est la même.</p>
-<p>Voir Illustration - Hashage et cryptage </p>
 <h3 id="securite-du-cryptage-symetrique">Sécurité du cryptage symétrique</h3>
 <p>La sécurité d’un cryptage à clé symétrique repose sur 2 facteurs :</p>
 <ul>
@@ -1644,14 +1659,14 @@ Texte crypté + clé 🡺 texte clair </p>
 <h3 id="algorithme-aes">Algorithme AES</h3>
 <p>Le Advance Encryption Standard (AES) est la méthode de cryptage symétrique la plus utilisée aujourd’hui.</p>
 <p>Les données sont cryptées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.</p>
-<p>Il effectue plusieurs étapes de permutation / substitution</p>
+<p>Il effectue plusieurs étapes de permutation / substitution.</p>
 <h3 id="crypter-avec-mysql">Crypter avec MySQL</h3>
 <p>Pour crypter, on utilise la fonction <strong>AES_ENCRYPT</strong>. Son premier argument est le texte à crypter et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.</p>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">carte_credit</span><span class="p">)</span>
 <span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">AES_ENCRYPT</span><span class="p">(</span><span class="s1">&#39;1234123412341234&#39;</span><span class="p">,</span><span class="w">  </span>
 <span class="w">  </span><span class="nf">UNHEX</span><span class="p">(</span><span class="s1">&#39;F3229A0B371ED2D9441B830D21A390C3&#39;</span><span class="p">)));</span>
 </code></pre></div>
-<p>On place le résultat dans un BLOB.</p>
+<p>On place le résultat dans un champs de type <strong>BLOB</strong>.</p>
 <h4 id="fonction-unhex">Fonction UNHEX</h4>
 <p>La fonction <strong>UNHEX</strong> convertit une chaîne de valeurs hexadécimale en sa représentation sous forme de chaîne de caractères.</p>
 <table>
@@ -1693,7 +1708,6 @@ Texte crypté + clé 🡺 texte clair </p>
 <ul>
 <li>On peut hasher la phrase secrète pour obtenir une chaîne de la bonne longueur !</li>
 </ul>
-<h1 id="phrase-secrete_1">Phrase secrète</h1>
 <div class="highlight"><pre><span></span><code><span class="c1"># Insertion</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">carte_credit</span><span class="p">)</span><span class="w"> </span>
 <span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">AES_ENCRYPT</span><span class="p">(</span><span class="s1">&#39;1234123412341234&#39;</span><span class="p">,</span>
@@ -1704,22 +1718,31 @@ Texte crypté + clé 🡺 texte clair </p>
 <span class="w">  </span><span class="nf">CAST</span><span class="p">(</span><span class="nf">AES_DECRYPT</span><span class="p">(</span><span class="n">carte_credit</span><span class="p">,</span><span class="w"> </span><span class="nf">UNHEX</span><span class="p">(</span><span class="nf">SHA2</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">)))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s1">&#39;Carte credit&#39;</span>
 <span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">Utilisateur</span><span class="p">;</span>
 </code></pre></div>
-<h1 id="cryptage-de-la-bd">Cryptage de la BD</h1>
-<p>L’engin de stockage de données InnoDB permet de crypter l’ensemble d’une table ou de la BD. Via un plug-in.</p>
-<p>Ces manipulations ne sont pas vues en classe.</p>
-<p>https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html</p>
-<h3 id="-exercice-421-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.2.1 ---</h3>
-<p>On crée la table de renseignements personnels suivant :</p>
-<ol>
+<h3 id="cryptage-de-la-bd-au-complet">Cryptage de la BD au complet</h3>
+<p>L’engin de stockage de données <em>InnoDB</em> permet de crypter une table ou la BD au complet via un logiciel enfichable (<em>plug-in</em>).</p>
+<p><strong>Ces manipulations ainsi que InnoDB ne sont pas vues en classe</strong>.</p>
+<p>Plus d'informations: <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html">https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html</a></p>
+<h2 id="-exercice-421-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg></span> --- Exercice 4.2.1 ---</h2>
+<p>On crée la table de renseignements_personnels avec les champs suivant:</p>
+<ul>
 <li>Nom</li>
 <li>Mot de passe</li>
 <li>Le contenu du certificat de naissance</li>
 <li>Une chaîne authentifiant le contenu du certificat de naissance</li>
 <li>Numéro de compte en banque</li>
-<li>Date de naissance</li>
+<li>
+<p>Date de naissance</p>
+<ol>
+<li>
+<p>Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.</p>
+</li>
+<li>
+<p>Affichez ces informations.</p>
+</li>
 </ol>
-<p>Ajoutez les informations d’une personne fictive en cryptant ou hashant les données selon la situation.</p>
-<p>Affichez ensuite ces informations</p>
+</li>
+</ul>
+<p>Pour cet exercice, il est grandement suggéré de créer réèllement la table dans une BD de votre choix afin de tester votre requête.</p>
 
 
 
@@ -1769,7 +1792,7 @@ Texte crypté + clé 🡺 texte clair </p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
         <script src="../../javascript/alltarget.js"></script>
       
