@@ -1,4 +1,4 @@
-# Fonctions et déclancheurs
+# Fonctions et déclencheurs
 
 ## Fonctions
 
@@ -14,8 +14,8 @@ Particularité en SQL :
 
 Plusieurs types de caractéristiques de fonctions existent dans MySQL. On en distingue principalement 2 :
 
-- Caractère déterministe
-- Contenu de la fonction (Type de requête qu'elle contient)
+- Caractère déterministe  
+- Contenu de la fonction (Type de requête qu'elle contient)  
 
 ### Caractère déterministe
 
@@ -23,17 +23,17 @@ Indique si la valeur de retour est déterminée seulement selon les paramètres 
 
 2 valeurs possibles :
 
-- DETERMINISTIC
-- NOT DETERMINISTIC (NOW, RAND...)
+- DETERMINISTIC  
+- NOT DETERMINISTIC (NOW, RAND...)  
 
 ### Contenu
 
 4 valeurs représentent le contenu d’une fonction :
 
-**NO SQL** : ne contient pas d’instruction SQL
-**CONTAINS SQL** : contient des instructions SQL
-**READS SQL DATA** : contient une opération SELECT
-**MODIFIES SQL DATA** : contient une opération *INSERT*, *UPDATE* ou *DELETE*
+**NO SQL** : ne contient pas d’instruction SQL  
+**CONTAINS SQL** : contient des instructions SQL  
+**READS SQL DATA** : contient une opération *SELECT*  
+**MODIFIES SQL DATA** : contient une opération *INSERT*, *UPDATE* ou *DELETE*  
 
 On indique toujours une seule caractéristique de contenu. (*MODIFIES* implique *READS*). 
 
@@ -43,9 +43,9 @@ Dans vos fonctions, vous devez préciser explicitement au moins une caractérist
 
 **Pour le cours, il faut préciser les deux caractéristiques en tout temps**
 
-*Par défaut* :
-Déterminisme : **NOT DETERMINISTIC**
-Valeur : **CONTAINS SQL**
+*Par défaut* :  
+Déterminisme : **NOT DETERMINISTIC**  
+Valeur : **CONTAINS SQL**  
 
 Vous pouvez en préciser une de chaque type.
 
@@ -75,9 +75,29 @@ END $$
 DELIMITER ;
 ```
 
-### Exemple de fonction
+### Exemple de fonction déterministe
 
-Fonction qui retourne le nombre d’enregistrements de la table Étudiant.
+Fonction qui retourne le produit de deux entiers.
+
+```sql
+DELIMITER $$
+
+CREATE FUNCTION multiplier(_val1 INT, _val2 INT) RETURNS INT DETERMINISTIC NO SQL
+BEGIN   
+  RETURN _val1 * _val2;
+END $$
+
+DELIMITER ;
+```
+Pour exécuter la fonction
+
+```sql
+SELECT multiplier(2, 3);
+```
+
+### Exemple de fonction non déterministe
+
+Fonction qui retourne le nombre d’enregistrements de la table **etudiants**.
 
 ```sql
 DELIMITER $$
@@ -171,14 +191,13 @@ Effectuez cet exerice de deux façons : sans utiliser de jointure et en utilisan
 Comment résoudre les situations suivantes :
 
 - Si l’on essaie d’ajouter une note plus grande que la note maximale d’évaluation, alors on affecte la note maximale
-- Après la création d'une Evaluation, on crée un ligne de EvaluationEtudiant pour chaque étudiant du groupe
-- Si l'on supprime une EvaluationEtudiant, alors on supprime le document associé (sens inverse du ON CASCADE) 
+- Après la création d'une Evaluation, on crée un ligne de Evaluation_Etudiant pour chaque étudiant du groupe
 
 Un déclencheur (appelé communément *Trigger*) permet d’effectuer un traitement immédiatement avant ou après l'une de ces opérations :
 
-- INSERT 
-- UPDATE
-- DELETE
+- INSERT  
+- UPDATE  
+- DELETE  
 
 ### Syntaxe des déclencheurs
 
@@ -248,24 +267,24 @@ Pour documenter un déclencheur, on utilise un commentaire de style JavaDOC
 
 ### Démonstration
 
-Si la date de passation d'une nouvelle évaluation est hors de la durée de la session, alors on lui affecte la valeur nulle.
+Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée de la session, alors on lui affecte la valeur nulle.
 
 ### :material-cog: --- Exercice 5.2.2 ---
 
 Ajoutez les déclencheurs permettant d'effectuer les traitements suivants
 
 A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable)  
-B. À la suppression d'une EvaluationEtudiant, alors on supprime le document associé (sens inverse du ON CASCADE) 
+B. Après la création d'une évaluation, on crée une ligne de evaluations_etudiants pour chaque étudiant du groupe avec la date de remise à null et le nom du document à null.
 
 
 ## Conflits et limitations des déclencheurs et des fonctions
 
 Les cas de figure suivant sont interdits :
 
-- Une fonction ne peut pas s'appeler elle-même
-- Un déclencheur ne peut pas être appelé sur une table en modification par un déclencheur
+- Une fonction ne peut pas s'appeler elle-même  
+- Un déclencheur ne peut pas être appelé sur une table en modification par un déclencheur  
 
-Un déclencheur peut appeler une fonction et l'exécution d'une fonction pourrait activer un déclencheur.
+Un déclencheur peut appeler une fonction et l'exécution d'une fonction pourrait activer un déclencheur.  
 
 **Les appels implicits sont aussi interdits !**
 
@@ -285,7 +304,7 @@ Donc une table peut définir jusqu'à 6 déclencheurs.
 
 ### Démonstration
 
-Si la date de passation d'une évaluation est hors de la durée de la session, alors on lui affecte la valeur nulle.
+Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée de la session, alors on lui affecte la valeur nulle.
 
 Gérez cette validation pour l'insertion et la modification.
 
@@ -302,7 +321,7 @@ C. Si l'évaluation ajoutée cause la somme des pondérations du cours à excéd
 |[ ] |	Indique un élément optionnel |
 |…	| Ellipse (permet de répéter un élément) |
 |MAJUSCULES |	Mot-clé du langage |
-|Italique |	Terme définit plus loin |
+|*Italique* |	Terme définit plus loin |
 |\| |	OU |
 |{ } |	Un dans la liste est obligatoire |
 

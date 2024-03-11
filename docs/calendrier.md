@@ -21,20 +21,18 @@ th {background-color: #28B463;}
 | 7   | 13    | 28 févr |           |Examen sommatif requêtes                             |                              |                    |            |
 |     | 14    | 01 mars | 3.1 à 3.3 | Sauvegardes et automatisation                | Sauvegarder/restaurer une BD |                          |   |
 | 8   | 15    | 13 mars | 4.1       | Contraintes intégrités                       | Confidentialité et cohérence | Atelier 8                   |            |
-|     | 16    | 15 mars | 4.2       | Cryptage et sécurité                         |     {++**TP à remettre cours 26**++}                            |                             | Atelier 8  |
+|     | 16    | 15 mars | 4.2       | Cryptage et sécurité                         |     **TP à remettre cours 26**                           |                             | Atelier 8  |
 | 9   | 17    | 22-mars | 4.3       | Gestion des accès                            |                              |                             |            |
 |     | 18    | 27 mars |           | Temps travail                                |                              |                             |            |
-| 10  | 19    | 03 avr  | 5.1       | Variables, conditionnelles et boucles        | Traitements automatisés      |                             |            |
-|     | 20    | 05 avr  | 5.2       | Déclencheurs                                 |                              |                             |            |
-| 11  | 21    | 10 avr  | 5.2       | Atelier déclencheurs                         |                              | Atelier 9                 |         |
+| 10  | 19    | 03 avr  | 5.1, 5.2       | Variables, conditionnelles et boucles <br/>Fonctions       | Traitements automatisés      | Atelier 9
+|     | 20    | 05 avr  |       | Ateliers fonctions                           |                              |                  |            |                            |            |
+| 11  | 21    | 10 avr  | 5.2       | Déclencheurs                         |                              | Atelier 10                 |  Atelier 9       |
 |     | 22    | 12 avr  |           | Atelier déclencheurs                         |                              |                             |            |
-| 12  | 23    | 17 avr  | 5.3       | Procedure, transactions et gestion d'erreurs |                              |                             | Atelier 9 |
-|     | 24    | 22 avr  | 5.3       | Ateliers procédures                          |                              | Atelier 10                  |            |
+| 12  | 23    | 17 avr  | 5.3       | Procedure, transactions et gestion d'erreurs |                              |                             | Atelier 10 |
+|     | 24    | 22 avr  | 5.3       | Ateliers procédures                          |                              | Atelier 11                  |            |
 | 13  | 25    | 24 avr  |           | Ateliers procédures                          |                              |                             |            |
-|     | 26    | 26 avr  | 5.2       | Fonctions                                    |                              |                             | **TP** <br/>Atelier 10 |
-| 14  | 27    | 01 mai  | 5.2       | Ateliers fonctions                           |                              | Atelier 11                  |            |
-|     | 28    | 03 mai  |           | Révision                                     |                              |                             | Atelier 11 |
-| 15  | 29    | 08 mai  |           | BD Games                                     |                              |                             |            |
-|     | 30    | 10 mai  |           | Pratique d'examen                            |                              |                             |            |
-| 16  | 31    | à venir |           | Retour sur la pratique d'examen              |                              |                             |            |
-|     | 32    | à venir |           | **Examen final**                                 |                              |                             |            |
+|     | 26    | 26 avr  |           | Révision                                     |                              |                             | Atelier 11<br/>**TP à remettre**  |
+| 14  | 27    | 01 mai  |           | BD Games                                     |                              |                             |            |
+|     | 28    | 03 mai  |           | Pratique d'examen                            |                              |                             |            |
+| 15  | 29   | 08 mai |           | Retour sur la pratique d'examen              |                              |                             |            |
+|     | 30   | 10 mai |           | **Examen final**                                 |                              |                             |            |

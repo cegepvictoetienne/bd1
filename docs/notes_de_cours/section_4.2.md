@@ -1,20 +1,16 @@
 # Confidentialité des données
 
-Cryptage et hashage
-Cryptage à clé symétrique
-Cryptage de la BD
+## Hashage et Cryptage
 
-## Cryptage et hashage
-
-Il est très souvent nécessaire d'assurer la confidentialité des données. Ainsi, un administrateur de BDD ne peut pas voir les informations de certains champs ou tables.
+Il est très souvent nécessaire d'assurer la confidentialité des données dans un BD afin que les administrateurs d'une base de données ne puisse en aucun cas voir les informations de certains champs ou tables (ex.: mots de passe).
 
 Quelle est la distinction entre le cryptage et le hashage?
 
-**Cryptage** : transformation des données à l’aide d’une donnée secrète appelée clé
+**Hashage** : transformation *non inversible* à l’aide d’un algorithme.
 
-**Hashage** : transformation *non inversible* à l’aide d’un algorithme
+**Cryptage** : transformation des données à l’aide d’une donnée secrète appelée **clé**. Aussi appelé *chiffrement*.
 
-Doc : https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html
+Doc : [https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)
 
 ## Hashage
 
@@ -22,9 +18,9 @@ Une fonction de hashage accepte généralement une seule chaîne en entrée et r
 
 La fonction peut produire un *hash* unique pour chaque entrée (fonction injective) ou permettre à plusieurs entrées de partager le même *hash*. Le deuxième cas est celui le plus rencontré.
 
-Il faut évidemment évaluer le risque de collision de *hash* (partage de valeur). Pour le *hash* de Git, ce risque est estimé à environ $1 \times 10^{-48}$, soit de tirer au hasard un atome sur la Terre. 
+Il existe un risque de *collision* (deux valeurs de *hash* qui par hasard seraient identiques pour la même chaîne de caractères). Exemple: pour le *hash* de Git, ce risque est estimé à environ 10^48, soit moins de chance de tirer au hasard deux fois le même atome parmis tous les atomes qui composent la Terre.
 
-Les fonctions utilisables par MySQL (et d'autres langages) sont
+Les fonctions utilisables par MySQL (et d'autres langages) sont:
 
 |Fonction|Longueur du hash|Type de colonne|
 ||||
@@ -34,7 +30,7 @@ Les fonctions utilisables par MySQL (et d'autres langages) sont
 
 Elles retournent toutes un hash en hexadécimal. On peut le convertir en binaire en utilisant la fonction **UNHEX**().
 
-### SHA2
+### Fonction SHA2
 
 La fonction SHA2 permet d’utiliser divers algorithmes. Les algorithmes sont SHA-224, SHA-256, SHA-384 et SHA-512.
 
@@ -67,6 +63,7 @@ retourne:
 | jardiner14    | b48cea174391677879618ace9ea78531f5a0d18551de187ee76eb3190624ef35 |
 ...
 ```
+
 ### Avantages et désavantages du hashage
 
 Avantages :
@@ -77,23 +74,25 @@ Avantages :
 
 Désavantage :
 
-* Impossible d’avoir accès à la donnée originale
+* Impossible d’avoir accès à la donnée originale (on peut seulement vérifier qu'une entrée est bonne ou mauvaise).
 
 ### Quand utiliser le hashage?
 
 * Pour les données que nous n’avons pas besoin de consulter
 * Vérification d’intégrité de fichier ou de transport (checksum) 
 
-### Fonction de SHA256
+### Le SHA256 en détails
 
-https://qvault.io/cryptography/how-sha-2-works-step-by-step-sha-256/#:~:text=SHA%2D2%20is%20an%20algorithm,is%20the%20output%20size%2C%20256.
+Fonctionnement: [https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm](https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm).
 
-1. Convertir en binaire
-2. Ajouter un 1
-3. Allonger avec des 0 à la fin pour obtenir un multiple de 512 moins 64 bits
-4. Ajouter la longueur de l'entrée originale en binaire sur 64 bits.
+*En résumé*:
 
-**Exemple**
+1. Convertion de la chaine en binaire
+2. Ajout d'un 1 à la fin.
+3. Allongement avec des 0 à la fin jusqu'à un multiple de 512 moins 64 bits
+4. Ajout de la longueur de l'entrée originale en binaire sur 64 bits.
+
+*Exemple*:
 
 1. Allo -> **01100001 01101100 01101100 01101111**
 2. 01100001 01101100 01101100 01101111 **1**
@@ -115,7 +114,7 @@ https://qvault.io/cryptography/how-sha-2-works-step-by-step-sha-256/#:~:text=SHA
    **00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000100**
 5. Initialisation des 8 constantes de hash qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines des 8 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19)
 
-**Exemple**
+*Exemple avec la racine de 2*
 
 Racine de 2 = 1.41421356237
 Partie fractionnaire = 41421356237
@@ -130,12 +129,10 @@ En binaire = 1101010000010011110011001100111
 
 Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».
 
-Texte clair + clé 🡺 texte crypté
-Texte crypté + clé 🡺 texte clair 
+Texte clair + clé => texte crypté  
+Texte crypté + clé => texte clair 
 
 On appelle cryptage à clé symétrique lorsque la clé servant à crypter et à décrypter est la même.
-
-Voir Illustration - Hashage et cryptage 
 
 ### Sécurité du cryptage symétrique
 
@@ -150,7 +147,7 @@ Le Advance Encryption Standard (AES) est la méthode de cryptage symétrique la 
 
 Les données sont cryptées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.
 
-Il effectue plusieurs étapes de permutation / substitution
+Il effectue plusieurs étapes de permutation / substitution.
 
 ### Crypter avec MySQL
 
@@ -162,7 +159,7 @@ INSERT INTO Utilisateur (nom, carte_credit)
   UNHEX('F3229A0B371ED2D9441B830D21A390C3')));
 ```
 
-On place le résultat dans un BLOB.
+On place le résultat dans un champs de type **BLOB**.
 
 #### Fonction UNHEX
 
@@ -200,8 +197,6 @@ Plutôt que d’utiliser une clé binaire, on peut utiliser une phrase secrète 
 
 * On peut hasher la phrase secrète pour obtenir une chaîne de la bonne longueur !
 
-# Phrase secrète
-
 ```mysql
 # Insertion
 INSERT INTO Utilisateur (nom, carte_credit) 
@@ -214,25 +209,28 @@ SELECT nom,
   FROM Utilisateur;
 ```
 
-# Cryptage de la BD
+### Cryptage de la BD au complet
 
-L’engin de stockage de données InnoDB permet de crypter l’ensemble d’une table ou de la BD. Via un plug-in.
+L’engin de stockage de données *InnoDB* permet de crypter une table ou la BD au complet via un logiciel enfichable (*plug-in*).
 
-Ces manipulations ne sont pas vues en classe.
+**Ces manipulations ainsi que InnoDB ne sont pas vues en classe**.
 
-https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html
+Plus d'informations: [https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html)
 
-### :material-cog: --- Exercice 4.2.1 ---
+## :material-cog: --- Exercice 4.2.1 ---
 
-On crée la table de renseignements personnels suivant :
+On crée la table de renseignements_personnels avec les champs suivant:
 
-1. Nom
-2. Mot de passe
-3. Le contenu du certificat de naissance
-4. Une chaîne authentifiant le contenu du certificat de naissance
-5. Numéro de compte en banque
-6. Date de naissance
+* Nom
+* Mot de passe
+* Le contenu du certificat de naissance
+* Une chaîne authentifiant le contenu du certificat de naissance
+* Numéro de compte en banque
+* Date de naissance
 
-Ajoutez les informations d’une personne fictive en cryptant ou hashant les données selon la situation.
+    1. Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.
 
-Affichez ensuite ces informations
+    2. Affichez ces informations.
+
+Pour cet exercice, il est grandement suggéré de créer réèllement la table dans une BD de votre choix afin de tester votre requête.
+

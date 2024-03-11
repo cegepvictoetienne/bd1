@@ -58,7 +58,7 @@ Le **DEFAULT** valeur peut être omis pour ne pas affecter de valeurs lors de la
 
 Toutes les instructions **DECLARE** doivent être au début du bloc **BEGIN**.
 
-**Pour reconnaître les variables locales des colonnes, toutes les variables locales doivent être préfixées de  (standard de code)**
+**Pour reconnaître les variables locales des colonnes, toutes les variables locales doivent être préfixées de _ (standard de code)**
 
 ## Opérations
 

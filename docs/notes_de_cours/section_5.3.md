@@ -54,9 +54,10 @@ BEGIN
 END $$
 DELIMITER ; 
 ```
-On remarque ici :
-- L'absence d'instruction RETURN (interdit dans une procédure)
-- L'utilisation du OUT pour résultat
+
+On remarque ici :  
+- L'absence d'instruction RETURN (interdit dans une procédure)  
+- L'utilisation du OUT pour résultat  
 
 ### Invocation de procédure
 
