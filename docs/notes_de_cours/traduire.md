@@ -12,6 +12,35 @@ Dans ce document, nous allons voir comment traduire une requête du français à
 
 1. Trouver le verbe d'action : le verbe d'action indique le type de requête SQL que nous devons utiliser. Par exemple, si le verbe d'action est "Affichez", cela indique que nous devons utiliser une requête SELECT.  
 
+Voici quelques verbes d'actions courants et leur équivalent en SQL :  
+
+| Verbe d'action | SQL |
+|----------------|-----|
+| Affichez       | SELECT |
+| Interrogez     | SELECT |
+| Extraire       | SELECT |
+| Récupérez        | SELECT |
+| Sélectionnez   | SELECT |
+| Montrez        | SELECT |
+| Faites la liste | SELECT |
+| Trouvez         | SELECT |
+| Comptez         | SELECT COUNT |
+| Insérez         | INSERT |
+| Alimentez       | INSERT |
+| Créez          | INSERT |
+| Ajoutez         | INSERT |
+| Modifiez       | UPDATE |
+| Mettez à jour   | UPDATE |
+| Changez         | UPDATE |
+| Actualisez      | UPDATE |
+| Corrigez        | UPDATE |
+| Supprimez       | DELETE |
+| Effacez        | DELETE |
+| Retirez         | DELETE |
+| Détruisez       | DELETE |
+
+
+
 2. Identifier le sujet : le sujet indique les données que nous devons sélectionner. Par exemple, si le sujet est "les étudiants", cela indique que nous devons sélectionner les données de la table "etudiants".
 
 3. Identifier les objets : les objets indiquent les colonnes que nous devons sélectionner. Par exemple, si les objets sont "le nom et le prénom", cela indique que nous devons sélectionner les colonnes "nom" et "prénom" de la table "etudiants".

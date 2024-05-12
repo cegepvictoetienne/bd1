@@ -308,6 +308,17 @@ Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée d
 
 Gérez cette validation pour l'insertion et la modification.
 
+## Empêcher un ajout via un déclencheur
+
+Pour empêcher un ajout, on peut utiliser la commande **SIGNAL SQLSTATE**.
+
+### Syntaxe
+
+```sql
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Message erreur';
+```
+
+
 ### :material-cog: --- Exercice 5.2.3 ---
 
 C. Si l'évaluation ajoutée cause la somme des pondérations du cours à excéder 100%, alors la pondération devient 0. Gérez cette validation lors de l'ajout et de la modification.
