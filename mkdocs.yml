@@ -35,7 +35,7 @@ nav:
       - 5.3 Procédures stockées et transactions: notes_de_cours/section_5.3.md
   - 'Convention': convention.md
   - 'Ressources': ressources.md
-  - 'Calendrier': calendrier.md
+  - 'Horaire': horaire.md
 theme:
   name: material
   icon:
