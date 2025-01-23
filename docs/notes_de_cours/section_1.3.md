@@ -126,16 +126,5 @@ ENUM('Placement', 'Chèque', 'Epargne')
 
 ## :material-cog: --- Exercice 1.3.1 ---
 
-Choisissez le type de données approprié pour les situations suivantes :
-
-- Température extérieure  
-- Date de naissance  
-- Date et heure de remise d'un travail  
-- Nom d'utilisateur  
-- Montant d'argent  
-- Quantité de retraits effectués d'un compte en banque  
-- Identifiant unique  
-- Description d'un produit  
-- Sorte d'une carte (Pique, cœur, carreau, trèfle)  
-- Numéro de téléphone  
-- Photo d'un produit  
+Répondez au questionnaire suivant :  
+<iframe width="800px" height="600px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=JvVsnYGt-EanOqUHqvBs2h4e_CrnfMxFsMr2ZqveBNhUMDhMT0pBSFZOUFc3VUcxR1RLQjJXVlVXRi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
