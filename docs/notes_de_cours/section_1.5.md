@@ -168,4 +168,4 @@ La notation contrainte de __PRIMARY KEY__ s'utilise aussi en présence d'une cl�
 
 La notation vue précédemment constitue un raccourci intéressant lorsqu'on travaille.
 
-On revient plus en détail sur les contraintes dans le Chapitre 4 - Assurer l'intégrité des données.
+On revient plus en détail sur les contraintes dans la section 4 - Assurer l'intégrité des données.
