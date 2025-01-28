@@ -4,9 +4,9 @@
 1|1|2025-01-21| 1.1, 1.2 | Introduction, Diagramme entité-relation | Créer une BD | | 
  |2|2025-01-23| 1.2 à 1.4 | Types de données et création de table | | Atelier 1 | 
 2|3|2025-01-28|1.5| Clés étrangères et relations | | Atelier 2 | Atelier 1 
- |4|2025-01-30|2.1| Create/Update/Delete | | | Atelier 2 
-3|5|2025-02-04|2.2| Sélection simple, filtrage et logique | Requête CRUD | Atelier 3 | 
- |6|2025-02-06|2.3| Opérations arithmétiques, chaînes, REGEX | | Atelier 4 - formatif formel | Atelier 3 
+ |4|2025-01-30|2.1| Create/Update/Delete | Requête CRUD | Atelier 3a| Atelier 2 
+3|5|2025-02-04|2.2| Sélection simple, filtrage et logique | Requête CRUD | Atelier 3b| Atelier 3a
+ |6|2025-02-06|2.3| Opérations arithmétiques, chaînes, REGEX | | Atelier 4 - formatif formel | Atelier 3b
 4|7|2025-02-11|2.4| Dates | | Atelier 5 | Atelier 4 
  |8|2025-02-13|2.5| Jointures et aggrégats | | | Atelier 5 
 5|9|2025-02-18|2.5| Jointures et aggrégats | | Atelier 6 | 
