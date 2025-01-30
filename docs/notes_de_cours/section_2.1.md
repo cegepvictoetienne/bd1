@@ -152,6 +152,8 @@ Nous verrons dans les prochaines sections les requêtes **SELECT** en détail.
 
 ## :material-cog: --- Exercice 2.1.1 ---
 
+À partir du script [miniecole.sql](../miniecole.sql), créez la base de données **miniecole** et répondez aux questions suivantes.  
+   
 Ajoutez les enseignants et les programmes suivants:
 
 **enseignants**
