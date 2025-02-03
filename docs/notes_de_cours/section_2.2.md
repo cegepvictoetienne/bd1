@@ -307,4 +307,4 @@ A. Sélectionnez les 5 évaluations ayant la plus basse pondération
 
 B. Sélectionnez le nom des 3 étudiants qui ont été admis le plus récemment
 
-C. Sélectionnez tous les groupes, triés par numéro de groupe en ordre croissant et par session, de la plus récente à la plus ancienne (supposez que les sessions sont ajoutées dans l'ordre quelles arrivent). Les groupes d'un même cours doivent être regroupés à l'affichage.
+C. Sélectionnez tous les groupes, triés par numéro de groupe en ordre croissant et par session, de la plus récente à la plus ancienne (supposez que les sessions sont ajoutées dans l'ordre qu'elles arrivent). Les groupes d'un même cours doivent être regroupés à l'affichage.
