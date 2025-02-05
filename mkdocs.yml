@@ -1,5 +1,5 @@
-site_name: Cours Bases de donn&eacute;es 1
-site_url: https://bd1.kerzo.ca/
+site_name: Bases de donn&eacute;es 1
+site_url: https://bd1.profinfo.ca/
 repo_url: https://github.com/jaixan/db1
 
 nav:
@@ -37,6 +37,7 @@ nav:
   - 'Ressources': ressources.md
   - 'Horaire': horaire.md
 theme:
+  favicon: images/database.png
   name: material
   icon:
     logo: fontawesome/solid/database
