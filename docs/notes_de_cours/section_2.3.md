@@ -78,6 +78,8 @@ Pour introduire une REGEX en MySQL, on utilise la syntaxe suivante :
 SELECT colonne FROM Table WHERE colonne RLIKE 'regex';
 ```
 
+Voici un terrain de jeu (avec une super histoire de héros des bases de données) pour vous aider à pratiquer les REGEX : [Regex101](https://regex101.com/r/k2YZAg/1)  
+
 ### Rechercher un caractère
 
 À moins qu'il s'agisse d'un caractère spécial, indiquez une lettre dans une REGEX permet de chercher celle-ci, n'importe où dans la chaîne.
