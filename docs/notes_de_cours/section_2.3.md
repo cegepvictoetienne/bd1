@@ -93,6 +93,8 @@ Voici un terrain de jeu (avec une super histoire de héros des bases de données
 |cba|ba|Oui|
 |abc|d|Non|
 
+[Regex 101 - abc](https://regex101.com/r/NzBMcE/2)  
+
 ### Début et fin
 
 Pour indiquer le début d'une chaîne, on utilise le symbole **^**, et pour la fin, le symbole **$**.
@@ -104,6 +106,8 @@ Pour indiquer le début d'une chaîne, on utilise le symbole **^**, et pour la f
 |abc|^bc|Non|
 |abc|^ab$|Non|
 |abc|ab$|Non|
+
+[Regex 101 - abc](https://regex101.com/r/NzBMcE/2)  
 
 ### Répétitions 
 
@@ -120,13 +124,19 @@ Les REGEX offrent 3 différents caractères spéciaux pour la répétition :
 |aac|b*c|Oui|
 |aac|a?c|Non|
 
+[Regex 101 - abc](https://regex101.com/r/NzBMcE/2)  
+
 |Chaîne|Regex|Trouvé|
 ||||
 |aac|a+c|Oui|
+|aac|a?c|Oui|
 |bbc|a+c|Non|
 |aaaaaaaaaaaa|a*|Oui|
-|aaaaaaaaaaaa|a?|Non|
+|aaaaaaaaaaaa|a?|Oui|
 |aaaaaaaaaaaa|a+|Oui|
+
+[SQL pour tester les REGEX](/test_regex.sql)
+
 
 ### :material-cog: --- Exercice 2.3.1 ---
 
@@ -146,7 +156,7 @@ valet
 
 animal
 
-Utilisez le site [Regex 101](https://regex101.com/r/M5fA4m/1) pour vous aider.
+Utilisez le site [Regex 101 - Exercice 2.3.1](https://regex101.com/r/M5fA4m/1) pour vous aider.
 
 A. Les mots contenant « chat » (3 mots)  
 B. Les mots commençant par « ch » (4 mots)  
@@ -185,7 +195,7 @@ On indique une classe avec **[*min*-*max*]**. On peut juxtaposé des intervalles
 
 |Énoncé|REGEX|
 |||
-|Un numéro de téléphone|[0-9]{3}-[0-9]{3}-[0-9]{4}|
+|Un numéro de téléphone Nord-Américain|[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}|
 |Une séquence contenant entre 3 et 8 lettres|[a-zA-Z]{3,8}|
 |Un mot de 6 lettres commençant par h|^h[a-z]{5}$|
 
