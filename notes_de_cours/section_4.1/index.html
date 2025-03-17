@@ -1227,6 +1227,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemples-de-check-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemples de CHECK simples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contraintes-check-sur-plusieurs-colonnes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contraintes CHECK sur plusieurs colonnes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1679,15 +1703,56 @@ D) Si l'on supprime une Évaluation, on veut supprimer toutes les evaluations_et
 <span class="w">    </span><span class="p">...</span>
 <span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">nom_contrainte</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="k">condition</span><span class="p">));</span>
 </code></pre></div>
-<p>Exemple : les pondérations des évaluations doivent être entre 0 et 100.</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations</span><span class="w"> </span><span class="p">(</span>
+<h4 id="exemples-de-check-simples">Exemples de CHECK simples</h4>
+<p>Voici plusieurs exemples de contraintes CHECK pour différents scénarios:</p>
+<ol>
+<li>
+<p><strong>Valeurs numériques dans un intervalle</strong> - les pondérations des évaluations doivent être entre 0 et 100:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">evaluations</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">evaluation_id</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span>
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="p">...</span>
 <span class="w">  </span><span class="n">ponderation</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
 <span class="w">  </span><span class="p">...</span>
 <span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">note_0_a_100</span><span class="w"> </span>
 <span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">ponderation</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
+</code></pre></div>
+2. <strong>Valeur numérique positive</strong> - le salaire d'un enseignant doit être positif:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">enseignants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">code_employe</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">nom</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">salaire</span><span class="w"> </span><span class="kt">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">salaire_positif</span><span class="w"> </span>
+<span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">salaire</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+</code></pre></div>
+3. <strong>Vérification avec opérateurs logiques</strong> - l'âge doit être d'au moins 18 ans ET le pays doit être 'Canada':</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">code_etudiant</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">age</span><span class="w"> </span><span class="kt">INTEGER</span><span class="p">,</span>
+<span class="w">  </span><span class="n">pays</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">adulte_canada</span><span class="w"> </span>
+<span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">pays</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Canada&#39;</span><span class="p">));</span>
+</code></pre></div>
+4. <strong>Vérification de format avec REGEX</strong> - vérifier que le courriel a un format valide:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">code_etudiant</span><span class="w"> </span><span class="kt">NUMERIC</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">courriel</span><span class="w"> </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">courriel_valide</span><span class="w"> </span>
+<span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">courriel</span><span class="w"> </span><span class="k">RLIKE</span><span class="w"> </span><span class="s1">&#39;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+</span><span class="se">\\</span><span class="s1">.[a-zA-Z]{2,}$&#39;</span><span class="p">));</span>
+</code></pre></div>
+</li>
+</ol>
+<h4 id="contraintes-check-sur-plusieurs-colonnes">Contraintes CHECK sur plusieurs colonnes</h4>
+<p>On peut également créer des contraintes qui vérifient la relation entre plusieurs colonnes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sessions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id_session</span><span class="w"> </span><span class="kt">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">debut_session</span><span class="w"> </span><span class="kt">DATE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">fin_session</span><span class="w"> </span><span class="kt">DATE</span><span class="p">,</span>
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">dates_session_coherentes</span><span class="w"> </span>
+<span class="w">    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">fin_session</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">debut_session</span><span class="p">));</span>
 </code></pre></div>
 <pre class="mermaid"><code>erDiagram  
 evaluations {
