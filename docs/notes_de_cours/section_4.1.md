@@ -149,17 +149,66 @@ CREATE TABLE Nom_table (
     CONSTRAINT nom_contrainte CHECK (condition));
 ```
 
-Exemple : les pondérations des évaluations doivent être entre 0 et 100.
+#### Exemples de CHECK simples
+
+Voici plusieurs exemples de contraintes CHECK pour différents scénarios:
+
+1. **Valeurs numériques dans un intervalle** - les pondérations des évaluations doivent être entre 0 et 100:
+
+    ```mysql
+    CREATE TABLE evaluations (
+      evaluation_id INTEGER 
+        PRIMARY KEY AUTO_INCREMENT,
+      ...
+      ponderation NUMERIC(5,2),
+      ...
+      CONSTRAINT note_0_a_100 
+        CHECK (ponderation BETWEEN 0 AND 100));
+    ```  
+2. **Valeur numérique positive** - le salaire d'un enseignant doit être positif:
+
+    ```mysql
+    CREATE TABLE enseignants (
+      code_employe NUMERIC(8) PRIMARY KEY,
+      nom VARCHAR(255) NOT NULL,
+      ...
+      salaire DECIMAL(10,2),
+      CONSTRAINT salaire_positif 
+        CHECK (salaire > 0));
+    ```  
+3. **Vérification avec opérateurs logiques** - l'âge doit être d'au moins 18 ans ET le pays doit être 'Canada':
+
+    ```mysql
+    CREATE TABLE etudiants (
+      code_etudiant NUMERIC(8) PRIMARY KEY,
+      ...
+      age INTEGER,
+      pays VARCHAR(50),
+      CONSTRAINT adulte_canada 
+        CHECK (age >= 18 AND pays = 'Canada'));
+    ```  
+4. **Vérification de format avec REGEX** - vérifier que le courriel a un format valide:
+
+    ```mysql
+    CREATE TABLE etudiants (
+      code_etudiant NUMERIC(8) PRIMARY KEY,
+      ...
+      courriel VARCHAR(255),
+      CONSTRAINT courriel_valide 
+        CHECK (courriel RLIKE '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'));
+    ```  
+
+#### Contraintes CHECK sur plusieurs colonnes
+
+On peut également créer des contraintes qui vérifient la relation entre plusieurs colonnes:
 
 ```mysql
-CREATE TABLE evaluations (
-  evaluation_id INTEGER 
-    PRIMARY KEY AUTO_INCREMENT
-  ...
-  ponderation NUMERIC(5,2),
-  ...
-  CONSTRAINT note_0_a_100 
-    CHECK (ponderation BETWEEN 0 AND 100));
+CREATE TABLE sessions (
+  id_session INTEGER PRIMARY KEY AUTO_INCREMENT,
+  debut_session DATE,
+  fin_session DATE,
+  CONSTRAINT dates_session_coherentes 
+    CHECK (fin_session > debut_session));
 ```
 
 ```mermaid
