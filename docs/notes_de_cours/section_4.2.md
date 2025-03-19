@@ -81,50 +81,6 @@ Désavantage :
 * Pour les données que nous n’avons pas besoin de consulter
 * Vérification d’intégrité de fichier ou de transport (checksum) 
 
-### Le SHA256 en détails
-
-Fonctionnement: [https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm](https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm).
-
-*En résumé*:
-
-1. Convertion de la chaine en binaire
-2. Ajout d'un 1 à la fin.
-3. Allongement avec des 0 à la fin jusqu'à un multiple de 512 moins 64 bits
-4. Ajout de la longueur de l'entrée originale en binaire sur 64 bits.
-
-*Exemple*:
-
-1. Allo -> **01100001 01101100 01101100 01101111**
-2. 01100001 01101100 01101100 01101111 **1**
-3. 01100001 01101100 01101100 01101111 1**000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000**
-4. 01100001 01101100 01101100 01101111 1000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   **00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000100**
-5. Initialisation des 8 constantes de hash qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines des 8 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19)
-
-*Exemple avec la racine de 2*
-
-Racine de 2 = 1.41421356237
-Partie fractionnaire = 41421356237
-En binaire = 1101010000010011110011001100111
-
-6. Initialisation des 64 constantes d'arrondissement qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines cubiques des 64 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19 - 311)
-7. Création de *chunk* (segment) de 512 bits de long
-8. Création du message pour chaque *chunk* 
-9. Compression du message en utilisant les constantes établies et concaténation du résultat.
-
 ## Cryptage
 
 Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».
