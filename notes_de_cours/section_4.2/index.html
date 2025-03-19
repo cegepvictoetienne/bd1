@@ -1199,15 +1199,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#le-sha256-en-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      Le SHA256 en détails
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1604,47 +1595,6 @@
 <li>Pour les données que nous n’avons pas besoin de consulter</li>
 <li>Vérification d’intégrité de fichier ou de transport (checksum) </li>
 </ul>
-<h3 id="le-sha256-en-details">Le SHA256 en détails</h3>
-<p>Fonctionnement: <a href="https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm">https://www.simplilearn.com/tutorials/cyber-security-tutorial/sha-256-algorithm</a>.</p>
-<p><em>En résumé</em>:</p>
-<ol>
-<li>Convertion de la chaine en binaire</li>
-<li>Ajout d'un 1 à la fin.</li>
-<li>Allongement avec des 0 à la fin jusqu'à un multiple de 512 moins 64 bits</li>
-<li>Ajout de la longueur de l'entrée originale en binaire sur 64 bits.</li>
-</ol>
-<p><em>Exemple</em>:</p>
-<ol>
-<li>Allo -&gt; <strong>01100001 01101100 01101100 01101111</strong></li>
-<li>01100001 01101100 01101100 01101111 <strong>1</strong></li>
-<li>01100001 01101100 01101100 01101111 1<strong>000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000</strong></li>
-<li>01100001 01101100 01101100 01101111 1000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
-   <strong>00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000100</strong></li>
-<li>Initialisation des 8 constantes de hash qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines des 8 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19)</li>
-</ol>
-<p><em>Exemple avec la racine de 2</em></p>
-<p>Racine de 2 = 1.41421356237
-Partie fractionnaire = 41421356237
-En binaire = 1101010000010011110011001100111</p>
-<ol>
-<li>Initialisation des 64 constantes d'arrondissement qui sont la représentation binaire des 32 premiers bits de la partie fractionnaire des racines cubiques des 64 premiers nombres premiers (2, 3, 5, 7, 11, 13, 17, 19 - 311)</li>
-<li>Création de <em>chunk</em> (segment) de 512 bits de long</li>
-<li>Création du message pour chaque <em>chunk</em> </li>
-<li>Compression du message en utilisant les constantes établies et concaténation du résultat.</li>
-</ol>
 <h2 id="cryptage">Cryptage</h2>
 <p>Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».</p>
 <p>Texte clair + clé =&gt; texte crypté<br />
