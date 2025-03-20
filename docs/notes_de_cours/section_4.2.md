@@ -173,20 +173,41 @@ L’engin de stockage de données *InnoDB* permet de crypter une table ou la BD 
 
 Plus d'informations: [https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html)
 
+# Flux décisionnel 
+
+Voici un exemple de flux décisionnel pour choisir entre le hashage et le cryptage.  
+
+```mermaid
+flowchart TD
+    A[Données sensibles] --> B{Mot de passe ou Donnée sensible}
+    B --> |Mot de passe| C[Hashage]
+    B --> |Données sensibles| D[Clé symétrique]
+    D --> E[Clé secrète : UNHEX#40;SHA2#40;'secret', 256#41;#41;]
+    E --> F[Type de colonne BLOB]
+    F --> G[AES_ENCRYPT#40;'1234123412341234'\, clé secrète#41; lors de l'écriture]
+    G --> H[AES_DECRYPT#40;carte_credit\, clé secrète#41; lors de la lecture]
+    C --> I[Clé de hachage]
+    I --> J[Type de colonne CHAR#40;128#41;]
+    J --> K[SHA2#40;'mot de passe', 256#41; lors de l'écriture]
+    K --> L[Décryptage impossible]
+
+```
+
 ## :material-cog: --- Exercice 4.2.1 ---
 
 On crée la table de renseignements_personnels avec les champs suivant:
 
-* Nom
-* Mot de passe
-* Le contenu du certificat de naissance
-* Une chaîne authentifiant le contenu du certificat de naissance
-* Numéro de compte en banque
-* Date de naissance
+1. Champs :  
+    * Nom
+    * Mot de passe
+    * Le contenu du certificat de naissance
+    * Une chaîne authentifiant le contenu du certificat de naissance
+    * Numéro de compte en banque
+    * Date de naissance  
 
-    1. Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.
+1. Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.
 
-    2. Affichez ces informations.
+2. Affichez ces informations.
 
-Pour cet exercice, il est grandement suggéré de créer réèllement la table dans une BD de votre choix afin de tester votre requête.
+Pour cet exercice, il est grandement suggéré de créer réellement la table dans une BD de votre choix afin de tester votre requête.
 
