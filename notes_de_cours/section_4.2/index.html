@@ -1288,15 +1288,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#-exercice-421-" class="md-nav__link">
-    <span class="md-ellipsis">
-      --- Exercice 4.2.1 ---
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1672,17 +1663,35 @@ Texte crypté + clé =&gt; texte clair </p>
 <p>L’engin de stockage de données <em>InnoDB</em> permet de crypter une table ou la BD au complet via un logiciel enfichable (<em>plug-in</em>).</p>
 <p><strong>Ces manipulations ainsi que InnoDB ne sont pas vues en classe</strong>.</p>
 <p>Plus d'informations: <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html">https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html</a></p>
+<h1 id="flux-decisionnel">Flux décisionnel</h1>
+<p>Voici un exemple de flux décisionnel pour choisir entre le hashage et le cryptage.  </p>
+<pre class="mermaid"><code>flowchart TD
+    A[Données sensibles] --&gt; B{Mot de passe ou Donnée sensible}
+    B --&gt; |Mot de passe| C[Hashage]
+    B --&gt; |Données sensibles| D[Clé symétrique]
+    D --&gt; E[Clé secrète : UNHEX#40;SHA2#40;'secret', 256#41;#41;]
+    E --&gt; F[Type de colonne BLOB]
+    F --&gt; G[AES_ENCRYPT#40;'1234123412341234'\, clé secrète#41; lors de l'écriture]
+    G --&gt; H[AES_DECRYPT#40;carte_credit\, clé secrète#41; lors de la lecture]
+    C --&gt; I[Clé de hachage]
+    I --&gt; J[Type de colonne CHAR#40;128#41;]
+    J --&gt; K[SHA2#40;'mot de passe', 256#41; lors de l'écriture]
+    K --&gt; L[Décryptage impossible]
+</code></pre>
 <h2 id="-exercice-421-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></svg></span> --- Exercice 4.2.1 ---</h2>
 <p>On crée la table de renseignements_personnels avec les champs suivant:</p>
+<ol>
+<li>
+<p>Champs :  </p>
 <ul>
 <li>Nom</li>
 <li>Mot de passe</li>
 <li>Le contenu du certificat de naissance</li>
 <li>Une chaîne authentifiant le contenu du certificat de naissance</li>
 <li>Numéro de compte en banque</li>
-<li>
-<p>Date de naissance</p>
-<ol>
+<li>Date de naissance  </li>
+</ul>
+</li>
 <li>
 <p>Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.</p>
 </li>
@@ -1690,9 +1699,7 @@ Texte crypté + clé =&gt; texte clair </p>
 <p>Affichez ces informations.</p>
 </li>
 </ol>
-</li>
-</ul>
-<p>Pour cet exercice, il est grandement suggéré de créer réèllement la table dans une BD de votre choix afin de tester votre requête.</p>
+<p>Pour cet exercice, il est grandement suggéré de créer réellement la table dans une BD de votre choix afin de tester votre requête.</p>
 
 
 
