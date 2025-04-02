@@ -130,11 +130,11 @@ SELECT USER();
 
 ### :material-cog: --- Exercice 4.3.1 ---
 
-Faites un *use ecole* et créez un nouvel utilisateur nommé *toto* qui possède tous les privilèges sur votre BD.
+Faites un *use ecole* et créez un nouvel utilisateur nommé *toto* qui possède tous les privilèges sur votre BD ecole.
 
 Déconnectez-vous en fermant Workbench et reconnectez-vous avec le nouvel utilisateur.
 
-Essayez de faire un *use PlanetEpxress* (quel message d'erreur obtenez-vous?). Essayez maintenant de faire un *use ecole*.
+Essayez de faire un *use PlanetExpress* (quel message d'erreur obtenez-vous?). Essayez maintenant de faire un *use ecole*.
 
 ## Les rôles
 
