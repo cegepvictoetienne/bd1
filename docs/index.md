@@ -1,4 +1,4 @@
-# Bases de données 1 (420-2B4-VI) - Hiver 2024
+# Bases de données 1 (420-2B4-VI) - Hiver 2026
 ## Introduction
 Vous trouverez ici les notes et exercices du cours. J'ajouterai du nouveau contenu continuellement.
 
@@ -12,7 +12,7 @@ Vous trouverez ici les notes et exercices du cours. J'ajouterai du nouveau conte
 
 Il est donc préalable, indirectement, à presque tous les cours de la 3e année.
 
-**Cheminement complet**: [https://techinfo.profinfo.ca/grille/](https://techinfo.profinfo.ca/grille/)
+**Cheminement complet**: [https://techinfo.profinfo.ca/grille/](https://techinfo.profinfo.ca/grille/)  
 
 ## Environnement de travail
 
