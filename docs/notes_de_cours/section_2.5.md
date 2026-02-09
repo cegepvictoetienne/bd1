@@ -73,9 +73,19 @@ SELECT programmes.nom AS 'Nom programme', enseignants.nom AS 'Responsable'
 
 #### :material-cog: --- Exercice 2.5.1 ---
 
+Utiliser [ecole2.sql](../ecole2.sql) pour répondre aux questions suivantes.  
+
+Diagramme :  
+
+``` mermaid
+erDiagram  
+{!ecole2.mermaid!} 
+```
+
+
 A. Sélectionnez le nom de chaque étudiant et le nom du programme dans lequel il est inscrit. Triez les résultats par programme.
 
-B. Pour chaque document de la table **evaluations_etudiants**, sélectionnez le nom du document et le code de l'étudiant qui l'a remis.
+B. Pour chaque document de la table **evaluations_etudiants**, sélectionnez le nom du document, le nom de l'évaluation et le code de l'étudiant qui l'a remis.
 
 ### Jointure naturelle
 
@@ -106,12 +116,6 @@ erDiagram
     {!groupes.mermaid!}
 ```
 
-### :material-cog: --- Exercice 2.5.2 ---
-
-A. Sélectionnez le titre des évaluations pour lequel aucun document n'est associé.  
-
-B. Sélectionnez l'année admission et le nom de l'étudiant pour chaque étudiant des programmes sous la responsabilité de l'enseignant portant le code 7654.  
-
 ## Problème
 
 On veut afficher pour chaque étudiant son nom, le titre des documents qu'il a remis et la date à laquelle la remise s'est faite.
@@ -132,88 +136,15 @@ SELECT cours.nom as 'Cours', evaluations.nom_evaluation as 'Titre évaluation' F
 
 *44 lignes ont été sélectionnées.*
 
-### :material-cog: --- Exercice 2.5.3 ---
+### :material-cog: --- Exercice 2.5.2 ---
 
-Diagramme : 
-
+Diagramme :  
 
 ``` mermaid
 erDiagram  
-    
-    enseignants ||--o{ programmes : "responsable"
-    enseignants {
-        NUMERIC(8) code_employe PK
-        VARCHAR(255) nom
-        NUMERIC(9) num_assurance_sociale
-        TINYINT anciennete
-    }
-
-    enseignants ||--o{ cours : "enseigne"
-    cours {
-        INTEGER cours_id PK
-        VARCHAR(255) nom 
-        CHAR(10) sigle 
-        TINYINT duree   "=60"
-        TINYINT nombre_semaine   "=15"
-        NUMERIC(8) enseignant FK
-    }
-
-    groupes ||--|{ cours : ""
-    groupes ||--|{ sessions : ""
-    groupes {
-        INTEGER groupe_id PK
-        INTEGER cours_id FK
-        VARCHAR(4) session_code FK
-        TINYINT numero_groupe
-    }  
-
-    programmes {
-        CHAR(6) code_programme PK
-        VARCHAR(255) nom
-        NUMERIC(8) prof_responsable FK
-    }
-
-    etudiants }o--|| programmes : "est inscrit à"
-    etudiants {
-        NUMERIC(7) code_etudiant PK
-        VARCHAR(255) nom
-        YEAR annee_admission
-        CHAR(6) code_programme FK
-    }
-
-    sessions {
-        VARCHAR(4) session_code PK
-        VARCHAR(255) session_saison
-        DATE date_debut
-        DATE date_fin
-    }
-
-    etudiants ||--o{ inscriptions : ""
-    inscriptions }o--|| groupes : ""
-    inscriptions {
-        NUMERIC(7) code_etudiant PK
-        INTEGER groupe_id PK
-    }
-
-    evaluations }o--|| groupes : ""
-    evaluations {
-        INTEGER evaluation_id PK
-        INTEGER groupe_id FK
-        VARCHAR(255) nom_evaluation
-        NUMERIC(5_2) note_max
-        DATE date_evaluation
-    }
-
-    evaluations_etudiants }o--|| evaluations : ""
-    evaluations_etudiants {
-        NUMERIC(7) code_etudiant PK,FK
-        INTEGER evaluation_id PK,FK
-        DATE date_remise
-        VARCHAR(255) nom_document
-        NUMERIC(5_2) note
-    }
-    
+{!ecole2.mermaid!} 
 ```
+
 
 A. Sélectionnez pour le cours de Programmation 2 le nom de tous les documents remis par les étudiants.
 
@@ -240,7 +171,7 @@ SELECT groupe_id, count(code_etudiant) FROM inscriptions
 
 ![](images/2_agregation.png)
 
-### :material-cog: --- Exercice 2.5.4 ---
+### :material-cog: --- Exercice 2.5.3 ---
 
 A. Comptez le nombre d'évaluations pour chaque groupe. Affichez seulement l'id du groupe et le nombre d'évaluations.
 
@@ -258,7 +189,7 @@ SELECT count(evaluations_etudiants.evaluation_id), groupe_id, code_etudiant  FRO
 
 ![](images/2_agregations_multiples.png)
 
-### :material-cog: --- Exercice 2.5.5 ---
+### :material-cog: --- Exercice 2.5.4 ---
 
 Sélectionnez pour chaque cours le nombre de fois qu'il s'est donné à chaque session (nombre de groupes). Affichez le semestre, l'année de la session ainsi que le sigle du cours. Triez les résultats par sigle.
 
@@ -299,7 +230,7 @@ SELECT groupe_id, count(code_etudiant) AS nombre_etudiants FROM inscriptions
 !!! note 
     le nom nombre_etudiants est inscrit tel quel sans guillemet, c'est pourquoi il est accessible. Avec des guillemets, cela aurait changé l'affichage, mais nous n'aurions pas pu l'utiliser dans la clause **HAVING**.
 
-## :material-cog: --- Exercice 2.5.6 ---
+## :material-cog: --- Exercice 2.5.5 ---
 
 A. Sélectionnez le nombre de cours pour chaque session (session_code seulement) où il ne se donne pas plus de 2 cours;
 
@@ -319,6 +250,6 @@ SELECT DISTINCT colonne
 count(DISTINCT colonne)
 ```
 
-## :material-cog: --- Exercice 2.5.7 ---
+## :material-cog: --- Exercice 2.5.6 ---
 
 Sélectionnez les sigles des cours ayant plus de 2 évaluations lorsqu'ils se sont donnés. Chaque sigle doit apparaître qu'une seule fois.
