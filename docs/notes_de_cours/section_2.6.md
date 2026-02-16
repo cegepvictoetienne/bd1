@@ -42,26 +42,13 @@ C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 2.
 
 D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 7.
 
-## Afficher toutes les valeurs
-
-Pour s'aider dans le debogage, on peut afficher le contenu d'un groupe. La fonction qui permet cela est **GROUP_CONCAT**.
-
-Par exemple, voici le nom des étudiants inscrit au programme 420.01.
-
-```mysql
-SELECT GROUP_CONCAT(etudiants.nom), count(*) FROM etudiants 
-    INNER JOIN programmes ON etudiants.code_programme = programmes.code_programme 
-    WHERE programmes.code_programme = '420.01'
-    GROUP BY etudiants.nom;
-```
-
 ## Opérateurs d'ensemble
 
 Des opérateurs existent sur les ensembles pour simplifier les requêtes de sélection.
 
-Deux opérateurs existent :
-- BETWEEN
-- IN
+Deux opérateurs existent :  
+- BETWEEN  
+- IN  
 
 ### Between
 
