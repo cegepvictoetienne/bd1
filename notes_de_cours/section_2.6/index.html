@@ -1205,17 +1205,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#afficher-toutes-les-valeurs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Afficher toutes les valeurs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#operateurs-densemble" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1882,19 +1871,11 @@
 <p>B. Sélectionnez le nom de l'étudiant ayant obtenu la plus haute note à l'évaluation 9.</p>
 <p>C. Sélectionnez la note totale de l'étudiant 1234567 au groupe 2.</p>
 <p>D. Sélectionnez la moyenne (en pourcentage) de l'évaluation 7.</p>
-<h2 id="afficher-toutes-les-valeurs">Afficher toutes les valeurs</h2>
-<p>Pour s'aider dans le debogage, on peut afficher le contenu d'un groupe. La fonction qui permet cela est <strong>GROUP_CONCAT</strong>.</p>
-<p>Par exemple, voici le nom des étudiants inscrit au programme 420.01.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">GROUP_CONCAT</span><span class="p">(</span><span class="n">etudiants</span><span class="p">.</span><span class="n">nom</span><span class="p">),</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">etudiants</span><span class="w"> </span>
-<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">programmes</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">etudiants</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">programmes</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">programmes</span><span class="p">.</span><span class="n">code_programme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;420.01&#39;</span>
-<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">etudiants</span><span class="p">.</span><span class="n">nom</span><span class="p">;</span>
-</code></pre></div>
 <h2 id="operateurs-densemble">Opérateurs d'ensemble</h2>
 <p>Des opérateurs existent sur les ensembles pour simplifier les requêtes de sélection.</p>
-<p>Deux opérateurs existent :
-- BETWEEN
-- IN</p>
+<p>Deux opérateurs existent :<br />
+- BETWEEN<br />
+- IN  </p>
 <h3 id="between">Between</h3>
 <p>Le mot-clé BETWEEN permet de chercher un enregistrement entre deux valeurs.</p>
 <div class="highlight"><pre><span></span><code><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">nom_colonne</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="n">minimum</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">maximum</span>
