@@ -135,7 +135,7 @@ Les REGEX offrent 3 différents caractères spéciaux pour la répétition :
 |aaaaaaaaaaaa|a?|Oui|
 |aaaaaaaaaaaa|a+|Oui|
 
-[SQL pour tester les REGEX](/test_regex.sql)
+[SQL pour tester les REGEX](../test_regex.sql)
 
 
 ### :material-cog: --- Exercice 2.3.1 ---
