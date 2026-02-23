@@ -1,8 +1,4 @@
-# Exercices de pratique — Requêtes SQL
-
-Ces exercices couvrent les mêmes habiletés que l'examen pratique : création de structures, manipulation de données, sélection et correction de requêtes.
-
----
+# Exercices de pratique — Requêtes SQL  
 
 ## Modèles de bases de données
 
