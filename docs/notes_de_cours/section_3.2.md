@@ -42,8 +42,14 @@ Pour charger (donc restaurer) la BD, c’est simple : il suffit d’exécuter le
 
 Soit à travers Workbench ou avec l'invite de commandes :
 
+**Créez la bd en premier**
+```sql
+CREATE DATABASE nomdb;
+``` 
+
+Ensuite, lancez la commande :  
 ```console
-mysql < fichier.sql
+mysql nomdb < fichier.sql
 ```
 
 ## Dumping dans un fichier texte non SQL
@@ -134,3 +140,13 @@ REPAIR TABLE Nom_table EXTENDED;
 ```
 
 Plus de détail ici: [https://dev.mysql.com/doc/refman/8.0/en/repair-table.html](https://dev.mysql.com/doc/refman/8.0/en/repair-table.html)
+
+
+# Exercice 3.2.1  
+
+Restaurez la base de données `games` sur votre système à partir de cette sauvegarde : [games.sql](../assets/cours/games.sql).  
+
+# Exercice 3.2.2  
+
+Faites la sauvegarde de la base de données de votre projet de **Développement Web**.  
+
