@@ -1960,8 +1960,12 @@
 <h2 id="charger-une-bd-a-partir-dun-fichier-de-sauvegarde">Charger une BD à partir d’un fichier de sauvegarde</h2>
 <p>Pour charger (donc restaurer) la BD, c’est simple : il suffit d’exécuter le script mysql.</p>
 <p>Soit à travers Workbench ou avec l'invite de commandes :</p>
-<div class="highlight"><pre><span></span><code><span class="go">mysql &lt; fichier.sql</span>
-</code></pre></div>
+<p><strong>Créez la bd en premier</strong>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">nomdb</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Ensuite, lancez la commande :<br />
+<div class="highlight"><pre><span></span><code><span class="go">mysql nomdb &lt; fichier.sql</span>
+</code></pre></div></p>
 <h2 id="dumping-dans-un-fichier-texte-non-sql">Dumping dans un fichier texte non SQL</h2>
 <p>Il est possible d’exporter le contenu des tables dans des fichiers de format texte (pas SQL) afin de les lire avec d’autres logiciels.</p>
 <p>On trouve notamment le format <strong>CSV</strong> (<em>Comma Separeted Values</em>) que l'on peut ouvrir par exemple avec <em>Excel</em>.</p>
@@ -2039,6 +2043,10 @@ secure_file_priv = ""</p>
 <div class="highlight"><pre><span></span><code><span class="k">REPAIR</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Nom_table</span><span class="w"> </span><span class="k">EXTENDED</span><span class="p">;</span>
 </code></pre></div>
 <p>Plus de détail ici: <a href="https://dev.mysql.com/doc/refman/8.0/en/repair-table.html">https://dev.mysql.com/doc/refman/8.0/en/repair-table.html</a></p>
+<h1 id="exercice-321">Exercice 3.2.1</h1>
+<p>Restaurez la base de données <code>games</code> sur votre système à partir de cette sauvegarde : <a href="../../assets/cours/games.sql">games.sql</a>.  </p>
+<h1 id="exercice-322">Exercice 3.2.2</h1>
+<p>Faites la sauvegarde de la base de données de votre projet de <strong>Développement Web</strong>.  </p>
 
 
 
