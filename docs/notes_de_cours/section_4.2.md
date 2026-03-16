@@ -157,11 +157,12 @@ Plutôt que d’utiliser une clé binaire, on peut utiliser une phrase secrète 
 # Insertion
 INSERT INTO Utilisateur (nom, carte_credit) 
   VALUES ('Patissier21', AES_ENCRYPT('1234123412341234',
-                           UNHEX(SHA2('secret', 256))));
+                           UNHEX(LEFT(SHA2('secret', 256), 32))));
 
 # Lecture
 SELECT nom, 
-  CAST(AES_DECRYPT(carte_credit, UNHEX(SHA2('secret', 256))) AS CHAR) AS 'Carte credit'
+  CAST(AES_DECRYPT(carte_credit, 
+    UNHEX(LEFT(SHA2('secret', 256), 32))) AS CHAR) AS 'Carte credit'
   FROM Utilisateur;
 ```
 
