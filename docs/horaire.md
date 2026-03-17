@@ -16,9 +16,9 @@
 7|13|2026-02-27 10:15:00| |Examen sommatif requêtes | | | 
  |14|2026-03-10 09:15:00| 3.1 à 3.3 | Sauvegardes et automatisation | Sauvegarder/restaurer une BD | | 
 8|15|2026-03-13 10:15:00|4.1| Contraintes intégrités | Confidentialité et cohérence | Atelier 8 | 
- |16|2026-03-17 09:15:00|4.2| Cryptage et sécurité | **TP à remettre cours 27** | | Atelier 8 
+ |16|2026-03-17 09:15:00|4.2| Cryptage et sécurité || | Atelier 8 
 9|17|2026-03-20 10:15:00|4.3| Gestion des accès | | | 
- |18|2026-03-27 09:15:00| | Temps travail | | | 
+ |18|2026-03-27 09:15:00| | Temps travail | **TP à remettre cours 27** | | 
 10|19|2026-03-31 09:15:00| 5.1, 5.2 | Variables, conditionnelles et boucles <br/>Fonctions | Traitements automatisés | Atelier 9|
  |20|2026-04-07 09:15:00| | Ateliers fonctions | | | 
 11|21|2026-04-10 10:15:00|5.2| Déclencheurs | | Atelier 10 | Atelier 9 
