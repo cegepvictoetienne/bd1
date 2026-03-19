@@ -1468,10 +1468,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hashage-et-cryptage" class="md-nav__link">
+  <a href="#hashage-et-chiffrement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hashage et Cryptage
+        Hashage et chiffrement
       
     </span>
   </a>
@@ -1529,22 +1529,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cryptage" class="md-nav__link">
+  <a href="#chiffrement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cryptage
+        Chiffrement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Cryptage">
+    <nav class="md-nav" aria-label="Chiffrement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#securite-du-cryptage-symetrique" class="md-nav__link">
+  <a href="#securite-du-chiffrement-symetrique" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sécurité du cryptage symétrique
+        Sécurité du chiffrement symétrique
       
     </span>
   </a>
@@ -1563,15 +1563,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#crypter-avec-mysql" class="md-nav__link">
+  <a href="#chiffrer-avec-mysql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Crypter avec MySQL
+        Chiffrer avec MySQL
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Crypter avec MySQL">
+    <nav class="md-nav" aria-label="Chiffrer avec MySQL">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1591,10 +1591,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#decrypter-avec-mysql" class="md-nav__link">
+  <a href="#dechiffrer-avec-mysql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Décrypter avec MySQL
+        Déchiffrer avec MySQL
       
     </span>
   </a>
@@ -1613,10 +1613,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cryptage-de-la-bd-au-complet" class="md-nav__link">
+  <a href="#chiffrement-de-la-bd-au-complet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cryptage de la BD au complet
+        Chiffrement de la BD au complet
       
     </span>
   </a>
@@ -2000,11 +2000,11 @@
 
 
 <h1 id="confidentialite-des-donnees">Confidentialité des données</h1>
-<h2 id="hashage-et-cryptage">Hashage et Cryptage</h2>
+<h2 id="hashage-et-chiffrement">Hashage et chiffrement</h2>
 <p>Il est très souvent nécessaire d'assurer la confidentialité des données dans un BD afin que les administrateurs d'une base de données ne puisse en aucun cas voir les informations de certains champs ou tables (ex.: mots de passe).</p>
-<p>Quelle est la distinction entre le cryptage et le hashage?</p>
+<p>Quelle est la distinction entre le chiffrement et le hashage?</p>
 <p><strong>Hashage</strong> : transformation <em>non inversible</em> à l’aide d’un algorithme.</p>
-<p><strong>Cryptage</strong> : transformation des données à l’aide d’une donnée secrète appelée <strong>clé</strong>. Aussi appelé <em>chiffrement</em>.</p>
+<p><strong>Chiffrement</strong> : transformation des données à l’aide d’une donnée secrète appelée <strong>clé</strong>. </p>
 <p>Doc : <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html">https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html</a></p>
 <h2 id="hashage">Hashage</h2>
 <p>Une fonction de hashage accepte généralement une seule chaîne en entrée et retourne une valeur correspondant à l’entrée (appelé <em>hash</em>).</p>
@@ -2061,7 +2061,7 @@
 <h3 id="avantages-et-desavantages-du-hashage">Avantages et désavantages du hashage</h3>
 <p>Avantages :</p>
 <ul>
-<li>Plus rapide qu’un cryptage</li>
+<li>Plus rapide qu’un chiffrement</li>
 <li>Espace mémoire constant</li>
 <li>Impossible à inverser</li>
 </ul>
@@ -2074,23 +2074,23 @@
 <li>Pour les données que nous n’avons pas besoin de consulter</li>
 <li>Vérification d’intégrité de fichier ou de transport (checksum) </li>
 </ul>
-<h2 id="cryptage">Cryptage</h2>
-<p>Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».</p>
-<p>Texte clair + clé =&gt; texte crypté<br />
-Texte crypté + clé =&gt; texte clair </p>
-<p>On appelle cryptage à clé symétrique lorsque la clé servant à crypter et à décrypter est la même.</p>
-<h3 id="securite-du-cryptage-symetrique">Sécurité du cryptage symétrique</h3>
-<p>La sécurité d’un cryptage à clé symétrique repose sur 2 facteurs :</p>
+<h2 id="chiffrement">Chiffrement</h2>
+<p>Une fonction de chiffrement transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».</p>
+<p>Texte clair + clé =&gt; texte chiffré<br />
+Texte chiffré + clé =&gt; texte clair </p>
+<p>On appelle chiffrement à clé symétrique lorsque la clé servant à chiffrer et à déchiffrer est la même.</p>
+<h3 id="securite-du-chiffrement-symetrique">Sécurité du chiffrement symétrique</h3>
+<p>La sécurité d’un chiffrement à clé symétrique repose sur 2 facteurs :</p>
 <ul>
 <li>Le secret de la clé</li>
 <li>La longueur de la clé</li>
 </ul>
 <h3 id="algorithme-aes">Algorithme AES</h3>
-<p>Le Advance Encryption Standard (AES) est la méthode de cryptage symétrique la plus utilisée aujourd’hui.</p>
-<p>Les données sont cryptées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.</p>
+<p>Le Advance Encryption Standard (AES) est la méthode de chiffrement symétrique la plus utilisée aujourd’hui.</p>
+<p>Les données sont chiffrées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.</p>
 <p>Il effectue plusieurs étapes de permutation / substitution.</p>
-<h3 id="crypter-avec-mysql">Crypter avec MySQL</h3>
-<p>Pour crypter, on utilise la fonction <strong>AES_ENCRYPT</strong>. Son premier argument est le texte à crypter et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.</p>
+<h3 id="chiffrer-avec-mysql">Chiffrer avec MySQL</h3>
+<p>Pour chiffrer, on utilise la fonction <strong>AES_ENCRYPT</strong>. Son premier argument est le texte à chiffrer et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.</p>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Utilisateur</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">carte_credit</span><span class="p">)</span>
 <span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Patissier21&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">AES_ENCRYPT</span><span class="p">(</span><span class="s1">&#39;1234123412341234&#39;</span><span class="p">,</span><span class="w">  </span>
 <span class="w">  </span><span class="nf">UNHEX</span><span class="p">(</span><span class="s1">&#39;F3229A0B371ED2D9441B830D21A390C3&#39;</span><span class="p">)));</span>
@@ -2119,19 +2119,19 @@ Texte crypté + clé =&gt; texte clair </p>
 </tr>
 </tbody>
 </table>
-<h3 id="decrypter-avec-mysql">Décrypter avec MySQL</h3>
-<p>Pour décrypter, on utilise la fonction <strong>AES_DECRYPT</strong>. Le premier argument est la valeur à décrypter, le second la clé secrète.</p>
+<h3 id="dechiffrer-avec-mysql">Déchiffrer avec MySQL</h3>
+<p>Pour déchiffrer, on utilise la fonction <strong>AES_DECRYPT</strong>. Le premier argument est la valeur à déchiffrer, le second la clé secrète.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="nf">CAST</span><span class="p">(</span><span class="nf">AES_DECRYPT</span><span class="p">(</span><span class="n">carte_credit</span><span class="p">,</span><span class="w">   </span>
 <span class="w">  </span><span class="nf">UNHEX</span><span class="p">(</span><span class="s1">&#39;F3229A0B371ED2D9441B830D21A390C3’)) AS CHAR)</span>
 <span class="s1">  AS carte_credit FROM Utilisateur;</span>
 </code></pre></div>
-<p>Le résultat du décryptage.</p>
+<p>Le résultat du déchiffrement.  </p>
 <div class="highlight"><pre><span></span><code><span class="go">| nom           | carte_credit     |</span>
 
 <span class="go">| patissier21   | 1234123412341234 |</span>
 <span class="go">| jardiner14    | 9876987698769876 |</span>
 </code></pre></div>
-<p>Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du décryptage avec la mauvaise clé !)</p>
+<p>Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du déchiffrement avec la mauvaise clé !)</p>
 <h3 id="phrase-secrete">Phrase secrète</h3>
 <p>Plutôt que d’utiliser une clé binaire, on peut utiliser une phrase secrète comme mot de passe. La clé est cependant limitée à 256 caractères. Comment fait-on ?</p>
 <ul>
@@ -2148,24 +2148,24 @@ Texte crypté + clé =&gt; texte clair </p>
 <span class="w">    </span><span class="nf">UNHEX</span><span class="p">(</span><span class="k">LEFT</span><span class="p">(</span><span class="nf">SHA2</span><span class="p">(</span><span class="s1">&#39;secret&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">),</span><span class="w"> </span><span class="mi">32</span><span class="p">)))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="kt">CHAR</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s1">&#39;Carte credit&#39;</span>
 <span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">Utilisateur</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="cryptage-de-la-bd-au-complet">Cryptage de la BD au complet</h3>
-<p>L’engin de stockage de données <em>InnoDB</em> permet de crypter une table ou la BD au complet via un logiciel enfichable (<em>plug-in</em>).</p>
+<h3 id="chiffrement-de-la-bd-au-complet">Chiffrement de la BD au complet</h3>
+<p>L’engin de stockage de données <em>InnoDB</em> permet de chiffrer une table ou la BD au complet via un logiciel enfichable (<em>plug-in</em>).</p>
 <p><strong>Ces manipulations ainsi que InnoDB ne sont pas vues en classe</strong>.</p>
 <p>Plus d'informations: <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html">https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryption.html</a></p>
 <h1 id="flux-decisionnel">Flux décisionnel</h1>
-<p>Voici un exemple de flux décisionnel pour choisir entre le hashage et le cryptage.  </p>
+<p>Voici un exemple de flux décisionnel pour choisir entre le hashage et le chiffrement.  </p>
 <pre class="mermaid"><code>flowchart TD
     A[Données sensibles] --&gt; B{Mot de passe ou Donnée sensible}
     B --&gt; |Mot de passe| C[Hashage]
     B --&gt; |Données sensibles| D[Clé symétrique]
     D --&gt; E[Clé secrète : UNHEX#40;SHA2#40;'secret', 256#41;#41;]
     E --&gt; F[Type de colonne BLOB]
-    F --&gt; G[AES_ENCRYPT#40;'1234123412341234'\, clé secrète#41; lors de l'écriture]
-    G --&gt; H[AES_DECRYPT#40;carte_credit\, clé secrète#41; lors de la lecture]
+    F --&gt; G[AES_ENCRYPT#40;'1234123412341234', clé secrète#41; lors de l'écriture]
+    G --&gt; H[AES_DECRYPT#40;carte_credit, clé secrète#41; lors de la lecture]
     C --&gt; I[Clé de hachage]
     I --&gt; J[Type de colonne CHAR#40;128#41;]
     J --&gt; K[SHA2#40;'mot de passe', 256#41; lors de l'écriture]
-    K --&gt; L[Décryptage impossible]
+    K --&gt; L[Déchiffrement impossible]
 </code></pre>
 <h2 id="-exercice-421-"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></svg></span> --- Exercice 4.2.1 ---</h2>
 <p>On crée la table de renseignements_personnels avec les champs suivant:</p>
@@ -2182,7 +2182,7 @@ Texte crypté + clé =&gt; texte clair </p>
 </ul>
 </li>
 <li>
-<p>Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.</p>
+<p>Créez un requête permettant d'ajouter les informations d’une personne fictive en chiffrant ou en hashant les données selon la situation.</p>
 </li>
 <li>
 <p>Affichez ces informations.</p>
