@@ -1,14 +1,14 @@
 # Confidentialité des données
 
-## Hashage et Cryptage
+## Hashage et chiffrement
 
 Il est très souvent nécessaire d'assurer la confidentialité des données dans un BD afin que les administrateurs d'une base de données ne puisse en aucun cas voir les informations de certains champs ou tables (ex.: mots de passe).
 
-Quelle est la distinction entre le cryptage et le hashage?
+Quelle est la distinction entre le chiffrement et le hashage?
 
 **Hashage** : transformation *non inversible* à l’aide d’un algorithme.
 
-**Cryptage** : transformation des données à l’aide d’une donnée secrète appelée **clé**. Aussi appelé *chiffrement*.
+**Chiffrement** : transformation des données à l’aide d’une donnée secrète appelée **clé**. 
 
 Doc : [https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)
 
@@ -68,7 +68,7 @@ retourne:
 
 Avantages :
 
-* Plus rapide qu’un cryptage
+* Plus rapide qu’un chiffrement
 * Espace mémoire constant
 * Impossible à inverser
 
@@ -81,33 +81,33 @@ Désavantage :
 * Pour les données que nous n’avons pas besoin de consulter
 * Vérification d’intégrité de fichier ou de transport (checksum) 
 
-## Cryptage
+## Chiffrement
 
-Une fonction de cryptage transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».
+Une fonction de chiffrement transforme une chaîne avec les données d’une chaîne secrète appelée « clé ».
 
-Texte clair + clé => texte crypté  
-Texte crypté + clé => texte clair 
+Texte clair + clé => texte chiffré  
+Texte chiffré + clé => texte clair 
 
-On appelle cryptage à clé symétrique lorsque la clé servant à crypter et à décrypter est la même.
+On appelle chiffrement à clé symétrique lorsque la clé servant à chiffrer et à déchiffrer est la même.
 
-### Sécurité du cryptage symétrique
+### Sécurité du chiffrement symétrique
 
-La sécurité d’un cryptage à clé symétrique repose sur 2 facteurs :
+La sécurité d’un chiffrement à clé symétrique repose sur 2 facteurs :
 
 - Le secret de la clé
 - La longueur de la clé
 
 ### Algorithme AES
 
-Le Advance Encryption Standard (AES) est la méthode de cryptage symétrique la plus utilisée aujourd’hui.
+Le Advance Encryption Standard (AES) est la méthode de chiffrement symétrique la plus utilisée aujourd’hui.
 
-Les données sont cryptées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.
+Les données sont chiffrées par bloc de 128 bits. La clé peut faire 128, 192 ou 256 bits.
 
 Il effectue plusieurs étapes de permutation / substitution.
 
-### Crypter avec MySQL
+### Chiffrer avec MySQL
 
-Pour crypter, on utilise la fonction **AES_ENCRYPT**. Son premier argument est le texte à crypter et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.
+Pour chiffrer, on utilise la fonction **AES_ENCRYPT**. Son premier argument est le texte à chiffrer et le second la clé secrète. La clé doit avoir entre 128 et 256 bits.
 
 ```mysql
 INSERT INTO Utilisateur (nom, carte_credit)
@@ -126,9 +126,9 @@ La fonction **UNHEX** convertit une chaîne de valeurs hexadécimale en sa repr�
 |A|41|A|
 |Allo|416C6C6F|Allo|
 
-### Décrypter avec MySQL
+### Déchiffrer avec MySQL
 
-Pour décrypter, on utilise la fonction **AES_DECRYPT**. Le premier argument est la valeur à décrypter, le second la clé secrète.
+Pour déchiffrer, on utilise la fonction **AES_DECRYPT**. Le premier argument est la valeur à déchiffrer, le second la clé secrète.
 
 ```mysql
 SELECT nom, CAST(AES_DECRYPT(carte_credit,   
@@ -136,7 +136,7 @@ SELECT nom, CAST(AES_DECRYPT(carte_credit,
   AS carte_credit FROM Utilisateur;
 ```
 
-Le résultat du décryptage.
+Le résultat du déchiffrement.  
 
 ```console
 | nom           | carte_credit     |
@@ -145,7 +145,7 @@ Le résultat du décryptage.
 | jardiner14    | 9876987698769876 |
 ```
 
-Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du décryptage avec la mauvaise clé !)
+Si la mauvaise clé est passée, alors la valeur NULL est retounée (et non le résultat du déchiffrement avec la mauvaise clé !)
 
 ### Phrase secrète
 
@@ -166,9 +166,9 @@ SELECT nom,
   FROM Utilisateur;
 ```
 
-### Cryptage de la BD au complet
+### Chiffrement de la BD au complet
 
-L’engin de stockage de données *InnoDB* permet de crypter une table ou la BD au complet via un logiciel enfichable (*plug-in*).
+L’engin de stockage de données *InnoDB* permet de chiffrer une table ou la BD au complet via un logiciel enfichable (*plug-in*).
 
 **Ces manipulations ainsi que InnoDB ne sont pas vues en classe**.
 
@@ -176,7 +176,7 @@ Plus d'informations: [https://dev.mysql.com/doc/refman/8.0/en/innodb-data-encryp
 
 # Flux décisionnel 
 
-Voici un exemple de flux décisionnel pour choisir entre le hashage et le cryptage.  
+Voici un exemple de flux décisionnel pour choisir entre le hashage et le chiffrement.  
 
 ```mermaid
 flowchart TD
@@ -185,12 +185,12 @@ flowchart TD
     B --> |Données sensibles| D[Clé symétrique]
     D --> E[Clé secrète : UNHEX#40;SHA2#40;'secret', 256#41;#41;]
     E --> F[Type de colonne BLOB]
-    F --> G[AES_ENCRYPT#40;'1234123412341234'\, clé secrète#41; lors de l'écriture]
-    G --> H[AES_DECRYPT#40;carte_credit\, clé secrète#41; lors de la lecture]
+    F --> G[AES_ENCRYPT#40;'1234123412341234', clé secrète#41; lors de l'écriture]
+    G --> H[AES_DECRYPT#40;carte_credit, clé secrète#41; lors de la lecture]
     C --> I[Clé de hachage]
     I --> J[Type de colonne CHAR#40;128#41;]
     J --> K[SHA2#40;'mot de passe', 256#41; lors de l'écriture]
-    K --> L[Décryptage impossible]
+    K --> L[Déchiffrement impossible]
 
 ```
 
@@ -206,7 +206,7 @@ On crée la table de renseignements_personnels avec les champs suivant:
     * Numéro de compte en banque
     * Date de naissance  
 
-1. Créez un requête permettant d'ajouter les informations d’une personne fictive en cryptant ou en hashant les données selon la situation.
+1. Créez un requête permettant d'ajouter les informations d’une personne fictive en chiffrant ou en hashant les données selon la situation.
 
 2. Affichez ces informations.
 
