@@ -39,6 +39,7 @@ nav:
   - "Convention": convention.md
   - "Ressources": ressources.md
   - "Horaire": horaire.md
+  - "Déclaration de l'utilisation de l'IA": declaration-ia.md
 theme:
   favicon: images/database.png
   name: material
