@@ -1,4 +1,1 @@
-mkdocs-material
-markdown-include
-openpyxl
-pyyaml
+zensical
