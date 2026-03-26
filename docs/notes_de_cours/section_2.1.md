@@ -32,7 +32,7 @@ INSERT INTO etudiants (code, nom,
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
     
 ```
 
@@ -48,7 +48,7 @@ Le cours BD1 aura alors un id automatique et une durée de 60 heures.
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!}
+--8<-- "cours.mermaid"
     
 ```
 
@@ -70,7 +70,7 @@ INSERT INTO etudiants (code, nom, annee_admission, programme)
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
     
 ```
 
@@ -87,7 +87,7 @@ INSERT INTO etudiants VALUES
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
     
 ```
 
@@ -99,7 +99,8 @@ INSERT INTO cours VALUES ('420-2B4-VI', 'Base de données 1');
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!}     
+--8<-- "cours.mermaid"
+   
 ```
 
 L'instruction suivante n'est pas valide car l'ordre des colonnes n’est pas respecté:
@@ -204,7 +205,7 @@ UPDATE programmes
 
 ``` mermaid
 erDiagram  
-{!programmes.mermaid!}
+--8<-- "programmes.mermaid"
 ```
 
 ### Désactiver le SafeMode

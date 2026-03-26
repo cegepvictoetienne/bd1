@@ -30,8 +30,9 @@ On ajoute dans la table enfant un champ enseignant et une annotation de clé ét
 ``` mermaid
 erDiagram  
     enseignants ||--o{ cours : "enseigne" 
-{!enseignants.mermaid!}
-{!cours.mermaid!}    
+--8<-- "enseignants.mermaid"
+--8<-- "cours.mermaid"
+   
 ```
 
 ## Importances des relations
@@ -67,8 +68,8 @@ Ici rien ne change dans la création de la table `enseignants` (la table ne sait
 ``` mermaid
 erDiagram  
     enseignants ||--o{ cours : "enseigne" 
-{!enseignants.mermaid!}
-{!cours.mermaid!} 
+--8<-- "enseignants.mermaid"
+--8<-- "cours.mermaid"
     
 ```
 
@@ -109,10 +110,11 @@ On peut voir que deux tables sont associées si l'on peut suivre avec notre doig
 ``` mermaid
 erDiagram  
     etudiants ||--o{ inscriptions : " " 
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
     inscriptions }o--|| cours : " "
-{!inscriptions.mermaid!}
-{!cours.mermaid!}    
+--8<-- "inscriptions.mermaid"
+--8<-- "cours.mermaid"
+   
 ```
 
 ## Mais... un instant!
@@ -125,10 +127,10 @@ Oui, c'est possible: c'est appelé une *clé composée*.
 ``` mermaid
 erDiagram   
     etudiants ||--o{ inscriptions : " " 
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
     inscriptions }o--|| cours : " "
-{!inscriptions.mermaid!}
-{!cours.mermaid!}   
+--8<-- "inscriptions.mermaid"
+--8<-- "cours.mermaid"
     
 ```
 

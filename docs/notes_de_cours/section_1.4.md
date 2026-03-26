@@ -75,7 +75,7 @@ Pour créer la table Étudiant correspondant au modèle suivant.
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
 ```
 
 ```mysql
@@ -107,7 +107,7 @@ Créez la table représentant le modèle suivant.
 
 ``` mermaid
 erDiagram  
-{!programmes.mermaid!}
+--8<-- "programmes.mermaid"
 ```
 
 Afficher la structure de la table après la création pour vous valider votre opération.
@@ -120,7 +120,7 @@ Par exemple, pour la table Étudiant, le modèle correspond maintenant à
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!}
+--8<-- "etudiants.mermaid"
 ```
 
 ## Supprimer une table

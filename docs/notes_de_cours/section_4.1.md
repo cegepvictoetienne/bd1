@@ -33,8 +33,8 @@ Parce que la table **programmes** contient une clé étrangère vers **enseignan
 ```mermaid  
 erDiagram  
     enseignants ||--o{ programmes : " " 
-    {!enseignants.mermaid!}
-    {!programmes.mermaid!}
+    --8<-- "enseignants.mermaid"
+    --8<-- "programmes.mermaid"
 ```
 
 La stratégie ON DELETE CASCADE permet de supprimer tous les enregistrements qui sont référencés, donc qui posent problème.
@@ -74,7 +74,7 @@ CREATE TABLE programmes (
 ```
 ```mermaid  
 erDiagram  
-    {!programmes.mermaid!}
+    --8<-- "programmes.mermaid"
 ```
 
 
@@ -98,7 +98,7 @@ CREATE TABLE sessions (
 
 ```mermaid
 erDiagram  
-{!sessions.mermaid!}
+--8<-- "sessions.mermaid"
 ```
 
 ### Nullité
@@ -213,7 +213,7 @@ CREATE TABLE sessions (
 
 ```mermaid
 erDiagram  
-{!evaluations.mermaid!}
+--8<-- "evaluations.mermaid"
 ```
 
 ### :material-cog: --- Exercice 4.1.3 ---

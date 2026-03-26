@@ -22,7 +22,8 @@ On peut utiliser des noms de colonne des deux côtés de l'opérateur.
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!} 
+--8<-- "cours.mermaid"
+   
 ```
 
 ## Recherche sur les chaînes de caractères
@@ -63,7 +64,8 @@ On peut utiliser des noms de colonne des deux côtés de l'opérateur.
 
 ``` mermaid
 erDiagram  
-{!evaluations.mermaid!} 
+--8<-- "evaluations.mermaid"
+   
 ```
 
 ## Expressions régulières (Regex)

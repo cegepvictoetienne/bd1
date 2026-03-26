@@ -76,8 +76,8 @@ code `<pk>`
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!} 
-{!cours.mermaid!}
+--8<-- "etudiants.mermaid" 
+--8<-- "cours.mermaid"
 ```
 
 ## Identifier les clés candidates

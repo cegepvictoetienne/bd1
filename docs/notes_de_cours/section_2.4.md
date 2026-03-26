@@ -4,7 +4,8 @@ Les fonctions SQL date, time et datetime permettent de convertir explicitement u
 
 ``` mermaid
 erDiagram  
-{!etudiants.mermaid!} 
+--8<-- "etudiants.mermaid"
+   
 ```
 
 ```sql

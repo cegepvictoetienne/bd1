@@ -22,8 +22,8 @@ Le problème : nom programme et nom professeur sont dans deux tables différente
 ```mermaid  
 erDiagram  
     enseignants ||--o{ programmes : " " 
-    {!enseignants.mermaid!}
-    {!programmes.mermaid!}
+    --8<-- "enseignants.mermaid"
+    --8<-- "programmes.mermaid"
 ```
 
 ## Jointures
@@ -79,7 +79,8 @@ Diagramme :
 
 ``` mermaid
 erDiagram  
-{!ecole2.mermaid!} 
+--8<-- "ecole2.mermaid"
+    
 ```
 
 
@@ -112,8 +113,9 @@ SELECT enseignant, numero_groupe, sigle
 
 erDiagram  
     cours ||--o{ groupes : " " 
-    {!cours.mermaid!}
-    {!groupes.mermaid!}
+    --8<-- "cours.mermaid"
+    --8<-- "groupes.mermaid"
+       
 ```
 
 ## Problème
@@ -142,7 +144,8 @@ Diagramme :
 
 ``` mermaid
 erDiagram  
-{!ecole2.mermaid!} 
+--8<-- "ecole2.mermaid"
+   
 ```
 
 

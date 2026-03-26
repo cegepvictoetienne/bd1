@@ -29,7 +29,7 @@ SELECT * FROM nom_table;
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!}
+--8<-- "cours.mermaid"
     
 ```
 
@@ -95,7 +95,8 @@ SELECT sigle FROM cours
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!} 
+--8<-- "cours.mermaid"
+   
 ```
 
 On peut combiner les opérations de filtrage en utilisant les opérateurs logiques.
@@ -114,7 +115,8 @@ SELECT nom FROM Cours
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!} 
+--8<-- "cours.mermaid"
+   
 ```
 
 ### :material-cog: --- Exercice 2.2.1 ---
@@ -123,7 +125,8 @@ erDiagram
 
 ``` mermaid
 erDiagram  
-{!ecole.mermaid!} 
+--8<-- "ecole.mermaid"
+   
 ```
 
 A. Sélectionnez les codes d'employé des enseignants qui ont au moins 5 ans d'ancienneté.  
@@ -151,7 +154,8 @@ SELECT nom, duree FROM cours
 
 ``` mermaid
 erDiagram  
-{!cours.mermaid!} 
+--8<-- "cours.mermaid"
+   
 ```
 
 Maintenant, on veut la même requête, mais en ordonnant d'abord par durée, puis par ordre alphabétique. Voici le résultat attendu :
