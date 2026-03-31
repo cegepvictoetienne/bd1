@@ -322,20 +322,3 @@ SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Message erreur';
 ### :material-cog: --- Exercice 5.2.3 ---
 
 C. Si l'évaluation ajoutée cause la somme des pondérations du cours a excédé 100%, alors la pondération devient 0. Gérez cette validation lors de l'ajout et de la modification.
-
-### Lire la documentation
-
-<center>
-
-|Symbole|Signification|
-|:-:||
-|[ ] |	Indique un élément optionnel |
-|…	| Ellipse (permet de répéter un élément) |
-|MAJUSCULES |	Mot-clé du langage |
-|*Italique* |	Terme définit plus loin |
-|\| |	OU |
-|{ } |	Un dans la liste est obligatoire |
-
-</center>
-
-**Le texte contient des informations importantes sur ce qui est permis et le résultat des opérations.**
