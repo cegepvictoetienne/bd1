@@ -273,8 +273,9 @@ Si la date de remise d'une nouvelle évaluation_etudiant est hors de la durée d
 
 Ajoutez les déclencheurs permettant d'effectuer les traitements suivants
 
-A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable)  
-B. Après la création d'une évaluation, on crée une ligne de evaluations_etudiants pour chaque étudiant du groupe avec la date de remise à null et le nom du document à null.
+A. Lorsqu'on supprime un enseignant, tous les programmes dont il est responsable sont modifiés pour que le responsable soit NULL (enlever la contrainte NOT NULL sur la colonne responsable) et tous les cours donnés par l'enseignant aient l'enseignant NULL.  
+
+B. Après la création d'une évaluation, on crée une ligne de evaluations_etudiants pour chaque étudiant du groupe avec la date de remise à NULL et le nom du document à NULL.
 
 
 ## Conflits et limitations des déclencheurs et des fonctions
