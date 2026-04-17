@@ -23,9 +23,9 @@
  |20|2026-04-07 09:15:00| | Ateliers fonctions | | | 
 11|21|2026-04-10 10:15:00|5.2| Déclencheurs | | Atelier 10 | Atelier 9 
  |22|2026-04-14 09:15:00| | Atelier déclencheurs | | | 
-12|23|2026-04-17 10:15:00|5.3| Procedure, transactions et gestion d'erreurs | | | Atelier 10 
- |24|2026-04-21 09:15:00|5.3| Ateliers procédures | | Atelier 11 | 
-13|25|2026-04-23 10:15:00| | Ateliers procédures | | | 
+12|23|2026-04-17 10:15:00|| Atelier déclencheurs | ||
+ |24|2026-04-21 09:15:00|5.3| Procedure, transactions et gestion d'erreurs | | | Atelier 10 
+13|25|2026-04-23 10:15:00| | Ateliers procédures | | Atelier 11 | 
  |26|2026-04-28 10:15:00| | Ateliers procédures | | |
 14|27|2026-05-05 09:15:00| | Révision | | | Atelier 11<br/>**TP à remettre** 
  |28|2026-05-08 10:15:00| | Pratique d'examen | | | 
