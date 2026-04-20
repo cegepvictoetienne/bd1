@@ -94,13 +94,13 @@ A. Créez une procédure pour ajouter un nouveau **groupe**.
 **Paramètres** : code de session et sigle du cours  
 **Valeur de retour** : le numéro du groupe qui a été créé
 
-B. Créez une procédure pour inscrire un étudiant à un cours. La procédure reçoit le code de l'étudiant, le sigle du cours, le semestre et l'année pour l'inscription. 
+B. Créez une procédure pour inscrire un étudiant à un cours. La procédure reçoit le code de l'étudiant, le sigle du cours et le code de session pour l'inscription. 
 
 - L'étudiant est toujours ajouté au groupe avec le plus petit numéro qui a une place de libre.
 - Si le groupe est plein (4 étudiants ou plus  - oui ce sont de petits groupes!), alors un nouveau groupe est créé.
 - Le numéro du groupe dans lequel l'élève a été inscrit est retourné.
 
-**Paramètres** : code étudiant, sigle du cours, semestre, année  
+**Paramètres** : code étudiant, sigle du cours, code de session 
 **Valeur de retour** : numéro du groupe dans lequel l'inscription s'est faite
 
 ## Gestion d'erreurs
