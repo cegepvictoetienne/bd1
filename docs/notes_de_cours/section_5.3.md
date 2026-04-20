@@ -87,11 +87,11 @@ Les procédures sont souvent plus longues et plus complexes que les fonctions. I
 
 A. Créez une procédure pour ajouter un nouveau **groupe**.
 
-- Vous connaissez seulement le semestre, l'année et le sigle du cours.
+- Vous connaissez seulement le code de session et le sigle du cours.
 - Pour le numéro de groupe, vous devez ajouter 1 au plus haut numéro de groupe existant (ex.: si les groupes 1 à 7 existent, alors le nouveau groupe aura le numéro 8, et si aucun groupe n'est dans la table, le premier groupe aura le numéro 1).
 - La procédure retourne le numéro du groupe qui a été créé.
 
-**Paramètres** : semestre, annee et sigle du cours  
+**Paramètres** : code de session et sigle du cours  
 **Valeur de retour** : le numéro du groupe qui a été créé
 
 B. Créez une procédure pour inscrire un étudiant à un cours. La procédure reçoit le code de l'étudiant, le sigle du cours, le semestre et l'année pour l'inscription. 
