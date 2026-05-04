@@ -101,26 +101,33 @@ erDiagram
 
 ---
 
+## Scripts SQL
+
+Téléchargez et exécutez le script correspondant au modèle pour créer la base de données et ses données de test.
+
+- [club\_video.sql](../club_video.sql) — Modèle Club vidéo
+- [boutique\_en\_ligne.sql](../boutique_en_ligne.sql) — Modèle Boutique en ligne
+
+---
+
 ## Partie 1 — Création et manipulation de structures
 
 ### Exercice 1
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Écrivez la requête pour créer la table `membres`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
 
-    Écrivez la requête pour créer la table `membres`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
+| Type | Colonne | Contrainte |
+|------|---------|------------|
+| INT | membre_id | PK |
+| VARCHAR(255) | nom | NOT NULL |
+| VARCHAR(255) | prenom | NOT NULL |
+| VARCHAR(255) | adresse | |
+| DATE | date_adhesion | |
+| VARCHAR(255) | courriel | |
 
-    | Type | Colonne | Contrainte |
-    |------|---------|------------|
-    | INT | membre_id | PK |
-    | VARCHAR(255) | nom | NOT NULL |
-    | VARCHAR(255) | prenom | NOT NULL |
-    | VARCHAR(255) | adresse | |
-    | DATE | date_adhesion | |
-    | VARCHAR(255) | courriel | |
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     CREATE TABLE membres (
@@ -139,19 +146,17 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Écrivez la requête pour créer la table `locations`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
 
-    Écrivez la requête pour créer la table `locations`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
+| Type | Colonne | Contrainte |
+|------|---------|------------|
+| INT | location_id | PK |
+| INT | film_id | FK → films |
+| INT | membre_id | FK → membres |
+| DATE | date_location | |
+| DATE | date_retour | |
 
-    | Type | Colonne | Contrainte |
-    |------|---------|------------|
-    | INT | location_id | PK |
-    | INT | film_id | FK → films |
-    | INT | membre_id | FK → membres |
-    | DATE | date_location | |
-    | DATE | date_retour | |
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     CREATE TABLE locations (
@@ -171,11 +176,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Écrivez la requête pour ajouter une colonne `date_retour_prevue` de type `DATE` à la table `locations`.
 
-    Écrivez la requête pour ajouter une colonne `date_retour_prevue` de type `DATE` à la table `locations`.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     ALTER TABLE locations
@@ -188,20 +191,18 @@ erDiagram
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+Écrivez la requête pour créer la table `produits`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
 
-    Écrivez la requête pour créer la table `produits`. Les clés primaires non composées de type entier doivent être auto-incrémentées.
+| Type | Colonne | Contrainte |
+|------|---------|------------|
+| INT | produit_id | PK |
+| VARCHAR(255) | nom | NOT NULL |
+| TEXT | description | |
+| DECIMAL(10,2) | prix | NOT NULL |
+| INT | stock | |
+| INT | categorie_id | FK → categories |
 
-    | Type | Colonne | Contrainte |
-    |------|---------|------------|
-    | INT | produit_id | PK |
-    | VARCHAR(255) | nom | NOT NULL |
-    | TEXT | description | |
-    | DECIMAL(10,2) | prix | NOT NULL |
-    | INT | stock | |
-    | INT | categorie_id | FK → categories |
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     CREATE TABLE produits (
@@ -221,11 +222,9 @@ erDiagram
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+Écrivez la requête pour modifier la colonne `description` de la table `produits` afin de changer son type de `TEXT` à `VARCHAR(500)`.
 
-    Écrivez la requête pour modifier la colonne `description` de la table `produits` afin de changer son type de `TEXT` à `VARCHAR(500)`.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     ALTER TABLE produits
@@ -240,11 +239,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Ajoutez un nouveau réalisateur : Denis Villeneuve, de nationalité canadienne, né le 3 octobre 1967.
 
-    Ajoutez un nouveau réalisateur : Denis Villeneuve, de nationalité canadienne, né le 3 octobre 1967.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     INSERT INTO realisateurs (nom, prenom, nationalite, date_de_naissance)
@@ -257,11 +254,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Ajoutez un film intitulé « Incendies » du réalisateur avec l'identifiant 12 et du distributeur avec l'identifiant 4, sorti en 2010. Ce film est un drame.
 
-    Ajoutez un film intitulé « Incendies » du réalisateur avec l'identifiant 12 et du distributeur avec l'identifiant 4, sorti en 2010. Ce film est un drame.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     INSERT INTO films (titre, realisateur_id, distributeur_id, annee_sortie, genre)
@@ -274,11 +269,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Le membre avec l'identifiant 78 a changé d'adresse courriel. Mettez à jour son courriel avec la valeur `pierre.gagnon@courriel.ca`.
 
-    Le membre avec l'identifiant 78 a changé d'adresse courriel. Mettez à jour son courriel avec la valeur `pierre.gagnon@courriel.ca`.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     UPDATE membres
@@ -292,11 +285,9 @@ erDiagram
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+En raison d'une promotion, réduisez de 15 % le prix de tous les produits appartenant à la catégorie avec l'identifiant 5.
 
-    En raison d'une promotion, réduisez de 15 % le prix de tous les produits appartenant à la catégorie avec l'identifiant 5.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     UPDATE produits
@@ -310,11 +301,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Le membre 221 a retourné le film 3309 le 14 mars 2025 pour la location 87654. Mettez à jour la location avec la date de retour.
 
-    Le membre 221 a retourné le film 3309 le 14 mars 2025 pour la location 87654. Mettez à jour la location avec la date de retour.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     UPDATE locations
@@ -330,11 +319,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez les noms et prénoms de tous les membres dont le prénom commence par « Ma ».
 
-    Récupérez les noms et prénoms de tous les membres dont le prénom commence par « Ma ».
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT nom, prenom
@@ -348,11 +335,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez les noms, prénoms et nationalités des réalisateurs dont la nationalité se termine par « ain » (ex. : Américain, Mexicain).
 
-    Récupérez les noms, prénoms et nationalités des réalisateurs dont la nationalité se termine par « ain » (ex. : Américain, Mexicain).
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT nom, prenom, nationalite
@@ -366,11 +351,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez le titre de chaque film ainsi que le nom complet de son réalisateur (prénom suivi du nom), trié alphabétiquement par titre.
 
-    Récupérez le titre de chaque film ainsi que le nom complet de son réalisateur (prénom suivi du nom), trié alphabétiquement par titre.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT f.titre, CONCAT(r.prenom, ' ', r.nom) AS realisateur
@@ -385,11 +368,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez le nombre de films par genre, trié par nombre de films en ordre décroissant.
 
-    Récupérez le nombre de films par genre, trié par nombre de films en ordre décroissant.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT genre, COUNT(*) AS nombre_films
@@ -404,11 +385,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez le nom des distributeurs qui distribuent plus de 5 films, ainsi que leur nombre de films. Triez par nombre de films en ordre décroissant.
 
-    Récupérez le nom des distributeurs qui distribuent plus de 5 films, ainsi que leur nombre de films. Triez par nombre de films en ordre décroissant.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT d.nom, COUNT(*) AS nombre_films
@@ -425,11 +404,9 @@ erDiagram
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Récupérez le nom et le prénom du membre, le titre du film ainsi que la durée de location en jours pour toutes les locations dont la durée a dépassé 7 jours.
 
-    Récupérez le nom et le prénom du membre, le titre du film ainsi que la durée de location en jours pour toutes les locations dont la durée a dépassé 7 jours.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT m.nom, m.prenom, f.titre, DATEDIFF(l.date_retour, l.date_location) AS duree_jours
@@ -445,11 +422,9 @@ erDiagram
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+Récupérez le nom et prénom des clients, le nom des produits commandés et la quantité commandée pour toutes les commandes dont le statut est `livré`.
 
-    Récupérez le nom et prénom des clients, le nom des produits commandés et la quantité commandée pour toutes les commandes dont le statut est `livré`.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT c.nom, c.prenom, p.nom AS produit, lc.quantite
@@ -466,11 +441,9 @@ erDiagram
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+Trouvez les 3 produits qui génèrent le plus grand revenu total (quantité × prix unitaire). Affichez le nom du produit et son revenu total.
 
-    Trouvez les 3 produits qui génèrent le plus grand revenu total (quantité × prix unitaire). Affichez le nom du produit et son revenu total.
-
-=== "Réponse"
+??? example "Réponse"
 
     ```mysql
     SELECT p.nom, SUM(lc.quantite * lc.prix_unitaire) AS revenu_total
@@ -493,26 +466,24 @@ Chaque requête ci-dessous comporte **deux erreurs**. Identifiez-les et réécri
 
 **Modèle :** Club vidéo
 
-=== "Question"
+Sélectionner le nom et le prénom des membres ainsi que le nombre de locations pour ceux qui ont fait au moins 3 locations.
 
-    Sélectionner le nom et le prénom des membres ainsi que le nombre de locations pour ceux qui ont fait au moins 3 locations.
+```mysql
+SELECT membres.nom, membres.prenom, COUNT(location_id) AS nombre_locations
+FROM membres
+INNER JOIN locations ON membres.membre_id = membres.membre_id
+GROUP BY membres.membre_id
+WHERE nombre_locations >= 3
+ORDER BY nombre_locations DESC;
+```
 
-    ```mysql
-    SELECT membres.nom, membres.prenom, COUNT(location_id) AS nombre_locations
-    FROM membres
-    INNER JOIN locations ON membres.membre_id = membres.membre_id
-    GROUP BY membres.membre_id
-    WHERE nombre_locations >= 3
-    ORDER BY nombre_locations DESC;
-    ```
+**Erreur 1 :**
 
-    **Erreur 1 :**
+**Erreur 2 :**
 
-    **Erreur 2 :**
+**Requête corrigée :**
 
-    **Requête corrigée :**
-
-=== "Réponse"
+??? example "Réponse"
 
     **Erreur 1 :** `ON membres.membre_id = membres.membre_id` — La condition de jointure compare `membres.membre_id` à lui-même. Il faut utiliser `locations.membre_id` d'un côté de la condition.
 
@@ -533,25 +504,23 @@ Chaque requête ci-dessous comporte **deux erreurs**. Identifiez-les et réécri
 
 **Modèle :** Boutique en ligne
 
-=== "Question"
+Sélectionner les 5 produits les plus chers encore en stock (stock > 0).
 
-    Sélectionner les 5 produits les plus chers encore en stock (stock > 0).
+```mysql
+SELECT nom, prix, stock
+FROM produits
+HAVING stock > 0
+ORDER BY prix
+LIMIT 5;
+```
 
-    ```mysql
-    SELECT nom, prix, stock
-    FROM produits
-    HAVING stock > 0
-    ORDER BY prix
-    LIMIT 5;
-    ```
+**Erreur 1 :**
 
-    **Erreur 1 :**
+**Erreur 2 :**
 
-    **Erreur 2 :**
+**Requête corrigée :**
 
-    **Requête corrigée :**
-
-=== "Réponse"
+??? example "Réponse"
 
     **Erreur 1 :** `HAVING stock > 0` — `HAVING` est réservé au filtrage **après agrégation** (`GROUP BY`). Pour filtrer des lignes ordinaires sans agrégat, il faut utiliser `WHERE`.
 
